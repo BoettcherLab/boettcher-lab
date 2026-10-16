@@ -363,9 +363,9 @@
   }
   function updateDipoles(dt,proton){
     // First-order relaxation directly toward the Coulomb minimum. No angular
-    // velocity, springs, torque, per-hydrogen targeting, or spontaneous wobble.
+    // velocity, springs, torque, or per-hydrogen targeting. Subtle visual vibrations are applied only during rendering.
     // The donor and acceptor are held fixed while their shared H bond changes.
-    const rate=3.0, maxRate=2.15, epsilon=0.008;
+    const rate=6.0, maxRate=4.30, epsilon=0.008;
     let moving=false;
     for(const w of waters){
       if(w.hs.length!==2)continue;
@@ -391,7 +391,14 @@
       for(const h of w.hs){
         if(!h.bond||h.bond.parentNode!==w.links){h.bond=svgEl('line',{'class':'water-bond','data-hid':h.id},w.links)}
         if(!h.ball||h.ball.parentNode!==w.atoms){h.ball=svgEl('circle',{'class':'hydrogen','data-hid':h.id,r:7.5},w.atoms)}
-        const x=xpos+bondLength*Math.sin(h.a),y=ypos(w.i)+bondLength*Math.cos(h.a);
+        // Small, purely visual rigid-body vibration (~1 degree). It never
+        // modifies the molecular angles used by Coulomb minimization.
+        // Keep transferring donor/acceptor molecules steady during a hop.
+        const vibrating=w.hs.length===2&&!jumpState&&
+          !(hopState&&(w.i===hopState.from||w.i===hopState.to));
+        const vibration=vibrating?0.017*Math.sin(performance.now()*0.009+w.i*1.9):0;
+        const displayAngle=h.a+vibration;
+        const x=xpos+bondLength*Math.sin(displayAngle),y=ypos(w.i)+bondLength*Math.cos(displayAngle);
         h.bond.setAttribute('x1',xpos);h.bond.setAttribute('y1',ypos(w.i));
         h.bond.setAttribute('x2',x);h.bond.setAttribute('y2',y);
         h.ball.setAttribute('cx',x);h.ball.setAttribute('cy',y);
