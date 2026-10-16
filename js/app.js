@@ -365,7 +365,7 @@
     // First-order relaxation directly toward the Coulomb minimum. No angular
     // velocity, springs, torque, or independent rotations of the hydrogen atoms.
     // The donor and acceptor are held fixed while their shared H bond changes.
-    const rate=3.0, maxRate=2.15, epsilon=0.008;
+    const rate=6.0, maxRate=4.30, epsilon=0.008;
     let moving=false;
     for(const w of waters){
       if(w.hs.length!==2)continue;
