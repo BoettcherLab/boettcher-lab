@@ -13,7 +13,6 @@ Upload everything in this directory to your existing public GitHub repository, p
 - **Metadata:** Crossref is queried for journal volume/pages/issue for up to 12 recent works with missing data on each run.
 - **Storage:** `data/publications.json`, loaded by `js/app.js`; `js/content.js` remains a fallback if loading fails.
 - **Automation:** `.github/workflows/sync-publications.yml`, Monday 12:25 UTC or on demand.
-- **Fees:** No paid API service required for this lightweight workflow. OpenAlex may apply free usage limits; an optional free API key can improve the allowance.
 
 ### First run
 
@@ -23,7 +22,6 @@ Upload everything in this directory to your existing public GitHub repository, p
 4. If OpenAlex requires API credentials or you wish to increase the free usage allowance, get a **free** API key at [OpenAlex](https://openalex.org/) and put it in **Settings → Secrets and variables → Actions → New repository secret** named `OPENALEX_API_KEY`.
 5. Optional: set the repository **Actions variable** `CONTACT_EMAIL` to an institutional email for polite API identification. This is not necessary to publish.
 
-**No SerpApi key is used.** The website does not call OpenAlex or Crossref on every visitor's request; GitHub Actions writes a cached snapshot. If a sync fails, the workflow exits without overwriting the existing data.
 
 ### Quality control
 
@@ -49,4 +47,3 @@ The weekly OpenAlex sync imports works where Shannon W. Boettcher appears anywhe
 
 `CATEGORY_RULES` in `scripts/sync_publications.py` maps title/abstract keywords to the six existing research topics. Papers may have multiple topics or none. To override a particular paper, set `manual_tags` to an array of topic indices (0–5) in `data/publications.json`. `tags` are automatically regenerated each run; `manual_tags` are never overwritten. Review the category mappings periodically, especially for interdisciplinary publications.
 
-**Note:** OpenAlex may contain author disambiguation or authorship-order errors; the sync cannot independently verify each article. New entries must match the author’s OpenAlex ID, and legacy ambiguous records are marked accordingly.
