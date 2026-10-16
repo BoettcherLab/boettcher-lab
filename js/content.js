@@ -7,14 +7,86 @@
     'Photo-electrochemistry',
     'Oxygen evolution reaction'
   ];
+  // Research summaries adapted from the publication archive bundled with this site.
   const RESEARCH = [
-    {slug:'bipolar',title:TOPICS[0],paper:'wu-2026'},
-    {slug:'anion',title:TOPICS[1],paper:'hou-2025'},
-    {slug:'ion-transfer',title:TOPICS[2],paper:'dantona-2025'},
-    {slug:'thermo',title:TOPICS[3],paper:null},
-    {slug:'photo',title:TOPICS[4],paper:'yang-2026'},
-    {slug:'oer',title:TOPICS[5],paper:'liu-2025'}
-  ];
+  {
+    "slug": "bipolar",
+    "title": "Bipolar membranes",
+    "paper": "wu-2026",
+    "eyebrow": "WATER DISSOCIATION · ION TRANSPORT",
+    "description": "Bipolar membranes bring cation- and anion-exchange layers together at a junction where water can dissociate into protons and hydroxide ions. We investigate how catalysts, local electric fields, and water transport govern this reaction, connecting molecular mechanisms to membrane performance.",
+    "application": "Applications include water electrolysis, electrodialysis, and control of local pH when operating with impure water.",
+    "papers": [
+      "wu-2026",
+      "hou-2026",
+      "han-2026"
+    ]
+  },
+  {
+    "slug": "anion",
+    "title": "Anion-exchange membranes",
+    "paper": "hou-2025",
+    "eyebrow": "PURE-WATER ELECTROLYSIS · INTERPHASE ENGINEERING",
+    "description": "Anion-exchange-membrane electrolyzers offer a route to hydrogen production using alkaline-compatible catalysts. Our work examines the interfaces between catalysts and ion-conducting polymers, where electrical conductivity, ion transport, and chemical stability must work together.",
+    "application": "We study catalyst–ionomer degradation and engineer anode interphases to improve the durability of pure-water-fed electrolyzers.",
+    "papers": [
+      "hou-2025",
+      "kwak-2026",
+      "expanded-9"
+    ]
+  },
+  {
+    "slug": "ion-transfer",
+    "title": "Interfacial ion transfer",
+    "paper": "dantona-2025",
+    "eyebrow": "REACTION KINETICS · ELECTROCHEMICAL INTERFACES",
+    "description": "Moving ions across an interface is a fundamental step in many electrochemical reactions. We investigate proton transfer at liquid–liquid interfaces, proton transfer in model oxide films, and metal-ion transfer during electrodeposition and dissolution.",
+    "application": "By connecting measurements on model interfaces with molecular-level descriptions, these studies help identify what controls electrochemical reaction rates.",
+    "papers": [
+      "dantona-2025",
+      "expanded-0",
+      "kang-2024"
+    ]
+  },
+  {
+    "slug": "thermo",
+    "title": "Thermo-electrocatalysis",
+    "paper": null,
+    "eyebrow": "TEMPERATURE · POTENTIAL · REACTIVITY",
+    "description": "Temperature and electrode potential both influence the rates of electrochemical reactions. Understanding how they act together is part of the broader challenge of separating thermodynamic, kinetic, and transport contributions to measured catalytic activity.",
+    "application": "Explore the group’s related work on hydrogen evolution and electrochemical potentials in the publication archive.",
+    "papers": [
+      "expanded-10",
+      "expanded-30"
+    ]
+  },
+  {
+    "slug": "photo",
+    "title": "Photo-electrochemistry",
+    "paper": "yang-2026",
+    "eyebrow": "LIGHT ABSORPTION · CHARGE TRANSFER · SURFACE CHEMISTRY",
+    "description": "Photoelectrochemical materials couple light absorption to chemical reactions. We study how semiconductor surfaces and catalyst contacts control charge separation, charge transfer, and stability—from nanoscale interfaces to operating photoelectrodes.",
+    "application": "Recent work investigates how surface reconstruction changes the activity and stability of BiVO₄ during photoelectrochemical glycerol oxidation.",
+    "papers": [
+      "yang-2026",
+      "kaufman-2024",
+      "expanded-16"
+    ]
+  },
+  {
+    "slug": "oer",
+    "title": "Oxygen evolution reaction",
+    "paper": "liu-2025",
+    "eyebrow": "CATALYST DYNAMICS · METAL OXIDES",
+    "description": "The oxygen evolution reaction is a key anodic process in water electrolysis. We investigate mixed-metal oxides and oxyhydroxides to understand how composition, trace iron, and changing surface structures influence catalytic activity.",
+    "application": "Our studies connect active-site chemistry and iron adsorption dynamics to catalyst design for alkaline water electrolysis.",
+    "papers": [
+      "liu-2025",
+      "expanded-12",
+      "expanded-8"
+    ]
+  }
+];
   // Citations below were transcribed from the lab's public publications list (2024–2026).
   // Authors are supplied as displayed; several entries use et al. where the public listing is abbreviated.
   let PUBLICATIONS = [
