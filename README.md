@@ -14,18 +14,6 @@ Upload everything in this directory to your existing public GitHub repository, p
 - **Storage:** `data/publications.json`, loaded by `js/app.js`; `js/content.js` remains a fallback if loading fails.
 - **Automation:** `.github/workflows/sync-publications.yml`, Monday 12:25 UTC or on demand.
 
-### First run
-
-1. Upload the ZIP contents, including the `.github` folder, into your GitHub repository. Delete the old `sync-scholar.yml` workflow from the repository if it still exists.
-2. In GitHub, go to **Actions → Sync publications (OpenAlex + Crossref) → Run workflow**.
-3. When the workflow finishes, inspect `data/publications.json` and your Publications page. Future scheduled updates will commit the JSON automatically.
-4. If OpenAlex requires API credentials or you wish to increase the free usage allowance, get a **free** API key at [OpenAlex](https://openalex.org/) and put it in **Settings → Secrets and variables → Actions → New repository secret** named `OPENALEX_API_KEY`.
-5. Optional: set the repository **Actions variable** `CONTACT_EMAIL` to an institutional email for polite API identification. This is not necessary to publish.
-
-
-### Quality control
-
-OpenAlex and Google Scholar do not have identical coverage. Author disambiguation, publication type, byline order, and metadata can contain errors. Review newly imported works after the first run; do not treat automated author matching as a substitute for checking the publisher record. Some legacy cached records may not satisfy the strict last-author filter, because the update never deletes existing records. The automated feed is weekly, not real-time.
 
 ### Maintain content
 
