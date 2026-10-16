@@ -387,8 +387,9 @@
   const bendAmplitude=10*Math.PI/180;
   let lastTransferFinish=-Infinity;
   let lastTransferPair=null;
+  let lastTransferredHydrogen=null;
   function bondAngleBend(w,now){
-    if(reducedMotion.matches||w.hs.length!==2||jumpState)return 0;
+    if(reducedMotion.matches||w.hs.length<2||jumpState)return 0;
     // Only the two oxygen sites exchanging a proton can bend.
     const pair=hopState||lastTransferPair;
     if(!pair||(w.i!==pair.from&&w.i!==pair.to))return 0;
@@ -405,13 +406,20 @@
       for(const child of [...w.atoms.children])if(!attached.has(+child.dataset.hid))child.remove();
       const bend=bondAngleBend(w,renderNow);
       const bendSense=w.hs.length===2?(Math.sign(wrap(w.hs[1].a-w.hs[0].a))||1):0;
+      // On H3O+, leave the transferring/newly attached proton untouched;
+      // bend the two remaining O-H bonds in opposite directions.
+      const anchor=w.hs.length===3?
+        ((hopState&&hopState.from===w.i&&w.hs.includes(hopState.selected))?hopState.selected:
+        (lastTransferPair&&lastTransferPair.to===w.i&&w.hs.includes(lastTransferredHydrogen))?lastTransferredHydrogen:w.hs[0]):null;
+      const flexingHs=anchor?w.hs.filter(h=>h!==anchor):null;
       for(const h of w.hs){
         if(!h.bond||h.bond.parentNode!==w.links){h.bond=svgEl('line',{'class':'water-bond','data-hid':h.id},w.links)}
         if(!h.ball||h.ball.parentNode!==w.atoms){h.ball=svgEl('circle',{'class':'hydrogen','data-hid':h.id,r:7.5},w.atoms)}
         // Bend two O-H directions symmetrically by half the opening-angle
         // variation. No mutations to h.a, and H objects remain intact.
         const offset=w.hs.length===2?
-          (w.hs[0]===h?-0.5:0.5)*bendSense*bend:0;
+          (w.hs[0]===h?-0.5:0.5)*bendSense*bend:
+          (flexingHs?(flexingHs[0]===h?-0.5:flexingHs[1]===h?0.5:0)*bend:0);
         const visualAngle=h.a+offset;
         const x=xpos+bondLength*Math.sin(visualAngle),y=ypos(w.i)+bondLength*Math.cos(visualAngle);
         h.bond.setAttribute('x1',xpos);h.bond.setAttribute('y1',ypos(w.i));
@@ -528,12 +536,14 @@
     waterVisualIndex=j.to;
     jumpState=null;
     lastTransferPair={from:j.from,to:j.to};
+    lastTransferredHydrogen=j.selected;
     lastTransferFinish=performance.now();
     // Let spectators relax only after the new H3O+ has appeared.
     settleDeadline=performance.now()+3000;
   }
   function startHop(from,to){
     lastTransferPair=null;
+    lastTransferredHydrogen=null;
     const info=rotateForHop(from,to),dir=Math.sign(to-from);
     const rotation=info.rotation;
     // For BOTH directions, rigid-body orientation precedes proton release.
@@ -563,6 +573,7 @@
     waterVisualIndex=hop.to;
     hopState=null;
     lastTransferPair={from:hop.from,to:hop.to};
+    lastTransferredHydrogen=hop.selected;
     lastTransferFinish=performance.now();
     renderWaters();
   }
@@ -651,6 +662,7 @@
   }
   function stopWaterAnimation(){
     lastTransferPair=null;
+    lastTransferredHydrogen=null;
     lastTransferFinish=-Infinity;
     waterToken++;
     if(waterFrame!==null)cancelAnimationFrame(waterFrame);
