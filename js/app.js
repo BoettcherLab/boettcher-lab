@@ -744,7 +744,7 @@
     const key=raw.split(/[/?]/)[0]||'home';
     const home=key==='home';
     $('#homeView').hidden=!home;$('#slideControls').hidden=!home;$('#pageView').hidden=home;
-    if(home){clearInterval(researchTimer);researchTimer=null;document.title='Boettcher Lab – UC Berkeley · Redesign Concept';setActiveSlide(activeSlide);return}
+    if(home){clearInterval(researchTimer);researchTimer=null;document.title='Boettcher Lab';setActiveSlide(activeSlide);return}
     stopWaterAnimation();
     clearInterval(researchTimer);
     document.body.dataset.slideTone='paper';
@@ -771,7 +771,7 @@
     target.scrollTop=0;
     $$('.drawer-link').forEach(a=>{if(a.getAttribute('href')==='#/'+key)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
     let heading=$('h1',target);
-    document.title=(heading?.textContent.trim()||'Boettcher Lab')+' | Boettcher Lab – UC Berkeley';
+    document.title=(heading?.textContent.trim()||'Boettcher Lab')+' | Boettcher Lab';
     if(key==='research'){renderResearchCards();restartResearchTimer()}
     if(key==='publications'||key==='news'){updatePublicationResults();$('#pubCategory').value=publicationFilter;$('#pubYear').value=publicationYear;$('#pubRole').value=publicationRole;updateFeed();}
     heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});
