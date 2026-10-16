@@ -386,8 +386,12 @@
   // for electrostatic optimization and proton-transfer bookkeeping.
   const bendAmplitude=10*Math.PI/180;
   let lastTransferFinish=-Infinity;
+  let lastTransferPair=null;
   function bondAngleBend(w,now){
     if(reducedMotion.matches||w.hs.length!==2||jumpState)return 0;
+    // Only the two oxygen sites exchanging a proton can bend.
+    const pair=hopState||lastTransferPair;
+    if(!pair||(w.i!==pair.from&&w.i!==pair.to))return 0;
     const activity=hopState?1:Math.exp(-Math.max(0,now-lastTransferFinish)/180);
     if(activity<0.001)return 0;
     return bendAmplitude*activity*Math.sin(now*0.015+w.i*1.71);
@@ -523,11 +527,13 @@
     waters[j.to].theta=j.endAngle;
     waterVisualIndex=j.to;
     jumpState=null;
+    lastTransferPair={from:j.from,to:j.to};
     lastTransferFinish=performance.now();
     // Let spectators relax only after the new H3O+ has appeared.
     settleDeadline=performance.now()+3000;
   }
   function startHop(from,to){
+    lastTransferPair=null;
     const info=rotateForHop(from,to),dir=Math.sign(to-from);
     const rotation=info.rotation;
     // For BOTH directions, rigid-body orientation precedes proton release.
@@ -556,6 +562,7 @@
     acceptor.theta=hop.selected.a;
     waterVisualIndex=hop.to;
     hopState=null;
+    lastTransferPair={from:hop.from,to:hop.to};
     lastTransferFinish=performance.now();
     renderWaters();
   }
@@ -643,6 +650,8 @@
     renderWaters();
   }
   function stopWaterAnimation(){
+    lastTransferPair=null;
+    lastTransferFinish=-Infinity;
     waterToken++;
     if(waterFrame!==null)cancelAnimationFrame(waterFrame);
     waterFrame=null;waterLoopActive=false;hopState=null;jumpState=null;pendingJumpTarget=null;modelLast=0;
