@@ -365,7 +365,7 @@
     // First-order relaxation directly toward the Coulomb minimum. No angular
     // velocity, springs, torque, per-hydrogen targeting, or spontaneous wobble.
     // The donor and acceptor are held fixed while their shared H bond changes.
-    const rate=3.0, maxRate=2.15, epsilon=0.008;
+    const rate=6.0, maxRate=4.30, epsilon=0.008;
     let moving=false;
     for(const w of waters){
       if(w.hs.length!==2)continue;
@@ -382,16 +382,34 @@
     }
     return moving;
   }
+  // Only visual bond-angle deformation: the stored H positions stay unchanged
+  // for electrostatic optimization and proton-transfer bookkeeping.
+  const bendAmplitude=10*Math.PI/180;
+  let lastTransferFinish=-Infinity;
+  function bondAngleBend(w,now){
+    if(reducedMotion.matches||w.hs.length!==2||jumpState)return 0;
+    const activity=hopState?1:Math.exp(-Math.max(0,now-lastTransferFinish)/180);
+    if(activity<0.001)return 0;
+    return bendAmplitude*activity*Math.sin(now*0.015+w.i*1.71);
+  }
   function renderWaters(){
     const inTransfer=hopState && hopState.elapsed>=hopState.prep;
+    const renderNow=performance.now();
     for(const w of waters){
       const attached=new Set(w.hs.map(h=>h.id));
       for(const child of [...w.links.children])if(!attached.has(+child.dataset.hid))child.remove();
       for(const child of [...w.atoms.children])if(!attached.has(+child.dataset.hid))child.remove();
+      const bend=bondAngleBend(w,renderNow);
+      const bendSense=w.hs.length===2?(Math.sign(wrap(w.hs[1].a-w.hs[0].a))||1):0;
       for(const h of w.hs){
         if(!h.bond||h.bond.parentNode!==w.links){h.bond=svgEl('line',{'class':'water-bond','data-hid':h.id},w.links)}
         if(!h.ball||h.ball.parentNode!==w.atoms){h.ball=svgEl('circle',{'class':'hydrogen','data-hid':h.id,r:7.5},w.atoms)}
-        const x=xpos+bondLength*Math.sin(h.a),y=ypos(w.i)+bondLength*Math.cos(h.a);
+        // Bend two O-H directions symmetrically by half the opening-angle
+        // variation. No mutations to h.a, and H objects remain intact.
+        const offset=w.hs.length===2?
+          (w.hs[0]===h?-0.5:0.5)*bendSense*bend:0;
+        const visualAngle=h.a+offset;
+        const x=xpos+bondLength*Math.sin(visualAngle),y=ypos(w.i)+bondLength*Math.cos(visualAngle);
         h.bond.setAttribute('x1',xpos);h.bond.setAttribute('y1',ypos(w.i));
         h.bond.setAttribute('x2',x);h.bond.setAttribute('y2',y);
         h.ball.setAttribute('cx',x);h.ball.setAttribute('cy',y);
@@ -505,6 +523,7 @@
     waters[j.to].theta=j.endAngle;
     waterVisualIndex=j.to;
     jumpState=null;
+    lastTransferFinish=performance.now();
     // Let spectators relax only after the new H3O+ has appeared.
     settleDeadline=performance.now()+3000;
   }
@@ -537,6 +556,7 @@
     acceptor.theta=hop.selected.a;
     waterVisualIndex=hop.to;
     hopState=null;
+    lastTransferFinish=performance.now();
     renderWaters();
   }
   function tickWaterPhysics(now){
