@@ -385,7 +385,7 @@
   // Only visual bond-angle deformation: the stored H positions stay unchanged
   // for electrostatic optimization and proton-transfer bookkeeping.
   const bendAmplitude=10*Math.PI/180;
-  let lastTransferFinish=-Infinity;
+  let lastTransferStart=-Infinity;
   let lastTransferPair=null;
   let lastTransferredHydrogen=null;
   function bondAngleBend(w,now){
@@ -393,7 +393,9 @@
     // Only the two oxygen sites exchanging a proton can bend.
     const pair=hopState||lastTransferPair;
     if(!pair||(w.i!==pair.from&&w.i!==pair.to))return 0;
-    const activity=hopState?1:Math.exp(-Math.max(0,now-lastTransferFinish)/180);
+    // Exponential damping starts as soon as the hop begins, not at its end.
+    // After ~2.1 s (five time constants) the bend is visually negligible.
+    const activity=Math.exp(-Math.max(0,now-lastTransferStart)/420);
     if(activity<0.001)return 0;
     return bendAmplitude*activity*Math.sin(now*0.015+w.i*1.71);
   }
@@ -537,11 +539,13 @@
     jumpState=null;
     lastTransferPair={from:j.from,to:j.to};
     lastTransferredHydrogen=j.selected;
-    lastTransferFinish=performance.now();
+    // Distant fade jumps do not excite bond-angle vibrations.
+    lastTransferStart=-Infinity;
     // Let spectators relax only after the new H3O+ has appeared.
     settleDeadline=performance.now()+3000;
   }
   function startHop(from,to){
+    lastTransferStart=performance.now();
     lastTransferPair=null;
     lastTransferredHydrogen=null;
     const info=rotateForHop(from,to),dir=Math.sign(to-from);
@@ -574,7 +578,7 @@
     hopState=null;
     lastTransferPair={from:hop.from,to:hop.to};
     lastTransferredHydrogen=hop.selected;
-    lastTransferFinish=performance.now();
+    // Continue the same decaying vibration with no reset at completion.
     renderWaters();
   }
   function tickWaterPhysics(now){
@@ -663,7 +667,7 @@
   function stopWaterAnimation(){
     lastTransferPair=null;
     lastTransferredHydrogen=null;
-    lastTransferFinish=-Infinity;
+    lastTransferStart=-Infinity;
     waterToken++;
     if(waterFrame!==null)cancelAnimationFrame(waterFrame);
     waterFrame=null;waterLoopActive=false;hopState=null;jumpState=null;pendingJumpTarget=null;modelLast=0;
