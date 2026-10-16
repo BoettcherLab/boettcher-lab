@@ -591,9 +591,12 @@
     }
     // Keep waters still during the optical jump. Once the new H3O+ is visible,
     // re-minimize Coulomb energy using the new location of the excess charge.
-    const relaxing=jumpState?false:updateDipoles(dt,chargePosition());
+    // Re-evaluate the Coulomb minimum every frame as the proton moves.
+    // Hold spectators during a nonadjacent fade jump, then let them relax.
+    if(!jumpState)updateDipoles(dt,chargePosition());
     renderWaters();
-    if(hopState||jumpState||waterVisualIndex!==desiredWaterIndex||(relaxing&&now<settleDeadline)){
+    // Keep relaxation active on the homepage, even at equilibrium.
+    if(!document.querySelector('#homeView').hidden && !reducedMotion.matches){
       waterFrame=requestAnimationFrame(tickWaterPhysics);
     }else{waterFrame=null;waterLoopActive=false;modelLast=0;}
   }
@@ -744,7 +747,7 @@
     const key=raw.split(/[/?]/)[0]||'home';
     const home=key==='home';
     $('#homeView').hidden=!home;$('#slideControls').hidden=!home;$('#pageView').hidden=home;
-    if(home){clearInterval(researchTimer);researchTimer=null;document.title='Boettcher Lab – UC Berkeley · Redesign Concept';setActiveSlide(activeSlide);return}
+    if(home){clearInterval(researchTimer);researchTimer=null;document.title='Boettcher Lab – UC Berkeley · Redesign Concept';setActiveSlide(activeSlide);if(!reducedMotion.matches)startWaterLoop();return}
     stopWaterAnimation();
     clearInterval(researchTimer);
     document.body.dataset.slideTone='paper';
