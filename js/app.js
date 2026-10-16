@@ -365,7 +365,7 @@
     // First-order relaxation directly toward the Coulomb minimum. No angular
     // velocity, springs, torque, per-hydrogen targeting, or spontaneous wobble.
     // The donor and acceptor are held fixed while their shared H bond changes.
-    const rate=3.0, maxRate=2.15, epsilon=0.008;
+    const rate=6.0, maxRate=4.30, epsilon=0.008;
     let moving=false;
     for(const w of waters){
       if(w.hs.length!==2)continue;
@@ -382,16 +382,79 @@
     }
     return moving;
   }
+  // Only visual bond-angle deformation: the stored H positions stay unchanged
+  // for electrostatic optimization and proton-transfer bookkeeping.
+  const bendAmplitude=10*Math.PI/180;
+  let lastTransferStart=-Infinity;
+  let lastTransferPair=null;
+  let lastTransferredHydrogen=null;
+  // Bond stretching and recoil affect display coordinates only; the underlying
+  // hydrogen angles and atom identities remain the electrostatic model's data.
+  let recoilEvent=null;
+  const recoilDuration=3000;
+  const recoilTau=recoilDuration/Math.log(100); // ~1% amplitude after 3 seconds
+  function recoilEnvelope(now){
+    if(!recoilEvent)return 0;
+    const elapsed=Math.max(0,now-recoilEvent.at);
+    return elapsed>=recoilDuration?0:Math.exp(-elapsed/recoilTau);
+  }
+  function bondLengthOffset(w,h,now){
+    const participating=hopState&&(w.i===hopState.from||w.i===hopState.to);
+    // Before cleavage, stretch the transferring O-H bond and slightly
+    // contract the remaining bonds on both participating molecules.
+    if(participating&&!hopState.detached){
+      const p=sstep(hopState.prep?hopState.elapsed/hopState.prep:1);
+      if(w.i===hopState.from&&h===hopState.selected)return 0.18*bondLength*p;
+      return -0.055*bondLength*p;
+    }
+    // Once cleavage begins, release compressed spectator bonds into an
+    // underdamped, decaying O-H stretching mode. Never move the transferred H.
+    if(recoilEvent&&(w.i===recoilEvent.from||w.i===recoilEvent.to)&&
+       h!==recoilEvent.selected){
+      const elapsed=Math.max(0,now-recoilEvent.at);
+      const envelope=recoilEnvelope(now);
+      return -0.075*bondLength*envelope*Math.cos(elapsed*0.017);
+    }
+    return 0;
+  }
+  function bondAngleBend(w,now){
+    if(reducedMotion.matches||w.hs.length<2||jumpState)return 0;
+    // Only the two oxygen sites exchanging a proton can bend.
+    const pair=hopState||lastTransferPair;
+    if(!pair||(w.i!==pair.from&&w.i!==pair.to))return 0;
+    // Bending accompanies the same transfer/recoil excitation and is
+    // imperceptible at approximately three seconds after bond cleavage.
+    const activity=hopState&&!hopState.detached
+      ?1:recoilEnvelope(now);
+    if(activity<0.001)return 0;
+    return bendAmplitude*activity*Math.sin(now*0.015+w.i*1.71);
+  }
   function renderWaters(){
     const inTransfer=hopState && hopState.elapsed>=hopState.prep;
+    const renderNow=performance.now();
     for(const w of waters){
       const attached=new Set(w.hs.map(h=>h.id));
       for(const child of [...w.links.children])if(!attached.has(+child.dataset.hid))child.remove();
       for(const child of [...w.atoms.children])if(!attached.has(+child.dataset.hid))child.remove();
+      const bend=bondAngleBend(w,renderNow);
+      const bendSense=w.hs.length===2?(Math.sign(wrap(w.hs[1].a-w.hs[0].a))||1):0;
+      // On H3O+, leave the transferring/newly attached proton untouched;
+      // bend the two remaining O-H bonds in opposite directions.
+      const anchor=w.hs.length===3?
+        ((hopState&&hopState.from===w.i&&w.hs.includes(hopState.selected))?hopState.selected:
+        (lastTransferPair&&lastTransferPair.to===w.i&&w.hs.includes(lastTransferredHydrogen))?lastTransferredHydrogen:w.hs[0]):null;
+      const flexingHs=anchor?w.hs.filter(h=>h!==anchor):null;
       for(const h of w.hs){
         if(!h.bond||h.bond.parentNode!==w.links){h.bond=svgEl('line',{'class':'water-bond','data-hid':h.id},w.links)}
         if(!h.ball||h.ball.parentNode!==w.atoms){h.ball=svgEl('circle',{'class':'hydrogen','data-hid':h.id,r:7.5},w.atoms)}
-        const x=xpos+bondLength*Math.sin(h.a),y=ypos(w.i)+bondLength*Math.cos(h.a);
+        // Bend two O-H directions symmetrically by half the opening-angle
+        // variation. No mutations to h.a, and H objects remain intact.
+        const offset=w.hs.length===2?
+          (w.hs[0]===h?-0.5:0.5)*bendSense*bend:
+          (flexingHs?(flexingHs[0]===h?-0.5:flexingHs[1]===h?0.5:0)*bend:0);
+        const visualAngle=h.a+offset;
+        const displayedLength=bondLength+bondLengthOffset(w,h,renderNow);
+        const x=xpos+displayedLength*Math.sin(visualAngle),y=ypos(w.i)+displayedLength*Math.cos(visualAngle);
         h.bond.setAttribute('x1',xpos);h.bond.setAttribute('y1',ypos(w.i));
         h.bond.setAttribute('x2',x);h.bond.setAttribute('y2',y);
         h.ball.setAttribute('cx',x);h.ball.setAttribute('cy',y);
@@ -475,6 +538,7 @@
   // its covalent bond fade; the rest of the hydrogens remain stationary until
   // the new charge site is established and Coulombic relaxation resumes.
   function startJump(from,to){
+    recoilEvent=null;
     const donor=waters[from], acceptor=waters[to];
     const receiverY=ypos(to);
     const closest=donor.hs.reduce((best,h)=>{
@@ -505,10 +569,18 @@
     waters[j.to].theta=j.endAngle;
     waterVisualIndex=j.to;
     jumpState=null;
+    lastTransferPair={from:j.from,to:j.to};
+    lastTransferredHydrogen=j.selected;
+    // Distant fade jumps do not excite bond-angle vibrations.
+    lastTransferStart=-Infinity;
     // Let spectators relax only after the new H3O+ has appeared.
     settleDeadline=performance.now()+3000;
   }
   function startHop(from,to){
+    recoilEvent=null;
+    lastTransferStart=performance.now();
+    lastTransferPair=null;
+    lastTransferredHydrogen=null;
     const info=rotateForHop(from,to),dir=Math.sign(to-from);
     const rotation=info.rotation;
     // For BOTH directions, rigid-body orientation precedes proton release.
@@ -537,6 +609,9 @@
     acceptor.theta=hop.selected.a;
     waterVisualIndex=hop.to;
     hopState=null;
+    lastTransferPair={from:hop.from,to:hop.to};
+    lastTransferredHydrogen=hop.selected;
+    // Continue the same decaying vibration with no reset at completion.
     renderWaters();
   }
   function tickWaterPhysics(now){
@@ -556,10 +631,14 @@
       }
       if(!h.detached && elapsed>=h.prep){
         const donor=waters[h.from], proton=h.selected;
-        h.startX=xpos+bondLength*Math.sin(proton.a);
-        h.startY=ypos(h.from)+bondLength*Math.cos(proton.a);
+        // Match the fully stretched O-H endpoint from the preparation frame.
+        // This avoids a jump in the transferring proton when the bond breaks.
+        const stretchedLength=bondLength*1.18;
+        h.startX=xpos+stretchedLength*Math.sin(proton.a);
+        h.startY=ypos(h.from)+stretchedLength*Math.cos(proton.a);
         donor.hs=donor.hs.filter(a=>a!==proton);
         h.detached=true;
+        recoilEvent={from:h.from,to:h.to,selected:proton,at:now};
       }
       h.elapsed=elapsed;
       if(elapsed>=h.prep+h.travel+h.rest){
@@ -623,6 +702,10 @@
     renderWaters();
   }
   function stopWaterAnimation(){
+    lastTransferPair=null;
+    lastTransferredHydrogen=null;
+    lastTransferStart=-Infinity;
+    recoilEvent=null;
     waterToken++;
     if(waterFrame!==null)cancelAnimationFrame(waterFrame);
     waterFrame=null;waterLoopActive=false;hopState=null;jumpState=null;pendingJumpTarget=null;modelLast=0;
