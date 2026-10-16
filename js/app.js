@@ -363,9 +363,9 @@
   }
   function updateDipoles(dt,proton){
     // First-order relaxation directly toward the Coulomb minimum. No angular
-    // velocity, springs, torque, or per-hydrogen targeting. Subtle visual vibrations are applied only during rendering.
+    // velocity, springs, torque, or independent rotations of the hydrogen atoms.
     // The donor and acceptor are held fixed while their shared H bond changes.
-    const rate=6.0, maxRate=4.30, epsilon=0.008;
+    const rate=3.0, maxRate=2.15, epsilon=0.008;
     let moving=false;
     for(const w of waters){
       if(w.hs.length!==2)continue;
@@ -382,22 +382,37 @@
     }
     return moving;
   }
+  // Allow the H-O-H opening angle to flex by up to 10 degrees either side
+  // of its 120-degree resting value. The two bonds bend oppositely so the
+  // dipole axis remains defined by Coulombic reorientation.
+  // Motion is excited during proton transfer and decays quickly afterward.
+  const maxBend=10*Math.PI/180;
+  let bendRestTime=-Infinity;
+  function waterBend(w,now){
+    if(reducedMotion.matches||w.hs.length!==2||jumpState)return 0;
+    const duringTransfer=Boolean(hopState);
+    const envelope=duringTransfer?1:Math.exp(-(now-bendRestTime)/190);
+    if(envelope<0.002)return 0;
+    const phase=now*0.014+w.i*1.7;
+    return maxBend*envelope*Math.sin(phase);
+  }
   function renderWaters(){
     const inTransfer=hopState && hopState.elapsed>=hopState.prep;
+    const renderNow=performance.now();
     for(const w of waters){
       const attached=new Set(w.hs.map(h=>h.id));
       for(const child of [...w.links.children])if(!attached.has(+child.dataset.hid))child.remove();
       for(const child of [...w.atoms.children])if(!attached.has(+child.dataset.hid))child.remove();
-      for(const h of w.hs){
+      const flex=waterBend(w,renderNow);
+      const bondDirection=w.hs.length===2?
+        Math.sign(wrap(w.hs[1].a-w.hs[0].a))||1:0;
+      for(const [h,bondIndex] of w.hs.entries()){
         if(!h.bond||h.bond.parentNode!==w.links){h.bond=svgEl('line',{'class':'water-bond','data-hid':h.id},w.links)}
         if(!h.ball||h.ball.parentNode!==w.atoms){h.ball=svgEl('circle',{'class':'hydrogen','data-hid':h.id,r:7.5},w.atoms)}
-        // Small, purely visual rigid-body vibration (~1 degree). It never
-        // modifies the molecular angles used by Coulomb minimization.
-        // Keep transferring donor/acceptor molecules steady during a hop.
-        const vibrating=w.hs.length===2&&!jumpState&&
-          !(hopState&&(w.i===hopState.from||w.i===hopState.to));
-        const vibration=vibrating?0.017*Math.sin(performance.now()*0.009+w.i*1.9):0;
-        const displayAngle=h.a+vibration;
+        // Opposite angular offsets change H-O-H angle without spinning
+        // the whole water molecule. Base molecular geometry is untouched
+        // for transfer selection and electrostatic minimization.
+        const displayAngle=h.a+(bondIndex===0?-1:1)*bondDirection*flex/2;
         const x=xpos+bondLength*Math.sin(displayAngle),y=ypos(w.i)+bondLength*Math.cos(displayAngle);
         h.bond.setAttribute('x1',xpos);h.bond.setAttribute('y1',ypos(w.i));
         h.bond.setAttribute('x2',x);h.bond.setAttribute('y2',y);
@@ -512,10 +527,12 @@
     waters[j.to].theta=j.endAngle;
     waterVisualIndex=j.to;
     jumpState=null;
+    bendRestTime=performance.now();
     // Let spectators relax only after the new H3O+ has appeared.
     settleDeadline=performance.now()+3000;
   }
   function startHop(from,to){
+    bendRestTime=Infinity;
     const info=rotateForHop(from,to),dir=Math.sign(to-from);
     const rotation=info.rotation;
     // For BOTH directions, rigid-body orientation precedes proton release.
@@ -544,6 +561,7 @@
     acceptor.theta=hop.selected.a;
     waterVisualIndex=hop.to;
     hopState=null;
+    bendRestTime=performance.now();
     renderWaters();
   }
   function tickWaterPhysics(now){
@@ -635,7 +653,7 @@
   function stopWaterAnimation(){
     waterToken++;
     if(waterFrame!==null)cancelAnimationFrame(waterFrame);
-    waterFrame=null;waterLoopActive=false;hopState=null;jumpState=null;pendingJumpTarget=null;modelLast=0;
+    waterFrame=null;waterLoopActive=false;hopState=null;jumpState=null;pendingJumpTarget=null;modelLast=0;bendRestTime=-Infinity;
     // When leaving home, jump to a chemically valid rested model state.
     drawWaterCharge(waterVisualIndex);
   }
