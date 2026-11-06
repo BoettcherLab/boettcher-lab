@@ -43,4 +43,6 @@ The homepage uses native document scrolling for wheel, touch, and keyboard input
 
 Research topics are selected manually, with shareable URLs such as `#/research?topic=bipolar`. They do not advance automatically. Topic content remains in `js/content.js`. Responsive layout rules are in `css/additional.css`; base visual styles are in `css/styles.css`.
 
-Group photos remain explicitly marked placeholders until real photographs are supplied. No visual editor or CMS is configured.
+Lab photos are stored in `assets/` and listed in `GROUP_PHOTOS` in `js/content.js`. The homepage and Group Members page share the same manually controlled gallery. Images retain their full aspect ratio, with captions below the image. No visual editor or CMS is configured.
+
+Member portraits are stored in `assets/team/`. Maintain names, categories, roles, and image paths in `TEAM` in `js/content.js`; see `docs/team-photo-sources.json` for image provenance. The roster reflects an imported snapshot of the official team page and is not automatically synchronized.

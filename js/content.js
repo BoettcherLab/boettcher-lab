@@ -1,4 +1,10 @@
 'use strict';
+  // Shared by the homepage and Group Members page. Add new gallery photos here.
+  const GROUP_PHOTOS = [
+    {src:'assets/group-portrait.webp',caption:'Lab group',alt:'Boettcher Lab members gathered outside the College of Chemistry at UC Berkeley'},
+    {src:'assets/summer-barbecue.webp',caption:'Summer barbecue',alt:'Boettcher Lab members celebrating together at the summer barbecue'},
+    {src:'assets/lab-walkthrough.webp',caption:'Lab walkthrough',alt:'A Boettcher Lab walkthrough with researchers gathered beside electrochemistry equipment'}
+  ];
   const TOPICS = [
     'Bipolar membranes',
     'Anion-exchange membranes',
@@ -149,21 +155,393 @@
     {type:'GROUP MILESTONE',date:'2025',title:'Durable pure-water electrolyzers in Science',summary:'A group publication highlights interphase engineering in anion-exchange membrane electrolysis.',doi:'10.1126/science.adw7100',paper:'hou-2025'},
     {type:'EDUCATION',date:'2026 PROGRAM',title:'Summer Electrochemistry Academy at Berkeley',summary:'CESET offers hands-on summer electrochemistry courses spanning fundamentals and advanced electrochemical technologies.',url:'https://electrochemistry.berkeley.edu/summer-electrochemistry-academy'}
   ];
+  // Snapshot of the official team page. Image provenance: docs/team-photo-sources.json.
   const TEAM = [
-    {name:'Anthony Ekennia',role:'Postdoctoral Scholar'},
-    {name:'Arunavo Chakraborty',role:'Postdoctoral Scholar'},
-    {name:'Yang Zhao',role:'Postdoctoral Scholar · LBNL'},
-    {name:'Jin Wook Yang',role:'Postdoctoral Scholar'},
-    {name:'Gwan Hyun Choi',role:'Postdoctoral Scholar'},
-    {name:'Wenbo Zhang',role:'Postdoctoral Scholar'},
-    {name:'Dawei Xi',role:'Postdoctoral Scholar'},
-    {name:'Jaerim Kim',role:'Postdoctoral Scholar'},
-    {name:'Nick D’Antona',role:'Graduate Student'},
-    {name:'Kam Yun “Kelvin” Li',role:'Graduate Student'},
-    {name:'Nicole Sagui',role:'Graduate Student'},
-    {name:'Nathan Stovall',role:'Graduate Student · Collaborator'},
-    {name:'Catherine Wallace',role:'Graduate Student'}
-  ];
+  {
+    "name": "Anthony Ekennia",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/anthony-ekennia.webp",
+    "imageWidth": 300,
+    "imageHeight": 304
+  },
+  {
+    "name": "Arunavo Chakraborty",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/arunavo-chakraborty.webp",
+    "imageWidth": 300,
+    "imageHeight": 268
+  },
+  {
+    "name": "Yang Zhao - 赵洋",
+    "role": "Postdoctoral Scholar · LBNL",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/yang-zhao.webp",
+    "imageWidth": 300,
+    "imageHeight": 298
+  },
+  {
+    "name": "Jin Wook Yang",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/jin-wook-yang.webp",
+    "imageWidth": 300,
+    "imageHeight": 281
+  },
+  {
+    "name": "Gwan Hyun Choi",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/gwan-hyun-choi.webp",
+    "imageWidth": 300,
+    "imageHeight": 314
+  },
+  {
+    "name": "Wenbo Zhang",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/wenbo-zhang.webp",
+    "imageWidth": 300,
+    "imageHeight": 302
+  },
+  {
+    "name": "Dawei Xi",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/dawei-xi.webp",
+    "imageWidth": 300,
+    "imageHeight": 284
+  },
+  {
+    "name": "Chulhee Lim",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/chulhee-lim.webp",
+    "imageWidth": 300,
+    "imageHeight": 303
+  },
+  {
+    "name": "Jaerim Kim",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/jaerim-kim.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Jun Ho Lee",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/jun-ho-lee.webp",
+    "imageWidth": 300,
+    "imageHeight": 301
+  },
+  {
+    "name": "Hyun Woo Lim",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/hyun-woo-lim.webp",
+    "imageWidth": 300,
+    "imageHeight": 288
+  },
+  {
+    "name": "Chihyung Lee",
+    "role": "Postdoctoral Scholar",
+    "category": "Postdoctoral Scholars",
+    "image": "assets/team/chihyung-lee.webp",
+    "imageWidth": 300,
+    "imageHeight": 298
+  },
+  {
+    "name": "Nick D'Antona",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/nick-d-antona.webp",
+    "imageWidth": 300,
+    "imageHeight": 345
+  },
+  {
+    "name": "Kam Yun \"Kelvin\" Li",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/kam-yun-kelvin-li.webp",
+    "imageWidth": 300,
+    "imageHeight": 264
+  },
+  {
+    "name": "Nicole Sagui",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/nicole-sagui.webp",
+    "imageWidth": 300,
+    "imageHeight": 261
+  },
+  {
+    "name": "Francisco \"Kiko\" Galang",
+    "role": "Graduate Student · Collaborator",
+    "category": "Graduate Students",
+    "image": "assets/team/francisco-kiko-galang.webp",
+    "imageWidth": 300,
+    "imageHeight": 263
+  },
+  {
+    "name": "Dwaipayan Roychowdhury",
+    "role": "Graduate Student · University of Oregon",
+    "category": "Graduate Students",
+    "image": "assets/team/dwaipayan-roychowdhury.webp",
+    "imageWidth": 300,
+    "imageHeight": 285
+  },
+  {
+    "name": "Raj Shekhar",
+    "role": "Graduate Student · University of Oregon",
+    "category": "Graduate Students",
+    "image": "assets/team/raj-shekhar.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Nathan Stovall",
+    "role": "Graduate Student · Collaborator",
+    "category": "Graduate Students",
+    "image": "assets/team/nathan-stovall.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Louka Moutarlier",
+    "role": "Graduate Student · University of Oregon",
+    "category": "Graduate Students",
+    "image": "assets/team/louka-moutarlier.webp",
+    "imageWidth": 220,
+    "imageHeight": 200
+  },
+  {
+    "name": "Catherine Wallace",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/catherine-wallace.webp",
+    "imageWidth": 300,
+    "imageHeight": 299
+  },
+  {
+    "name": "Yifan Wu - 吴一凡",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/yifan-wu.webp",
+    "imageWidth": 300,
+    "imageHeight": 324
+  },
+  {
+    "name": "Madelaine Dolich",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/madelaine-dolich.webp",
+    "imageWidth": 300,
+    "imageHeight": 275
+  },
+  {
+    "name": "Yiwen Sun",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/yiwen-sun.webp",
+    "imageWidth": 300,
+    "imageHeight": 299
+  },
+  {
+    "name": "Meg Takezawa",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/meg-takezawa.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Jihan Zhang",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/jihan-zhang.webp",
+    "imageWidth": 300,
+    "imageHeight": 280
+  },
+  {
+    "name": "Richik Haldar",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/richik-haldar.webp",
+    "imageWidth": 300,
+    "imageHeight": 293
+  },
+  {
+    "name": "Martha Kubakh",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/martha-kubakh.webp",
+    "imageWidth": 300,
+    "imageHeight": 305
+  },
+  {
+    "name": "Paul McKinley",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/paul-mckinley.webp",
+    "imageWidth": 300,
+    "imageHeight": 286
+  },
+  {
+    "name": "Jack Pereira",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/jack-pereira.webp",
+    "imageWidth": 300,
+    "imageHeight": 301
+  },
+  {
+    "name": "Sree Sundararaman",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/sree-sundararaman.webp",
+    "imageWidth": 300,
+    "imageHeight": 288
+  },
+  {
+    "name": "Yun-Seok Kang",
+    "role": "Visiting Student",
+    "category": "Visiting Students",
+    "image": "assets/team/yun-seok-kang.webp",
+    "imageWidth": 300,
+    "imageHeight": 295
+  },
+  {
+    "name": "Minseo Kim",
+    "role": "Visiting Student",
+    "category": "Visiting Students",
+    "image": "assets/team/minseo-kim.webp",
+    "imageWidth": 300,
+    "imageHeight": 295
+  },
+  {
+    "name": "Jaqueline Savoia",
+    "role": "Visiting Student",
+    "category": "Visiting Students",
+    "image": "assets/team/jaqueline-savoia.webp",
+    "imageWidth": 300,
+    "imageHeight": 282
+  },
+  {
+    "name": "Tae-Hoon Kong",
+    "role": "Visiting Student",
+    "category": "Visiting Students",
+    "image": "assets/team/tae-hoon-kong.webp",
+    "imageWidth": 300,
+    "imageHeight": 274
+  },
+  {
+    "name": "Jiashen Yang",
+    "role": "Visiting Student",
+    "category": "Visiting Students",
+    "image": "assets/team/jiashen-yang.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Xianglong Zhou",
+    "role": "Visiting Student",
+    "category": "Visiting Students",
+    "image": "assets/team/xianglong-zhou.webp",
+    "imageWidth": 300,
+    "imageHeight": 295
+  },
+  {
+    "name": "Jinghan (Skylar) Gao",
+    "role": "Master's Graduate",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/jinghan-skylar-gao.webp",
+    "imageWidth": 300,
+    "imageHeight": 284
+  },
+  {
+    "name": "Jack Tobin",
+    "role": "Master's Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/jack-tobin.webp",
+    "imageWidth": 300,
+    "imageHeight": 289
+  },
+  {
+    "name": "Zachary Asawesna",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/zachary-asawesna.webp",
+    "imageWidth": 300,
+    "imageHeight": 284
+  },
+  {
+    "name": "Tingkai Chang",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/tingkai-chang.webp",
+    "imageWidth": 300,
+    "imageHeight": 268
+  },
+  {
+    "name": "Zhi Hao \"Kevin\" Chong",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/zhi-hao-kevin-chong.webp",
+    "imageWidth": 300,
+    "imageHeight": 289
+  },
+  {
+    "name": "Jeslyn Gao",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/jeslyn-gao.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Haeun Kim",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/haeun-kim.webp",
+    "imageWidth": 300,
+    "imageHeight": 287
+  },
+  {
+    "name": "Heesoo Kim",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/heesoo-kim.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Paulina Plater",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/paulina-plater.webp",
+    "imageWidth": 300,
+    "imageHeight": 288
+  },
+  {
+    "name": "Jiwen Qin",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/jiwen-qin.webp",
+    "imageWidth": 300,
+    "imageHeight": 300
+  },
+  {
+    "name": "Ben Tonnos",
+    "role": "Undergraduate Student",
+    "category": "Master's and Undergraduate Students",
+    "image": "assets/team/ben-tonnos.webp",
+    "imageWidth": 600,
+    "imageHeight": 229
+  }
+];
   const BASE = 'https://electrochemistry.berkeley.edu';
   const SOURCES = {
     lab:BASE+'/boettcher-lab',
@@ -178,3 +556,4 @@
     faculty:'https://chemistry.berkeley.edu/people/shannon-boettcher',
     scholar:'https://scholar.google.com/citations?user=ctl63ygAAAAJ&hl=en'
   };
+

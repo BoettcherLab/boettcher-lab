@@ -98,3 +98,9 @@ body.drawer-open .desktop-nav{visibility:hidden}
 }
 @media(max-width:360px){.brand-tagline{display:none}}
 
+
+/* Preserve complete member portraits, including photos with wider compositions. */
+.member-portrait{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:contain;background:#eef0ed}
+.member-details h3{overflow-wrap:anywhere}
+
+.principal-portrait{display:block;width:100%;height:auto}
