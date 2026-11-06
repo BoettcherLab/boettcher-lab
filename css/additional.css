@@ -37,3 +37,64 @@
 .research-carousel-section{flex:none;overflow:visible;padding-top:20px}
 .research-feature{flex:none;overflow:visible}
 .research-feature-inner{overflow:visible}
+
+/* Document flow and accessible section navigation. No nested homepage scrollers. */
+.deck{height:auto;overflow:visible;touch-action:auto}
+.slide.minimal-slide{height:auto;min-height:75svh;overflow:visible;padding:calc(var(--header) + 32px) clamp(25px,7vw,110px) 76px}
+.slide.minimal-slide:first-child{min-height:100svh}
+.minimal-slide .minimal-inner{max-height:none;max-width:1120px;width:100%;margin:0 auto}
+.minimal-slide :is(h1,h2){font-size:clamp(36px,5.8vw,86px);line-height:1.12;overflow-wrap:break-word}
+.minimal-slide p{max-width:760px;font-size:clamp(16px,1.6vw,22px)}
+.minimal-slide .news-three{width:100%;max-width:1120px;overflow:visible}
+.news-three>h2{font-size:clamp(30px,4vw,54px)!important}
+.news-three .pub-title{font-size:clamp(16px,1.3vw,20px);min-height:0}
+.minimal-next{position:absolute;bottom:20px;min-width:44px;min-height:44px;font-size:24px}
+.desktop-nav{display:flex;align-items:center;gap:clamp(14px,2vw,28px);font-size:14px;font-weight:600}
+.desktop-nav a{padding:12px 0;border-bottom:2px solid transparent}
+.desktop-nav a:hover,.desktop-nav a[aria-current="page"]{border-color:var(--gold)}
+body:is([data-slide-tone="navy"],[data-slide-tone="black"],[data-slide-tone="gold"]) .desktop-nav{color:white}
+.header-location{display:none}
+.section-label{position:absolute;right:calc(100% - 4px);top:50%;transform:translateY(-50%);font-size:12px;line-height:1.4;font-weight:600;white-space:nowrap;background:var(--paper);color:var(--navy);padding:5px 8px;border-radius:3px;opacity:.65}
+.water-hit[aria-current="true"] .section-label,.water-hit:hover .section-label,.water-hit:focus-visible .section-label{opacity:1;box-shadow:inset 3px 0 var(--gold)}
+body.drawer-open{overflow:hidden}
+body.drawer-open .desktop-nav{visibility:hidden}
+.research-fullscreen{min-height:calc(100svh - var(--header));padding-bottom:48px}
+.research-carousel-section{min-height:0;justify-content:flex-start}
+.research-intro{font-size:17px;line-height:1.6;color:#52625f;margin:8px 0 24px}
+.research-pager{flex-wrap:wrap;gap:10px;margin:8px 0 16px;max-width:1100px}
+.research-topic{min-height:44px;border:1px solid #b6c2c7;border-radius:24px;background:transparent;padding:10px 18px;color:var(--navy);font-size:14px;line-height:1.4}
+.research-topic:hover{background:#e9eef0}
+.research-topic.active{color:white;background:var(--navy);border-color:var(--navy)}
+.research-feature,.research-feature-inner{min-height:0}
+.research-single h2{overflow-wrap:anywhere}
+.research-single .research-description{font-size:clamp(16px,1.5vw,20px)}
+@media(min-width:1200px){
+ .slide.minimal-slide{padding-right:250px}
+}
+@media(max-width:1199px){
+ .slide-controls.water-controls{display:none}
+ .brand-tagline{display:none}
+}
+@media(max-width:800px){
+ .desktop-nav{display:none}
+ .brand-tagline{display:block}
+ .slide.minimal-slide{min-height:65svh;padding:calc(var(--header) + 24px) 25px 76px}
+ .slide.minimal-slide:first-child{min-height:90svh}
+ .pub-feature-grid{grid-template-columns:1fr;max-width:560px}
+ .research-program-header{grid-template-columns:1fr 1fr;align-items:center}
+ .research-program-header h1{grid-column:1/-1;grid-row:1;text-align:left}
+ .research-program-header .research-home-link{grid-row:2}
+ .research-feature{grid-template-columns:1fr 1fr;gap:12px}
+ .research-feature-inner{grid-column:1/-1;grid-row:1}
+ .research-arrow{grid-row:2;width:44px;height:44px;justify-self:center}
+ .research-single{padding:20px 0}
+ .research-pager{justify-content:flex-start}
+ .research-topic{font-size:13px;padding:10px 14px}
+ .pub-toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pub-toolbar :is(.filter-search,.field-wrap){min-width:0}
+ .pub-item :is(h3,.pub-item-meta,.tag){overflow-wrap:anywhere}
+ .team-pi{grid-template-columns:minmax(0,1fr)}
+ .page-section-title,.section-intro,.body-copy,.text-link{overflow-wrap:anywhere}
+}
+@media(max-width:360px){.brand-tagline{display:none}}
+
