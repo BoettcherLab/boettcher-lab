@@ -563,23 +563,23 @@ body[data-slide-tone="gold"] .water-controls{
 .news-three .minimal-actions{margin-top:12px!important;}
 @media(max-width:720px){.news-three{padding:8px!important}.pub-feature-grid{grid-template-columns:1fr;max-width:450px;margin:auto}.pub-title{min-height:0}.pub-graphic svg{max-height:75px}.pub-author{min-height:70px}.pub-author img,.pub-avatar-initials{width:55px;height:55px}.news-three>h2{font-size:25px!important}}
 
-/* Verified Boettcher Lab group photography; shared across home and team page. */
+/* Shared lab photography, displayed at its natural aspect ratio without cropping. */
 .group-gallery{width:min(100%,890px);margin:22px auto 0;position:relative}
-.group-gallery-images{position:relative;width:100%;aspect-ratio:2.15/1;border-radius:7px;overflow:hidden;background:#20344d}
-.group-gallery-frame{position:absolute;inset:0;margin:0;opacity:0;visibility:hidden;transition:opacity .85s ease,visibility .85s ease}
-.group-gallery-frame.is-active{opacity:1;visibility:visible}
-.group-gallery-frame img{width:100%;height:100%;object-fit:cover;display:block}
-.group-gallery-frame figcaption{position:absolute;bottom:0;left:0;right:0;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.75));padding:32px 20px 12px;font-size:12px;letter-spacing:.08em;text-align:left}
+.group-gallery-images{position:relative;width:100%;border-radius:7px;overflow:hidden;background:#20344d}
+.group-gallery-frame{display:none;margin:0}
+.group-gallery-frame.is-active{display:block}
+.group-gallery-frame img{width:100%;height:auto;display:block}
+.group-gallery-frame figcaption{color:#fff;background:var(--navy);padding:12px 20px;font-size:12px;letter-spacing:.08em;text-align:left}
 .group-gallery-controls{display:flex;justify-content:center;align-items:center;gap:22px;padding:8px 0;color:inherit;font-size:12px;letter-spacing:.14em}
-.group-gallery-controls button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;border-radius:50%;width:33px;height:33px;cursor:pointer}
+.group-gallery-controls button{font:inherit;color:inherit;background:transparent;border:1px solid currentColor;border-radius:50%;width:44px;height:44px;cursor:pointer}
 .group-gallery-controls button:hover{background:#ffffff20}
 #slide-4 .minimal-inner{width:min(100%,920px)}
 #slide-4 .minimal-inner>h2{font-size:clamp(42px,6vw,76px)}
 #slide-4 .group-gallery{margin-top:18px}
-#slide-4 .group-gallery-images{aspect-ratio:2.6/1}
+
 .team-gallery-section{padding-top:0}
 .team-gallery-section .group-gallery{max-width:1000px}
-@media(max-width:760px){#slide-4 .group-gallery-images{aspect-ratio:1.45/1}#slide-4 .group-gallery{margin-top:12px} .group-gallery-images{aspect-ratio:1.5/1}}
+@media(max-width:760px){#slide-4 .group-gallery{margin-top:12px}.group-gallery-controls{gap:12px}}
 @media(prefers-reduced-motion:reduce){.group-gallery-frame{transition:none}}
 .member-category{margin-top:42px}.member-category-title{font-size:clamp(22px,3vw,32px);margin:0 0 20px;letter-spacing:-.025em}
 /* V29 – typographic precision and safe-area layout */

@@ -1,0 +1,347 @@
+{
+  "page": "https://electrochemistry.berkeley.edu/boettcher-lab/boettcher-lab-team",
+  "portraits": [
+    {
+      "name": "Anthony Ekennia",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/anthony-ekennia.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img-20230518-wa0015.jpg?itok=EU6tkZRm&c=17109dee13c13083c4b71e8aabc7f5f2&timestamp=1739503263",
+      "sourceAlt": "Anthony Ekennia"
+    },
+    {
+      "name": "Arunavo Chakraborty",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/arunavo-chakraborty.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/arun_.png?itok=XfGXA0Wx&timestamp=1709423317",
+      "sourceAlt": "Arun"
+    },
+    {
+      "name": "Yang Zhao - 赵洋",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/yang-zhao.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/yang_zhao.png?itok=cadnEPs6&timestamp=1709257237",
+      "sourceAlt": "Yang Zhao"
+    },
+    {
+      "name": "Jin Wook Yang",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/jin-wook-yang.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/jinwookyang_0.jpg?itok=nNLmIxWT&c=86a68a1db859ce6138148aa5605a6202&timestamp=1725044837",
+      "sourceAlt": "Jin Wook Yang"
+    },
+    {
+      "name": "Gwan Hyun Choi",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/gwan-hyun-choi.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/gwan_hyun_choi.jpg?itok=HQ9J9Hcf&timestamp=1731623776",
+      "sourceAlt": "Gwan Hyun Choi"
+    },
+    {
+      "name": "Wenbo Zhang",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/wenbo-zhang.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/wenbozhang.jpg?itok=uLAr_KW-&c=768dc7f673f296f9eb77ce65c7664c44&timestamp=1739315795",
+      "sourceAlt": "Wenbo Zhang"
+    },
+    {
+      "name": "Dawei Xi",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/dawei-xi.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/daweixi.jpg?itok=lMYRq346&timestamp=1752536865",
+      "sourceAlt": "Dawei Xi"
+    },
+    {
+      "name": "Chulhee Lim",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/chulhee-lim.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/chulhee_profile_pic.jpg?itok=xr1pd4cp&c=320d1be5992e1dfd6f92c08a4d3a3277&timestamp=1770230815",
+      "sourceAlt": "Chulhee Lim"
+    },
+    {
+      "name": "Jaerim Kim",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/jaerim-kim.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/website_photo_jaerim_kim.jpg?itok=_BJ6UFyt&timestamp=1783446381",
+      "sourceAlt": "Jaerim Kim"
+    },
+    {
+      "name": "Jun Ho Lee",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/jun-ho-lee.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/jungholee.jpg?itok=LwhWCG4G&timestamp=1790649942",
+      "sourceAlt": "Jun Ho Lee"
+    },
+    {
+      "name": "Hyun Woo Lim",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/hyun-woo-lim.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/imhyeonu_3.5x4.5.jpg?itok=Ak33_Z9q&c=f8e4a58e76f8073d2ba271c717d73b78&timestamp=1790830748",
+      "sourceAlt": "Hyun Woo Lim"
+    },
+    {
+      "name": "Chihyung Lee",
+      "category": "Postdoctoral Scholars",
+      "image": "assets/team/chihyung-lee.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/chihyunglee.png?itok=JhPM9xFv&c=bb890fa2d6067b7bb8585ffa7fba4a9f&timestamp=1791244590",
+      "sourceAlt": "Chihyung Lee"
+    },
+    {
+      "name": "Nick D'Antona",
+      "category": "Graduate Students",
+      "image": "assets/team/nick-d-antona.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/nick.jpg?itok=oFPs_GRQ&c=3923541d4abf242988111477349f2598&timestamp=1724621974",
+      "sourceAlt": ""
+    },
+    {
+      "name": "Kam Yun \"Kelvin\" Li",
+      "category": "Graduate Students",
+      "image": "assets/team/kam-yun-kelvin-li.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/kelvinli.png?itok=hEptlfvf&c=1ac88275fe95a4696e19dafb74c2e843&timestamp=1724718740",
+      "sourceAlt": "Kelvin Li"
+    },
+    {
+      "name": "Nicole Sagui",
+      "category": "Graduate Students",
+      "image": "assets/team/nicole-sagui.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/nicole.jpg?itok=qe9-pJEc&timestamp=1724622039",
+      "sourceAlt": ""
+    },
+    {
+      "name": "Francisco \"Kiko\" Galang",
+      "category": "Graduate Students",
+      "image": "assets/team/francisco-kiko-galang.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/kikogalang.jpg?itok=Z0HToCbk&c=8a703f025e2cf07949c8167f808d6159&timestamp=1724973988",
+      "sourceAlt": "Kiko Galang"
+    },
+    {
+      "name": "Dwaipayan Roychowdhury",
+      "category": "Graduate Students",
+      "image": "assets/team/dwaipayan-roychowdhury.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/dwaipayanroychowdhury.jpg?itok=6gpmUgih&timestamp=1739911862",
+      "sourceAlt": "Dwaipayan Roychowdhury"
+    },
+    {
+      "name": "Raj Shekhar",
+      "category": "Graduate Students",
+      "image": "assets/team/raj-shekhar.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/rajshekar.jpg?itok=rnMKRVAC&timestamp=1732165449",
+      "sourceAlt": "Raj Shekhar"
+    },
+    {
+      "name": "Nathan Stovall",
+      "category": "Graduate Students",
+      "image": "assets/team/nathan-stovall.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/nathan.jpg?itok=FxTv9clU&timestamp=1731630529",
+      "sourceAlt": "Nathan Stovall"
+    },
+    {
+      "name": "Louka Moutarlier",
+      "category": "Graduate Students",
+      "image": "assets/team/louka-moutarlier.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_400/public/loukamoutarlier.png?itok=pr1EWqmR&c=03228bd82703ea53399357260806c340&timestamp=1732166374",
+      "sourceAlt": "Louka Moutarlier"
+    },
+    {
+      "name": "Catherine Wallace",
+      "category": "Graduate Students",
+      "image": "assets/team/catherine-wallace.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/catherinewallace.jpg?itok=lEXKlWgy&c=8dab9cfd493e07be5eec5029992383de&timestamp=1724718873",
+      "sourceAlt": "Catherine Wallace"
+    },
+    {
+      "name": "Yifan Wu - 吴一凡",
+      "category": "Graduate Students",
+      "image": "assets/team/yifan-wu.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/yifan_wu.png?itok=bHYmzIbl&timestamp=1709169806",
+      "sourceAlt": "Yifan Wu"
+    },
+    {
+      "name": "Madelaine Dolich",
+      "category": "Graduate Students",
+      "image": "assets/team/madelaine-dolich.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/madelainedolich.png?itok=Z2MdZI80&timestamp=1772147978",
+      "sourceAlt": "Madelaine Dolich"
+    },
+    {
+      "name": "Yiwen Sun",
+      "category": "Graduate Students",
+      "image": "assets/team/yiwen-sun.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/photo_sized_.png?itok=imA06CG2&timestamp=1731624034",
+      "sourceAlt": "Yiwen Sun"
+    },
+    {
+      "name": "Meg Takezawa",
+      "category": "Graduate Students",
+      "image": "assets/team/meg-takezawa.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_7647.jpeg?itok=qgrtsQBp&timestamp=1774903787",
+      "sourceAlt": "Meg Takezawa"
+    },
+    {
+      "name": "Jihan Zhang",
+      "category": "Graduate Students",
+      "image": "assets/team/jihan-zhang.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_7735.jpg?itok=kqRfP4Xt&c=2a739f636417e98d81b3b89b998b72f1&timestamp=1729788480",
+      "sourceAlt": "Jihan Zhang"
+    },
+    {
+      "name": "Richik Haldar",
+      "category": "Graduate Students",
+      "image": "assets/team/richik-haldar.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/image.png?itok=BIjLiFg_&c=e313e1cf9f79570841daef4f2e7cb989&timestamp=1779317595",
+      "sourceAlt": "Richik Haldar"
+    },
+    {
+      "name": "Martha Kubakh",
+      "category": "Graduate Students",
+      "image": "assets/team/martha-kubakh.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/marthakubakh.png?itok=n3jvYDRE&timestamp=1772148260",
+      "sourceAlt": "Martha Kubakh"
+    },
+    {
+      "name": "Paul McKinley",
+      "category": "Graduate Students",
+      "image": "assets/team/paul-mckinley.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/paulmckinley.jpg?itok=VXBJUGpv&c=716f1e70f33b1b66282625d452d6eec8&timestamp=1775761601",
+      "sourceAlt": "Paul McKinley"
+    },
+    {
+      "name": "Jack Pereira",
+      "category": "Graduate Students",
+      "image": "assets/team/jack-pereira.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/jackpereira_ecgphoto.jpg?itok=nMfavHNK&timestamp=1778709749",
+      "sourceAlt": "Jack Pereira"
+    },
+    {
+      "name": "Sree Sundararaman",
+      "category": "Graduate Students",
+      "image": "assets/team/sree-sundararaman.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/screenshot_2025-08-20_at_22.19.45.png?itok=aTR3xIMt&c=44a85e53bbe41bc9a8c8a4952a15e229&timestamp=1756163904",
+      "sourceAlt": "Sree Sundararaman"
+    },
+    {
+      "name": "Yun-Seok Kang",
+      "category": "Visiting Students",
+      "image": "assets/team/yun-seok-kang.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/yunseokkang.jpg?itok=MWxtElxQ&c=85ce6657cdadb8957bf4d591ec6587aa&timestamp=1724695459",
+      "sourceAlt": "Yun-Seok Kang"
+    },
+    {
+      "name": "Minseo Kim",
+      "category": "Visiting Students",
+      "image": "assets/team/minseo-kim.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/minseokim.jpg?itok=7Va3GwQH&timestamp=1776106590",
+      "sourceAlt": "Minseo Kim"
+    },
+    {
+      "name": "Jaqueline Savoia",
+      "category": "Visiting Students",
+      "image": "assets/team/jaqueline-savoia.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/whatsapp_image_2026-09-02_at_23.37.22_0.jpeg?itok=Ck8qZg4T&c=363f1682e9049b33d34e0e771025cbf5&timestamp=1788505513",
+      "sourceAlt": "Jaqueline Savoia"
+    },
+    {
+      "name": "Tae-Hoon Kong",
+      "category": "Visiting Students",
+      "image": "assets/team/tae-hoon-kong.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/image_1.png?itok=BnIeaK2v&c=395d0708f36cae4d5ff00e5ccb3aedb3&timestamp=1789405703",
+      "sourceAlt": "Tae-Hoon Kong"
+    },
+    {
+      "name": "Jiashen Yang",
+      "category": "Visiting Students",
+      "image": "assets/team/jiashen-yang.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/20260402-dsc_0312.jpg?itok=y9U-jC36&timestamp=1786048112",
+      "sourceAlt": "Jiashen Yang"
+    },
+    {
+      "name": "Xianglong Zhou",
+      "category": "Visiting Students",
+      "image": "assets/team/xianglong-zhou.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/photo_xianglongzhou.jpg?itok=h4pooqOW&c=4a9a228b292c2da1c963642fe1b7cc93&timestamp=1789665982",
+      "sourceAlt": "Xianglong Zhou"
+    },
+    {
+      "name": "Jinghan (Skylar) Gao",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/jinghan-skylar-gao.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_8909.jpeg?itok=op6gSlmG&c=42689a40cbced6a2f08823caa5f63f2e&timestamp=1788911559",
+      "sourceAlt": "Jinghan Gao"
+    },
+    {
+      "name": "Jack Tobin",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/jack-tobin.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/image_3.png?itok=sGivgPsq&c=912a0ab7e5660f7e7884ae885932d3a3&timestamp=1789666195",
+      "sourceAlt": "Jack Tobin"
+    },
+    {
+      "name": "Zachary Asawesna",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/zachary-asawesna.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_8550.jpg?itok=4XoJ36kq&c=fbe56577db87066aeec187ca67f0e7dc&timestamp=1768873894",
+      "sourceAlt": "Zachary Asawesna"
+    },
+    {
+      "name": "Tingkai Chang",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/tingkai-chang.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_6524.jpg?itok=qDZYanmz&c=2274e5ca2ee050b5e64cf80c4de20932&timestamp=1780374558",
+      "sourceAlt": "Tingkai Chang"
+    },
+    {
+      "name": "Zhi Hao \"Kevin\" Chong",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/zhi-hao-kevin-chong.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_8430.jpeg?itok=MD8fZnLN&c=cb2f0812f53e9a6c966dd5a4dfb7bc55&timestamp=1792608037",
+      "sourceAlt": "Zhi Hao Chong"
+    },
+    {
+      "name": "Jeslyn Gao",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/jeslyn-gao.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_1926.jpeg?itok=W3mFCKX-&c=264854ff211d0314fc156f7f49c89d9b&timestamp=1785257496",
+      "sourceAlt": "Jeslyn Gao"
+    },
+    {
+      "name": "Haeun Kim",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/haeun-kim.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/03ea7b56-e30a-44e1-9dc4-62e9eaaac6bc-10663-00000416a4668309.jpg?itok=Awp4wdJP&c=11d9eb1cecddb413decc4c8d1f648394&timestamp=1790963238",
+      "sourceAlt": "Haeun Kim"
+    },
+    {
+      "name": "Heesoo Kim",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/heesoo-kim.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/20260926_131329_187.jpg?itok=bAMOXIDN&timestamp=1790490662",
+      "sourceAlt": "Heesoo Kim"
+    },
+    {
+      "name": "Paulina Plater",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/paulina-plater.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/img_9470.jpeg?itok=JBJz9Osa&c=6db8622eae179d9f5ebc08a7e9a866df&timestamp=1788202011",
+      "sourceAlt": "Paulina Plater"
+    },
+    {
+      "name": "Jiwen Qin",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/jiwen-qin.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/width_300/public/image.jpeg?itok=sXNVctjo&timestamp=1788504898",
+      "sourceAlt": "Jiwen Qin"
+    },
+    {
+      "name": "Ben Tonnos",
+      "category": "Master's and Undergraduate Students",
+      "image": "assets/team/ben-tonnos.webp",
+      "sourceImage": "https://electrochemistry.berkeley.edu/sites/default/files/styles/openberkeley_image_full/public/group_logo_from_yifan_banner_blue.png?itok=9JXDKKLP&timestamp=1742942720",
+      "sourceAlt": ""
+    }
+  ],
+  "principalInvestigator": {
+    "name": "Shannon Boettcher",
+    "page": "https://chemistry.berkeley.edu/people/shannon-boettcher",
+    "sourceImage": "https://chemistry.berkeley.edu/sites/default/files/styles/openberkeley_brand_widgets_rectangle/public/shannon-boettcher-768x512.jpg?itok=EPnm2rc_&timestamp=1700507529",
+    "image": "assets/team/shannon-boettcher.webp"
+  }
+}
