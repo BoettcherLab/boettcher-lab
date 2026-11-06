@@ -8,8 +8,8 @@
   <title>Boettcher Lab</title>
   
 
-  <link rel="stylesheet" href="css/styles.css?v=graduate-roster-1">
-  <link rel="stylesheet" href="css/additional.css?v=graduate-roster-1">
+  <link rel="stylesheet" href="css/styles.css?v=publication-topics-1">
+  <link rel="stylesheet" href="css/additional.css?v=publication-topics-1">
 </head>
 <body>
   <a class="skip" href="#homeView">Skip to content</a>
@@ -26,22 +26,23 @@
     <button id="drawerClose" class="icon-button drawer-close" aria-label="Close navigation menu">×</button>
     <h2>Explore / Navigation</h2>
     <nav id="drawerNav" class="drawer-nav" aria-label="Site pages">
-      <a class="drawer-link" href="#/home" data-home-slide="0">The Boettcher Lab</a>
+      <a class="drawer-link" href="#/about">The Boettcher Lab</a>
       <a class="drawer-link" href="#/research">Research</a>
-      <a class="drawer-link" href="#/publications">Recent News and Publications</a>
+      <a class="drawer-link" href="#/publications">Publications</a>
       <a class="drawer-link" href="#/team">Group Members</a>
       <a class="drawer-link" href="#/outreach">Learn Electrochemistry!</a>
       <a class="drawer-link" href="#/join">Join the Team!</a>
       <div class="drawer-extra-label">More to explore</div>
       <a class="drawer-link" href="#/intranet">Internal Website</a>
+      <a class="drawer-link" href="#/ceset">Berkeley CESET</a>
       <a class="drawer-link" href="#/oregon">Oregon Center for Electrochemistry</a>
     </nav>
     <div class="drawer-bottom"><span>CHEMISTRY / CBE / LBNL</span><a href="mailto:boettcher@berkeley.edu">Contact the lab ↗</a></div>
   </aside>
   <main id="homeView" class="deck" aria-label="Boettcher Lab homepage" tabindex="-1">
-    <section class="slide slide-tone-paper minimal-slide is-current" id="slide-1" aria-label="Welcome"><div class="minimal-inner"><h1>The Boettcher Lab</h1><p>Electrochemistry at UC Berkeley and Lawrence Berkeley National Laboratory. We connect interfacial materials science with energy conversion and electrochemical devices.</p></div><button class="minimal-next scroll-next" data-next="1" aria-label="Next section">↓</button></section>
+    <section class="slide slide-tone-paper minimal-slide is-current" id="slide-1" aria-label="Welcome"><div class="minimal-inner"><h1>The Boettcher Lab</h1><p>Electrochemistry at UC Berkeley and Lawrence Berkeley National Laboratory. We connect interfacial materials science with energy conversion and electrochemical devices.</p><a class="minimal-cta" href="#/about">About the lab <span aria-hidden="true">→</span></a></div><button class="minimal-next scroll-next" data-next="1" aria-label="Next section">↓</button></section>
     <section class="slide slide-tone-navy minimal-slide" id="slide-2" aria-label="Research"><div class="minimal-inner"><h2>Research</h2><p>From ion-transfer kinetics and water-dissociation catalysis to membranes, solar fuels, and hydrogen production.</p><a class="minimal-cta" href="#/research">Explore research <span aria-hidden="true">↗</span></a></div><button class="minimal-next scroll-next" data-next="2" aria-label="Next section">↓</button></section>
-    <section class="slide slide-tone-gold minimal-slide" id="slide-3" aria-label="Recent News and Publications"><div class="minimal-inner news-three"><h2>Recent News and Publications</h2><p>Celebrating our group's latest research</p><div class="pub-feature-grid" id="featuredPublications" aria-label="Featured publications"></div><div class="minimal-actions"><a class="minimal-cta" href="#/publications">View all publications ↗</a></div></div><button class="minimal-next scroll-next" data-next="3" aria-label="Next section">↓</button></section>
+    <section class="slide slide-tone-gold minimal-slide" id="slide-3" aria-label="Publications"><div class="minimal-inner news-three"><h2>Publications</h2><p>Celebrating our group's latest research</p><div class="pub-feature-grid" id="featuredPublications" aria-label="Featured publications"></div><div class="minimal-actions"><a class="minimal-cta" href="#/publications">View publications ↗</a></div></div><button class="minimal-next scroll-next" data-next="3" aria-label="Next section">↓</button></section>
     <section class="slide slide-tone-black minimal-slide" id="slide-4" aria-label="Group Members"><div class="minimal-inner"><h2>Group Members</h2><p>Chemists, materials scientists, and engineers investigating electrochemical interfaces and energy technologies.</p><a class="minimal-cta" href="#/team">Meet the group <span aria-hidden="true">↗</span></a><div id="homeGroupGallery"></div></div><button class="minimal-next scroll-next" data-next="4" aria-label="Next section">↓</button></section>
     <section class="slide slide-tone-paper minimal-slide" id="slide-5" aria-label="Learn Electrochemistry!"><div class="minimal-inner"><h2>Learn Electrochemistry!</h2><p>Explore the electrochemistry minor, Summer Academy, and educational resources at UC Berkeley.</p><a class="minimal-cta" href="#/outreach">Explore programs <span aria-hidden="true">↗</span></a></div><button class="minimal-next scroll-next" data-next="5" aria-label="Next section">↓</button></section>
     <section class="slide slide-tone-navy minimal-slide" id="slide-6" aria-label="Join the Team!"><div class="minimal-inner"><h2>Join the Team!</h2><p>Join us in exploring the science of electrochemical interfaces and energy technology</p><a class="minimal-cta" href="#/join">Explore opportunities <span aria-hidden="true">↗</span></a></div><button class="minimal-next scroll-next" data-next="0" aria-label="Back to first section">↑</button></section>
@@ -54,12 +55,12 @@
       <g id="waterPhysicsScene"></g>
       <g id="waterPhysicsOverlay" pointer-events="none"></g>
     </svg>
-    <button type="button" class="water-hit" data-slide="0" style="top:10.3846%" aria-label="Go to Welcome" title="Welcome" aria-current="true"><span class="section-label">Welcome</span></button>
-    <button type="button" class="water-hit" data-slide="1" style="top:26.1538%" aria-label="Go to Research" title="Research"><span class="section-label">Research</span></button>
-    <button type="button" class="water-hit" data-slide="2" style="top:41.9231%" aria-label="Go to Recent News and Publications" title="Recent News and Publications"><span class="section-label">Publications</span></button>
-    <button type="button" class="water-hit" data-slide="3" style="top:57.6923%" aria-label="Go to Group Members" title="Group Members"><span class="section-label">People</span></button>
-    <button type="button" class="water-hit" data-slide="4" style="top:73.4615%" aria-label="Go to Learn Electrochemistry!" title="Learn Electrochemistry!"><span class="section-label">Learn</span></button>
-    <button type="button" class="water-hit" data-slide="5" style="top:89.2308%" aria-label="Go to Join the Team!" title="Join the Team!"><span class="section-label">Join</span></button>
+    <button type="button" class="water-hit" data-slide="0" style="top:10.3846%" aria-label="Go to Welcome" aria-current="true"></button>
+    <button type="button" class="water-hit" data-slide="1" style="top:26.1538%" aria-label="Go to Research"></button>
+    <button type="button" class="water-hit" data-slide="2" style="top:41.9231%" aria-label="Go to Publications"></button>
+    <button type="button" class="water-hit" data-slide="3" style="top:57.6923%" aria-label="Go to Group Members"></button>
+    <button type="button" class="water-hit" data-slide="4" style="top:73.4615%" aria-label="Go to Learn Electrochemistry!"></button>
+    <button type="button" class="water-hit" data-slide="5" style="top:89.2308%" aria-label="Go to Join the Team!"></button>
   </nav>
 
   <main id="pageView" class="page-view" hidden aria-label="Detailed page content" tabindex="-1"></main>
@@ -68,8 +69,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
   
 
-  <script src="js/content.js?v=graduate-roster-1"></script>
-  <script src="js/app.js?v=graduate-roster-1"></script>
+  <script src="js/publication-topics.js?v=publication-topics-1"></script>
+  <script src="js/content.js?v=publication-topics-1"></script>
+  <script src="js/migrated-content.js?v=publication-topics-1"></script>
+  <script src="js/app.js?v=publication-topics-1"></script>
 </body>
 </html>
 

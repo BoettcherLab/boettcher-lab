@@ -7,9 +7,9 @@
   const topicLabel = idx=>TOPICS[idx];
   const paperById = id => PUBLICATIONS.find(p=>p.id===id);
   const doiURL = doi=>'https://doi.org/'+encodeURIComponent(doi).replace(/%2F/gi,'/');
-  const publicationURL = p => p.doi ? doiURL(p.doi) : (p.url || SOURCES.scholar);
+  const publicationURL = p => p.doi ? doiURL(p.doi) : (p.url || '#/publications');
   const newestPublications = records => [...records].sort((a,b)=>Number(b.year)-Number(a.year)||String(a.title).localeCompare(String(b.title)));
-  const publicationYears = () => [...new Set(PUBLICATIONS.map(p=>Number(p.year)))].sort((a,b)=>b-a);
+  const publicationYears = () => [...new Set(PUBLICATIONS.filter(p=>Number(p.year)>=2020&&Number(p.year)<=2026).map(p=>Number(p.year)))].sort((a,b)=>b-a);
   PUBLICATIONS=newestPublications(PUBLICATIONS);
 
   // GitHub Pages serves a cached JSON snapshot; GitHub Actions refreshes it weekly via OpenAlex and Crossref.
@@ -35,15 +35,30 @@
     } catch(e) { console.warn('Using bundled publication archive:',e.message); }
   }
   loadSyncedPublications();
-  function renderFeaturedPublications(){
-    const target=$('#featuredPublications');if(!target)return;
-    const selected=['han-2026','yang-2026','wu-2026'].map(paperById).filter(Boolean);
-    target.innerHTML=selected.map((p,i)=>`<article class="pub-feature-card"><a class="pub-feature-top" href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer"><div class="pub-journal">${escapeHTML(p.journal)} · ${p.year}</div><h2 class="pub-title">${escapeHTML(p.title)}</h2><div class="publication-topic">${['BIPOLAR MEMBRANES','PHOTO-ELECTROCHEMISTRY','WATER DISSOCIATION'][i]}</div><p class="featured-authors">${escapeHTML(p.authors)}</p></a><a class="pub-pdf" href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer">↗ VIEW PUBLICATION</a></article>`).join('');
+  function publicationGraphic(p,extra=''){
+    if(!p?.graphic?.src)return '';
+    const label=p.graphic.kind==='toc'?'TOC graphic':'Article figure';
+    return `<figure class="publication-graphic ${extra}"><a href="${escAttr(p.graphic.src)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${label.toLowerCase()} for ${escAttr(p.title)}"><img src="${escAttr(p.graphic.src)}" alt="${escAttr(label+' for '+p.title)}" width="${p.graphic.width}" height="${p.graphic.height}" loading="lazy" decoding="async"></a><figcaption>${label}</figcaption></figure>`;
   }
-  const external = (url,label,cls='text-link')=>`<a class="${cls}" href="${escAttr(url)}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`;
+  function featuredPublicationCards(){
+    return ['han-2026','yang-2026','wu-2026'].map(paperById).filter(Boolean).map(p=>`<article class="pub-feature-card"><div class="pub-feature-top"><div class="pub-journal">${escapeHTML(p.journal)} · ${p.year}</div><h2 class="pub-title"><a href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.title)}</a></h2>${publicationGraphic(p,'featured-graphic')}<p class="featured-authors">${escapeHTML(p.authors)}</p></div><a class="pub-pdf" href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer">View publication ↗</a></article>`).join('');
+  }
+  function renderFeaturedPublications(){
+    const target=$('#featuredPublications');if(target)target.innerHTML=featuredPublicationCards();
+    const page=$('#pageFeaturedPublications');if(page)page.innerHTML=featuredPublicationCards();
+  }
+  const external = (url,label,cls='text-link')=>`<a class="${cls}" href="${escAttr(url)}"${url.startsWith('#/')?'':' target="_blank" rel="noopener noreferrer"'}>${label} ${url.startsWith('#/')?'→':'↗'}</a>`;
   const goButton = (href,label,variant='')=>`<a href="${href}" class="button ${variant}">${label} <span class="arrow">↗</span></a>`;
-  const footer = ()=>`<footer class="site-footer"><div><strong>BOETTCHER LAB</strong><br>UC BERKELEY · CHEMISTRY + CHEMICAL & BIOMOLECULAR ENGINEERING</div><div><a target="_blank" rel="noopener noreferrer" href="${SOURCES.lab}">Original Lab Website ↗</a><br><a href="#/home">Return to home ↑</a></div></footer>`;
-  const pageShell = (section,title,intro,content)=>`<div class="page-topline"><div class="breadcrumb"><a href="#/home">Home</a><span>/</span>${section.replace(/^\d+\s*\/\s*/,'')}</div></div><header class="page-hero"><div><h1>${title}</h1></div><p class="lead">${intro}</p></header>${content}${footer()}`;
+  const footer = ()=>`<footer class="site-footer"><div><strong>BOETTCHER LAB</strong><br>UC BERKELEY · CHEMISTRY + CHEMICAL & BIOMOLECULAR ENGINEERING</div><div><a href="#/about">About the lab</a> · <a href="#/ceset">Berkeley CESET</a><br><a href="mailto:boettcher@berkeley.edu">Contact the lab</a> · <a href="#/home">Home ↑</a></div></footer>`;
+  const pageShell = (section,title,intro,content)=>`<header class="page-hero ${intro?'':'page-hero-no-intro'}"><div><h1>${title}</h1></div>${intro?`<p class="lead">${intro}</p>`:''}</header>${content}${footer()}`;
+  function renderAbout(){return pageShell('ABOUT','The Boettcher Lab','Electrochemistry and materials science at UC Berkeley and Lawrence Berkeley National Laboratory.',`<section class="page-section migrated-copy">${MIGRATED.about}</section><section class="page-section"><div class="minimal-actions"><a class="button" href="#/research">Our research →</a><a class="button outline" href="#/join">Join the team →</a><a class="button outline" href="#/team">Meet the group →</a></div></section>`)}
+  function renderCeset(){return pageShell('CESET','Berkeley CESET','Center for Electrochemical Science, Engineering, and Technology',`
+    <section class="page-section migrated-copy"><h2>Electrochemistry for societal impact.</h2><p>CESET brings together researchers at UC Berkeley and Lawrence Berkeley National Laboratory to connect fundamental and applied electrochemical science and engineering with technology development, entrepreneurship, education, workforce development, and technoeconomic analysis that informs research and policy.</p><p>Building on Berkeley’s electrochemical engineering tradition, including the pioneering work of Charles Tobias and John Newman, the center focuses on efficient, low-cost energy conversion and storage; electrochemical production of materials and chemicals; and critical-materials refining and recovery.</p><p>Its work includes batteries, hydrogen technologies, electrosynthetic reactors, and membrane-based ion separations, with further opportunities in neuroscience, machine–brain interfaces, semiconductor electrodeposition, and corrosion science. CESET educates future leaders through research, coursework, and partnerships across industry, national laboratories, and academia.</p></section>
+    <section class="page-section"><h2 class="page-section-title">Research, education, and collaboration.</h2><div class="resource-cards"><article class="resource-card"><h3>Energy conversion and storage</h3><p>Improve the efficiency, cost, and durability of batteries, electrolyzers, and fuel cells.</p></article><article class="resource-card"><h3>Materials, chemicals, and critical resources</h3><p>Develop electrosynthesis, combine thermal and electrochemical processes, and recover valuable metals through selective ion transport.</p></article><article class="resource-card"><h3>Education and workforce development</h3><p>Train electrochemical scientists and engineers through fundamental research, practical courses, and the Summer Electrochemistry Academy.</p><a class="text-link" href="#/outreach">Explore courses and learning resources →</a></article></div></section>
+    <section class="page-section migrated-copy"><h2>Connect with CESET.</h2><p>Contact faculty and staff at <a href="mailto:electrochemistry@berkeley.edu">electrochemistry@berkeley.edu</a>.</p><p><a href="https://give.berkeley.edu/fund/FN2399000" target="_blank" rel="noopener noreferrer">Support the CESET mission ↗</a></p></section>`)}
+  function renderArchive(){return pageShell('PUBLICATIONS','Publication archive','Group bibliography with publisher links and author-accepted manuscripts.',`<section class="page-section"><div class="field-wrap archive-search"><label class="field-label" for="archiveSearch">Search the full bibliography</label><input class="input" id="archiveSearch" type="search" placeholder="Search author, title, journal, or DOI"></div><p id="archiveCount" class="result-count" role="status">${MIGRATED.archive.length} citations</p>${[...new Set(MIGRATED.archive.map(p=>p.year))].map((year,i)=>`<details class="archive-year" ${i===0?'open':''}><summary>${year} <span>(${MIGRATED.archive.filter(p=>p.year===year).length})</span></summary><div class="migrated-copy">${MIGRATED.archive.filter(p=>p.year===year).map(p=>`<div class="archive-entry" data-search="${escAttr(p.text.toLowerCase())}">${p.html}</div>`).join('')}</div></details>`).join('')}</section>`)}
+  function filterArchive(value){let count=0;const query=value.trim().toLowerCase();$$('.archive-year').forEach((group,i)=>{let visible=0;$$('.archive-entry',group).forEach(entry=>{entry.hidden=!entry.dataset.search.includes(query);if(!entry.hidden)visible++});group.hidden=visible===0;group.open=Boolean(query)||i===0;count+=visible});$('#archiveCount').textContent=count+' matching citation'+(count===1?'':'s')}
+
   // Blank, locally drawn SVG figure placeholder. No remotely hosted images or external assets.
   let figureSequence=0;
   function figureMarkup({label='Figure placeholder',ratio='16:9',code='PLATE',caption='FIGURE REPLACEMENT',kind='',compact=false,portrait=false}={}) {
@@ -55,21 +70,11 @@
   function insertFigurePlaceholders(root=document){$$('[data-figure]',root).forEach(el=>{el.outerHTML=figureMarkup({label:el.dataset.figure,ratio:el.dataset.ratio,code:el.dataset.code,caption:el.dataset.caption,kind:el.dataset.kind})});}
   function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),2800)}
   function renderLanding(){ $('#homeGroupGallery').innerHTML=groupGalleryMarkup(); }
-  function renderJoin(){
-    return pageShell('01 / JOIN THE TEAM','Join the team!','',`
-      <section class="page-section">
-        <div class="info-grid">
-          <article class="info-card"><div class="eyebrow">POSTDOCTORAL SCHOLARS</div><h3>Postdoctoral applicants</h3><p>Email your CV and a brief statement of research interests. Applicants are encouraged to plan external fellowship applications; international applicants should also investigate funding opportunities in their home countries.</p><p>${external(SOURCES.join,'Postdoctoral fellowship resources')}</p></article>
-          <article class="info-card"><div class="eyebrow">PHD STUDENTS</div><h3>Graduate applicants</h3><p>Apply through UC Berkeley’s Department of Chemistry or Department of Chemical and Biomolecular Engineering. College of Chemistry admission decisions are made by departmental committees rather than individual faculty. Prospective PhD students are encouraged to pursue external graduate fellowships.</p><p>${external('https://chemistry.berkeley.edu/grad','Department application information')}</p></article>
-          <article class="info-card"><div class="eyebrow">UNDERGRADUATES</div><h3>Undergraduate researchers</h3><p>UC Berkeley students seeking substantial research involvement, potentially leading to peer-reviewed publications, should send an email describing their interests, a résumé, and an unofficial transcript. Visiting students from other institutions should have external stipend, scholarship, or fellowship support.</p><p><a href="mailto:boettcher@berkeley.edu" class="text-link">Contact the lab ↗</a></p></article>
-        </div>
-      </section>
-      <section class="page-section" aria-label="Diversity and inclusion"><h2 class="page-section-title">Diversity and inclusion</h2><p class="body-copy">The Boettcher Lab is committed to fostering an inclusive, respectful, and supportive research environment. We welcome researchers from diverse backgrounds, perspectives, and experiences and aim to ensure that every member has equitable opportunities to learn, contribute, collaborate, and grow.</p></section>
-      <section class="page-section"><div style="border-left:2px solid var(--gold);padding:15px 0 15px 28px"><h3 style="font-size:26px;margin-bottom:12px">Get in touch</h3><p class="body-copy">Please use the official lab email for research inquiries. Due to the number of messages received, not every inquiry will receive an individual response.</p><a href="mailto:boettcher@berkeley.edu" class="button">boettcher@berkeley.edu ↗</a><p class="muted" style="font-size:12px;margin-top:18px">Office: 212 Gilman Hall · UC Berkeley</p></div></section>`);
-  }
+  function renderJoin(){return pageShell('JOIN','Join the team','Research opportunities at UC Berkeley and Lawrence Berkeley National Laboratory.',`<section class="page-section migrated-copy">${MIGRATED.join}</section>`)}
   function renderResearch(){
     return `<div class="research-fullscreen">
-      <div class="research-program-header"><a href="#/home" class="research-home-link">← Home</a><h1>Research</h1><a class="research-home-link" href="${SOURCES.research}" target="_blank" rel="noopener noreferrer">Full research overview ↗</a></div>
+      <div class="research-program-header"><a href="#/home" class="research-home-link">← Home</a><h1>Research</h1><a class="research-home-link" href="#/publications">Publications →</a></div>
+      <section class="page-section migrated-copy research-overview"><details><summary>Research overview, talks, and selected publications</summary>${MIGRATED.research}<p><a href="https://www.youtube.com/watch?v=KPh20c1vLcc" target="_blank" rel="noopener noreferrer">From Catalyst Fundamentals to Advanced Alkaline Membrane Electrolyzers ↗</a></p><p><a href="https://www.youtube.com/watch?v=nPFTczw4F1k" target="_blank" rel="noopener noreferrer">Electrochemistry Everywhere — Shannon Boettcher ↗</a></p></details></section>
       <section class="research-carousel-section" aria-label="Research topics">
         <nav id="researchPagination" class="research-pager" aria-label="Choose a research topic">${RESEARCH.map((item,i)=>`<button type="button" class="research-topic" data-research-index="${i}" aria-controls="researchResults">${escapeHTML(item.title)}</button>`).join('')}</nav>
         <p class="research-intro">Explore our research in electrochemical interfaces and energy technologies.</p>
@@ -86,7 +91,7 @@
     const target=$('#researchResults');if(!target)return;
     const r=RESEARCH[researchIndex];
     const papers=(r.papers||[]).map(paperById).filter(Boolean);
-    target.innerHTML=`<article class="research-single" aria-label="${escapeHTML(r.title)}"><div class="eyebrow research-eyebrow">${escapeHTML(r.eyebrow)}</div><h2>${escapeHTML(r.title)}</h2><p class="research-description">${escapeHTML(r.description)}</p><p class="research-application">${escapeHTML(r.application)}</p><div class="research-reading"><h3>Related publications</h3>${papers.map(p=>`<a class="research-paper" href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer"><span>${escapeHTML(p.title)}</span><small>${escapeHTML(p.journal)} · ${p.year} ↗</small></a>`).join('')}</div><a class="text-link research-archive" href="#/publications">Explore the publication archive ↗</a></article>`;
+    target.innerHTML=`<article class="research-single" aria-label="${escapeHTML(r.title)}"><h2>${escapeHTML(r.title)}</h2>${publicationGraphic(paperById(r.paper),'research-topic-graphic')}<p class="research-description">${escapeHTML(r.description)}</p><p class="research-application">${escapeHTML(r.application)}</p><div class="research-reading"><h3>Related publications</h3>${papers.map(p=>`<a class="research-paper" href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer"><span>${escapeHTML(p.title)}</span><small>${escapeHTML(p.journal)} · ${p.year} ↗</small></a>`).join('')}</div><a class="text-link research-archive" href="#/publications">View publications →</a></article>`;
     $$('#researchPagination button').forEach((button,i)=>{
       button.classList.toggle('active',i===researchIndex);
       button.setAttribute('aria-pressed',String(i===researchIndex));
@@ -114,24 +119,43 @@
   function updateChartFallback(k){const svg=$('#chartFallback');if(!svg)return;const pts=Array.from({length:101},(_,i)=>{let x=-.6+1.2*i/100;return `${55+(x+.6)/1.2*435},${245-(1/(1+Math.exp(-k*x)))*200}`}).join(' ');svg.innerHTML=`<g stroke="#e0e5df" stroke-width="1">${[0,1,2,3,4].map(i=>`<line x1="55" x2="490" y1="${45+i*50}" y2="${45+i*50}"/>`).join('')}<line x1="55" x2="55" y1="45" y2="245"/></g><polyline points="${pts}" stroke="#002A54" stroke-width="3" fill="none"/><text x="270" y="280" text-anchor="middle" font-size="11" fill="#777">Potential relative to E₀ / V</text><text x="14" y="15" font-size="11" fill="#777">j / jlim</text>`}
   function updateWave(k){$('#slopeValue').textContent=Number(k).toFixed(1);if(waveChartInstance){waveChartInstance.data.datasets[0].data=Array.from({length:101},(_,i)=>{const x=-.6+1.2*i/100;return {x,y:1/(1+Math.exp(-k*x))}});waveChartInstance.update('none')}else updateChartFallback(k)}
   function renderNews(){return pageShell('03 / NEWS & UPDATES','Lab updates','A curated look at recently published research and educational initiatives from the Boettcher group.',`
-    <section class="page-section"><p class="section-intro">These are editorial summaries based on verified publications and the Berkeley academy page, rather than a live, automatically updated news feed.</p><div class="timeline">${NEWS.map(n=>`<div class="year">${escapeHTML(n.date)}</div><article class="timeline-body"><div class="eyebrow" style="margin-bottom:15px">${escapeHTML(n.type)}</div><h3>${escapeHTML(n.title)}</h3><p>${escapeHTML(n.summary)}</p>${external(n.doi?doiURL(n.doi):n.url,'Read original source')}</article>`).join('')}</div></section>`)}
-  let publicationFilter='all',publicationYear='all',publicationRole='all',publicationSearch='';
+    <section class="page-section"><p class="section-intro">These are editorial summaries based on verified publications and the Berkeley academy page, rather than a live, automatically updated news feed.</p><div class="timeline">${NEWS.map(n=>`<div class="year">${escapeHTML(n.date)}</div><article class="timeline-body"><h3>${escapeHTML(n.title)}</h3><p>${escapeHTML(n.summary)}</p>${external(n.doi?doiURL(n.doi):n.url,'Read original source')}</article>`).join('')}</div></section>`)}
+  let publicationYear='all',publicationSearch='',selectedPublicationTopics=new Set();
+  function publicationKeywords(p){
+    if(Array.isArray(p.keywords)&&p.keywords.length)return p.keywords;
+    const text=[p.title,p.abstract||'',...(p.metadata_keywords||[])].join(' ').toLowerCase().replace(/[–‐]/g,'-').replace(/₂/g,'2').replace(/₄/g,'4');
+    return PUBLICATION_TOPICS.filter(t=>t.patterns.some(pattern=>new RegExp(pattern,'i').test(text))).map(t=>t.id);
+  }
   function renderPublications(){
     const query=new URLSearchParams(location.hash.split('?')[1]||'');
-    publicationSearch=query.get('search')||'';
-    return pageShell('04 / NEWS & PUBLICATIONS','Recent News and Publications','Featured group papers and a searchable archive of peer-reviewed research.',`
-      <section class="page-section bluesky-section"><h2 class="page-section-title">From X</h2>${renderBlueskySection()}</section>
-      <section class="page-section"><h2 class="page-section-title">Latest group publications.</h2><div class="pub-feature-grid"><article class="pub-feature-card"><a class="pub-feature-top" href="https://doi.org/10.1039/D6EE02476A" target="_blank" rel="noopener noreferrer"><div class="pub-journal">Energy & Environmental Science, 2026, volume/pages pending</div><div class="pub-title">Local pH Control for Impure-Water-Fed Bipolar-Membrane Electrolyzers</div><div class="pub-graphic"><div class="toc-placeholder" aria-label="TOC graphic placeholder">TOC / MAIN GRAPHIC<br><span>PLACEHOLDER</span></div></div></a><div class="pub-author"><img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22460%22%20viewBox%3D%220%200%20800%20460%22%3E%3Crect%20width%3D%22800%22%20height%3D%22460%22%20fill%3D%22%23e8ebeb%22%2F%3E%3Cpath%20d%3D%22M0%20355L205%20196%20368%20320%20505%20145%20800%20360V460H0Z%22%20fill%3D%22%23ccd5d6%22%2F%3E%3Ccircle%20cx%3D%22208%22%20cy%3D%22129%22%20r%3D%2258%22%20fill%3D%22%23d2bd87%22%2F%3E%3Ctext%20x%3D%22400%22%20y%3D%22418%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2223%22%20text-anchor%3D%22middle%22%20fill%3D%22%2340515b%22%20letter-spacing%3D%223%22%3EPHOTO%20PLACEHOLDER%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Portrait of Sanghwi Han" loading="lazy"></div><a class="pub-pdf" href="https://doi.org/10.1039/D6EE02476A" target="_blank" rel="noopener noreferrer">↗ VIEW PUBLICATION</a></article><article class="pub-feature-card"><a class="pub-feature-top" href="https://doi.org/10.1021/acsenergylett.6c01409" target="_blank" rel="noopener noreferrer"><div class="pub-journal">ACS Energy Letters, 2026, 11, 5633–5642</div><div class="pub-title">Operation-Induced BiVO₄ Surface Reconstruction Modulates Photoelectrochemical Glycerol Photooxidation Stability and Activity</div><div class="pub-graphic"><div class="toc-placeholder" aria-label="TOC graphic placeholder">TOC / MAIN GRAPHIC<br><span>PLACEHOLDER</span></div></div></a><div class="pub-author"><span class="pub-avatar-initials" aria-label="Portrait not available">JY</span></div><a class="pub-pdf" href="https://doi.org/10.1021/acsenergylett.6c01409" target="_blank" rel="noopener noreferrer">↗ VIEW PUBLICATION</a></article><article class="pub-feature-card"><a class="pub-feature-top" href="https://doi.org/10.1021/jacs.6c05146" target="_blank" rel="noopener noreferrer"><div class="pub-journal">Journal of the American Chemical Society, 2026, 148, 23395–23409</div><div class="pub-title">How Does Water Dissociation Work in Bipolar Membranes?</div><div class="pub-graphic"><div class="toc-placeholder" aria-label="TOC graphic placeholder">TOC / MAIN GRAPHIC<br><span>PLACEHOLDER</span></div></div></a><div class="pub-author"><span class="pub-avatar-initials" aria-label="Portrait not available">YW</span></div><a class="pub-pdf" href="https://doi.org/10.1021/jacs.6c05146" target="_blank" rel="noopener noreferrer">↗ VIEW PUBLICATION</a></article></div></section>
-      <section class="page-section"><div class="section-header" style="align-items:center"><div><h2 class="page-section-title" style="margin:0">Selected literature.</h2><p class="section-intro" style="margin-top:15px;margin-bottom:0">Search titles, journals, authors, and DOI numbers. Filter by the five research themes. Copy a BibTeX record for any entry.</p></div>${external(SOURCES.scholar,'Full Google Scholar profile')}</div>
-        <p class="body-copy" style="max-width:100%;font-size:13px">Archive entries are periodically synchronized from OpenAlex and Crossref, with previously curated Berkeley records retained. Publications are grouped by Boettcher’s position in the author list; collaborations and final-author papers are shown separately. See the <a href="https://electrochemistry.berkeley.edu/boettcher-group-publications" target="_blank" rel="noopener noreferrer" style="text-decoration:underline">Berkeley group bibliography</a>. For the complete and latest author publication history, <a href="https://scholar.google.com/citations?user=ctl63ygAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" style="text-decoration:underline">view Professor Boettcher’s Google Scholar profile ↗</a>.</p><div class="pub-toolbar"><div class="filter-search"><label class="field-label" for="pubSearch">Search literature</label><input class="input" id="pubSearch" type="search" placeholder="Search title, author, DOI..." value="${escAttr(publicationSearch)}" autocomplete="off"></div><div class="field-wrap"><label class="field-label" for="pubRole">Authorship</label><select class="select" id="pubRole"><option value="all">All publications</option><option value="group">Boettcher last author</option><option value="collaboration">Collaborations</option><option value="unverified">Legacy / unverified</option></select></div><div class="field-wrap"><label class="field-label" for="pubCategory">Research category</label><select class="select" id="pubCategory"><option value="all">All categories</option>${TOPICS.map((t,i)=>`<option value="${i}">${escapeHTML(t)}</option>`).join('')}</select></div><div class="field-wrap"><label class="field-label" for="pubYear">Publication year</label><select class="select" id="pubYear"><option value="all">All years</option>${publicationYears().map(y=>`<option value="${y}">${y}</option>`).join('')}</select></div></div>
-        <div class="result-count" id="pubCount" role="status"></div><div id="pubResults" class="pub-table"></div><p class="muted" style="font-size:11px;line-height:1.8;margin-top:23px">Publication records are refreshed weekly using OpenAlex and Crossref. Research categories are inferred from paper titles and abstracts; ambiguous legacy author lists are marked unverified.</p></section>
-      <section class="page-section"><h3 class="inner-heading">Find more work</h3><div class="resource-cards"><div class="resource-card"><h3>Official publication archive</h3><p>Browse all years and links to author-accepted manuscripts.</p>${external(SOURCES.publications,'Browse Berkeley archive')}</div><div class="resource-card"><h3>Google Scholar</h3><p>For the most current citation list and linked literature, visit the group's scholar profile.</p>${external(SOURCES.scholar,'Open Google Scholar')}</div></div></section>`);
+    publicationSearch=query.get('search')||'';publicationYear=query.get('year')||'all';
+    selectedPublicationTopics=new Set(query.getAll('topic').filter(id=>PUBLICATION_TOPICS.some(t=>t.id===id)));
+    return pageShell('PUBLICATIONS','Publications','Recent publications from Berkeley and Oregon, 2020–2026.',`
+      <section class="page-section"><h2 class="page-section-title">Featured publications.</h2><div class="pub-feature-grid" id="pageFeaturedPublications">${featuredPublicationCards()}</div></section>
+      <section class="page-section"><h2 class="page-section-title">Find publications.</h2><div class="pub-toolbar"><div class="filter-search"><label class="field-label" for="pubSearch">Search papers</label><input class="input" id="pubSearch" type="search" placeholder="Title, author, DOI, or keyword" value="${escAttr(publicationSearch)}" autocomplete="off"></div><div class="field-wrap"><label class="field-label" for="pubYear">Publication year</label><select class="select" id="pubYear"><option value="all">All years</option>${publicationYears().map(y=>`<option value="${y}" ${String(y)===publicationYear?'selected':''}>${y}</option>`).join('')}</select></div></div>
+      <fieldset class="publication-topic-fieldset"><legend>Explore topics</legend><p class="topic-help" id="topicHelp">Select one or more topics. Papers must match every selected topic.</p><div class="publication-topic-bubbles" aria-describedby="topicHelp">${PUBLICATION_TOPICS.map(t=>`<button type="button" class="topic-bubble" data-publication-topic="${t.id}" aria-pressed="${selectedPublicationTopics.has(t.id)}"><span>${escapeHTML(t.label)}</span><span class="topic-count" aria-hidden="true">0</span></button>`).join('')}</div></fieldset>
+      <div class="publication-results-header"><p class="result-count" id="pubCount" role="status"></p><button type="button" class="text-link" id="clearPubFilters">Clear filters</button></div><div id="pubResults" class="pub-table"></div></section>`);
+  }
+  function publicationBaseMatches(p){
+    if(Number(p.year)<2020||Number(p.year)>2026)return false;
+    if(publicationYear!=='all'&&String(p.year)!==publicationYear)return false;
+    const terms=[p.title,p.journal,p.authors,p.doi||'',p.abstract||'',...(p.metadata_keywords||[]),...publicationKeywords(p).map(id=>PUBLICATION_TOPICS.find(t=>t.id===id)?.label||'')].join(' ').toLowerCase();
+    return terms.includes(publicationSearch.trim().toLowerCase());
+  }
+  function updatePublicationURL(){
+    const params=new URLSearchParams();if(publicationSearch)params.set('search',publicationSearch);if(publicationYear!=='all')params.set('year',publicationYear);
+    selectedPublicationTopics.forEach(id=>params.append('topic',id));history.replaceState(null,'','#/publications'+(params.size?'?'+params:''));
   }
   function updatePublicationResults(){
-    const query=publicationSearch.trim().toLocaleLowerCase();
-    const filtered=PUBLICATIONS.filter(p=>(publicationRole==='all'||(p.role||'unverified')===publicationRole)&&(publicationFilter==='all'||(p.tags||[]).includes(Number(publicationFilter)))&&(publicationYear==='all'||String(p.year)===publicationYear)&&(!query||[p.title,p.journal,p.authors,p.doi||'',String(p.year)].some(s=>String(s).toLocaleLowerCase().includes(query))));
-    $('#pubCount').textContent=`SHOWING ${filtered.length} OF ${PUBLICATIONS.length} PUBLICATIONS`;
-    $('#pubResults').innerHTML=filtered.length?filtered.map(p=>`<article class="pub-item"><div class="pub-item-year">${p.year}</div><div><h3>${escapeHTML(p.title)}</h3><p class="pub-item-meta">${escapeHTML(p.authors)}<br><em>${escapeHTML(p.journal)}</em>${p.doi?` · DOI: ${escapeHTML(p.doi)}`:``}</p><div class="pub-tags"><span class="tag">${p.role==='group'?'Boettcher last author':p.role==='collaboration'?'Collaboration':'Unverified byline'}</span>${(p.tags||[]).map(i=>`<span class="tag">${topicHTML(TOPICS[i])}</span>`).join('')}</div></div><div class="pub-actions"><a href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer" class="button small outline">${p.doi?"DOI":"VIEW PAPER"} ↗</a><button class="button small ghost" data-bibtex="${p.id}" aria-label="Show BibTeX for ${escapeHTML(p.title)}">BibTeX ↗</button></div></article>`).join(''):`<div class="empty-state"><h3>No matching papers</h3><p>${publicationFilter==='2'?'The featured lab bibliography does not currently include a paper tagged specifically for thermo-electrocatalysis. Try another category or the official archive.':'Try a different search term, publication year, or research category.'}</p><button class="button outline small" id="clearPubFilters">Clear filters ↗</button></div>`;
+    const candidates=PUBLICATIONS.filter(publicationBaseMatches);
+    const filtered=candidates.filter(p=>[...selectedPublicationTopics].every(id=>publicationKeywords(p).includes(id)));
+    $$('.topic-bubble').forEach(button=>{
+      const id=button.dataset.publicationTopic;const active=selectedPublicationTopics.has(id);const required=new Set([...selectedPublicationTopics,id]);
+      const count=candidates.filter(p=>[...required].every(t=>publicationKeywords(p).includes(t))).length;
+      button.setAttribute('aria-pressed',String(active));button.classList.toggle('is-selected',active);$('.topic-count',button).textContent=count;
+    });
+    $('#pubCount').textContent=`${filtered.length} publication${filtered.length===1?'':'s'}${selectedPublicationTopics.size?' matching all '+selectedPublicationTopics.size+' selected topic'+(selectedPublicationTopics.size===1?'':'s'):''}`;
+    $('#pubResults').innerHTML=filtered.length?filtered.map(p=>`<article class="pub-item ${p.graphic?.src?'has-graphic':''}"><div class="pub-item-year">${p.year}</div><div class="publication-main"><h3><a href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.title)}</a></h3><p class="pub-item-meta"><span class="publication-authors">${escapeHTML(p.authors)}</span><em>${escapeHTML(p.journal)}</em>${p.volume?' · '+escapeHTML(p.volume):''}${p.pages?' · '+escapeHTML(p.pages):''}</p>${p.role==='collaboration'?'<p class="collaboration-badge">Collaboration</p>':''}<div class="publication-keywords">${publicationKeywords(p).map(id=>`<span>${escapeHTML(PUBLICATION_TOPICS.find(t=>t.id===id)?.label||id)}</span>`).join('')}</div><div class="pub-actions"><a href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer" class="button small outline">Read article ↗</a><button class="button small ghost" data-bibtex="${p.id}" aria-label="Show BibTeX for ${escAttr(p.title)}">BibTeX</button></div></div>${publicationGraphic(p,'publication-side-graphic')}</article>`).join(''):`<div class="empty-state"><h3>No matching papers.</h3><p>Remove a topic or clear the filters to broaden your search.</p></div>`;
   }
   function initials(name){return name.replace(/[“”]/g,'').split(' ').filter(Boolean).map(x=>x[0]).slice(0,2).join('').toUpperCase()}
   function memberPortraitMarkup(member){
@@ -161,61 +185,16 @@
   });
   function renderTeam(){return pageShell('05 / GROUP MEMBERS','The people','',`
     <section class="page-section team-gallery-section" aria-label="Life in the lab">${groupGalleryMarkup()}</section>
-    <section class="page-section"><div class="team-pi"><div><img class="principal-portrait" src="assets/team/shannon-boettcher.webp" alt="Shannon Boettcher" width="768" height="512" loading="lazy" decoding="async"></div><div><div class="eyebrow" style="margin-bottom:25px">PRINCIPAL INVESTIGATOR</div><h2>Prof. Shannon<br>Boettcher</h2><div class="credentials">Theodore Vermeulen Professor<br>Department of Chemical and Biomolecular Engineering &amp; Chemistry<br>UC Berkeley · Lawrence Berkeley National Laboratory</div><p class="body-copy">The Boettcher group explores interfacial reactions, electrochemical energy technologies, and the translation of fundamental discoveries into useful systems. Prof. Boettcher founded the Oregon Center for Electrochemistry and is a founding director of CESET at Berkeley.</p>${external(SOURCES.faculty,'View Berkeley faculty profile')}</div></div></section>
-    <section class="page-section"><div class="section-header"><div><div class="eyebrow" style="margin-bottom:18px">RESEARCH COMMUNITY</div><h2 class="page-section-title" style="margin-bottom:0">Group roster.</h2></div><span class="overline muted">GROUP MEMBERS</span></div><p class="section-intro">Meet our research community at UC Berkeley, Lawrence Berkeley National Laboratory, and partner institutions.</p>${['Postdoctoral Scholars','Graduate Students','Visiting Students',"Master's and Undergraduate Students"].map(category=>[category,m=>m.category===category]).map(([heading,matches])=>{const members=TEAM.filter(matches);return `<div class="member-category"><h3 class="member-category-title">${heading}</h3>${members.length?`<div class="roster-grid">${members.map(m=>`<article class="member-card">${memberPortraitMarkup(m)}<div class="member-details"><h3>${escapeHTML(m.name)}</h3><p>${escapeHTML(m.role)}</p></div></article>`).join('')}</div>`:`<p class="section-intro">For the current undergraduate researchers, see the official group roster.</p>`}</div>`}).join('')}<div style="margin-top:30px">${external(SOURCES.team,'View complete official group roster')}</div></section>`)}
-  function renderOutreach(){return pageShell('06 / LEARN ELECTROCHEMISTRY','Learn Electrochemistry!','',`
-    <section class="page-section"><h2 class="page-section-title">Electrochemistry education at Berkeley.</h2><div class="resource-cards">
-      <article class="resource-card"><h3>Electrochemistry Minor</h3><p>UC Berkeley's official undergraduate minor: requirements, curriculum, and advising information.</p><a class="text-link" href="https://undergraduate.catalog.berkeley.edu/programs/10I178U" target="_blank" rel="noopener noreferrer">Explore the minor ↗</a></article>
-      <article class="resource-card"><h3>Summer Electrochemistry Academy</h3><p>Fundamental and practical electrochemistry courses through Berkeley's CESET, including laboratory and device training.</p><a class="text-link" href="https://electrochemistry.berkeley.edu/node/34" target="_blank" rel="noopener noreferrer">Academy courses and enrollment ↗</a></article>
-      <article class="resource-card"><h3>Electrochemistry video lectures</h3><p>Free recorded electrochemistry fundamentals lectures hosted through the University of Oregon.</p><a class="text-link" href="https://electrochemistry.uoregon.edu/education/electrochemistry-video-lectures/" target="_blank" rel="noopener noreferrer">Watch lectures ↗</a></article>
-      <article class="resource-card"><h3>Center for Electrochemical Science, Engineering, and Technology</h3><p>Explore Berkeley's electrochemical research and education community.</p><a class="text-link" href="https://electrochemistry.berkeley.edu/" target="_blank" rel="noopener noreferrer">Explore CESET ↗</a></article>
-    </div></section>`)}
+    <section class="page-section"><div class="team-pi"><div><img class="principal-portrait" src="assets/team/shannon-boettcher.webp" alt="Shannon Boettcher" width="768" height="512" loading="lazy" decoding="async"></div><div><h2>Prof. Shannon<br>Boettcher</h2><div class="credentials">Theodore Vermeulen Professor<br>Department of Chemical and Biomolecular Engineering &amp; Chemistry<br>UC Berkeley · Lawrence Berkeley National Laboratory</div><p class="body-copy">The Boettcher group explores interfacial reactions, electrochemical energy technologies, and the translation of fundamental discoveries into useful systems. Prof. Boettcher founded the Oregon Center for Electrochemistry and is a founding director of CESET at Berkeley.</p>${external(SOURCES.faculty,'View Berkeley faculty profile')}</div></div></section>
+    <section class="page-section"><div class="section-header"><div><h2 class="page-section-title" style="margin-bottom:0">Group roster.</h2></div></div><p class="section-intro">Meet our research community at UC Berkeley, Lawrence Berkeley National Laboratory, and partner institutions.</p>${['Postdoctoral Scholars','Graduate Students','Visiting Students',"Master's and Undergraduate Students"].map(category=>[category,m=>m.category===category]).map(([heading,matches])=>{const members=TEAM.filter(matches);return `<div class="member-category"><h3 class="member-category-title">${heading}</h3>${members.length?`<div class="roster-grid">${members.map(m=>`<article class="member-card">${memberPortraitMarkup(m)}<div class="member-details"><h3>${escapeHTML(m.name)}</h3><p>${escapeHTML(m.role)}</p>${m.bio?`<details class="member-bio"><summary>About ${escapeHTML(m.name.split(' ')[0])}</summary><div class="migrated-copy">${m.bio}</div></details>`:''}</div></article>`).join('')}</div>`:`<p class="section-intro">For the current undergraduate researchers, see the official group roster.</p>`}</div>`}).join('')}</section>`)}
+  function renderOutreach(){return pageShell('LEARN','Learn Electrochemistry','',`
+    <section class="page-section migrated-copy">${MIGRATED.learning}</section>
+    <section class="page-section"><h2 class="page-section-title">Berkeley programs.</h2><div class="resource-cards"><article class="resource-card"><h3>Electrochemistry minor</h3><p>A five-course summer sequence in electrochemical science, engineering, and technology.</p>${external('https://undergraduate.catalog.berkeley.edu/programs/10I178U','Minor requirements')}</article><article class="resource-card"><h3>Summer Sessions</h3><p>Courses welcome Berkeley students, visiting students, international students, nontraditional students, and industry professionals.</p>${external('https://summer.berkeley.edu/apply','Summer Sessions applications')}</article><article class="resource-card"><h3>Berkeley CESET</h3><p>The center connects electrochemical research, technology development, and education.</p><a class="text-link" href="#/ceset">About Berkeley CESET →</a></article></div></section>
+    <section class="page-section migrated-copy"><h2>Summer Electrochemistry Academy — 2026 program.</h2>${MIGRATED.academy}<details class="course-schedule"><summary>2026 course schedule and enrollment details</summary>${MIGRATED.courses}</details></section>`)}
   function renderOregon(){return pageShell('07 / OREGON CENTER','Oregon Center','An important part of the group’s history – linking graduate training, industry partnerships, and fundamental electrochemical research.',`
-    <section class="page-section"><div class="team-pi"><div><div class="eyebrow" style="margin-bottom:17px">OUR ORIGINS</div><h2 class="page-section-title">A foundation in electrochemistry.</h2><p class="section-intro">Before the group's transition to UC Berkeley and Lawrence Berkeley National Laboratory in January 2024, Prof. Boettcher founded the Oregon Center for Electrochemistry and a graduate program in electrochemical science and technology.</p><p class="body-copy">The center is a separate program. Visit its official website for current programs, resources, and information.</p>${external(SOURCES.oregon,'Visit the Oregon Center for Electrochemistry')}</div><div>${figureMarkup({label:'Oregon Center / archival imagery',ratio:'4:3',code:'ARCHIVE / 01',caption:'HISTORICAL IMAGE PLACEHOLDER'})}</div></div></section>
+    <section class="page-section"><div class="team-pi"><div><h2 class="page-section-title">A foundation in electrochemistry.</h2><p class="section-intro">Before the group's transition to UC Berkeley and Lawrence Berkeley National Laboratory in January 2024, Prof. Boettcher founded the Oregon Center for Electrochemistry and a graduate program in electrochemical science and technology.</p><p class="body-copy">The center is a separate program. Visit its official website for current programs, resources, and information.</p>${external(SOURCES.oregon,'Visit the Oregon Center for Electrochemistry')}</div><div>${figureMarkup({label:'Oregon Center / archival imagery',ratio:'4:3',code:'ARCHIVE / 01',caption:'HISTORICAL IMAGE PLACEHOLDER'})}</div></div></section>
     <section class="page-section"><div class="timeline"><div class="year">OREGON</div><div class="timeline-body"><h3>Training and research infrastructure</h3><p>Interdisciplinary education and partnerships created a foundation for electrochemical technology development.</p></div><div class="year">2024</div><div class="timeline-body"><h3>Transition to Berkeley</h3><p>The Boettcher laboratory transitioned to UC Berkeley and LBNL in January 2024.</p></div><div class="year">BERKELEY</div><div class="timeline-body"><h3>CESET and the Summer Academy</h3><p>Berkeley's Center for Electrochemical Science, Engineering, and Technology extends this work through education, research, and collaboration.</p></div></div></section>`)}
-  let intranetUnlocked=false,intranetTab='calendar',weekShift=0;
-  const DEMO_PASS='LAB-PREVIEW';
-  let demoInstrument='Potentiostat / Bay A';
-  const demoBookings=new Set();
-  const SOP_LIST=[
-    {name:'Laboratory access & orientation',owner:'General reference',text:'DEMO DOCUMENT – NOT AN ACTUAL LABORATORY SOP.\n\n1. Confirm that your facility orientation and access have been approved.\n2. Review the actual institutional safety and laboratory procedures supplied by your supervisor.\n3. Use official institutional reporting channels for safety concerns.\n\nThis preview contains no authoritative safety instructions.'},
-    {name:'Potentiostat booking guidance',owner:'Shared instruments',text:'DEMO DOCUMENT – NOT AN ACTUAL LABORATORY SOP.\n\nReserve shared equipment through the official lab scheduling system. Confirm instrument status and relevant local training before beginning work. This mock-up does not create or modify a real reservation.'},
-    {name:'Electrochemical cell preparation',owner:'Experimental methods',text:'DEMO DOCUMENT – NOT AN ACTUAL LABORATORY SOP.\n\nConsult the laboratory-approved written procedures, chemical hygiene plan, and relevant safety data sheets for your specific experiment. No experimental protocol is provided here.'},
-    {name:'Data organization & archiving',owner:'Research records',text:'DEMO DOCUMENT – NOT AN ACTUAL LABORATORY SOP.\n\nDocument methods, instrument parameters, filenames, and sample identifiers consistently. Follow the actual group data-management policies for storage and sharing.'}
-  ];
-  function renderIntranet(){return pageShell('08 / INTERNAL WEBSITE','Internal website','A password-gated visual demonstration of a future lab intranet, with sample instrument reservations and SOP organization.',`
-    <section class="page-section"><div class="demo-notice"><strong>Interactive prototype only.</strong> The access gate operates in this HTML file, not on a secure server. It does not authenticate real lab members; instrument reservations and SOPs are sample-only and are not connected to any university systems. Do not enter an actual password.</div>
-    <div id="intranetApp">${intranetUnlocked?intranetInterface():intranetLogin()}</div></section>`)}
-  function intranetLogin(){return `<div class="login-frame"><div class="eyebrow" style="margin-bottom:22px">LAB PORTAL / PREVIEW</div><h2>Members' workspace.</h2><p class="body-copy">Enter the demo access phrase to explore the mock booking calendar and sample laboratory reference library.</p><form id="intranetLogin"><label class="field-label" for="demoPassword">Demo access phrase</label><input class="input" type="password" id="demoPassword" placeholder="Enter demo access phrase" autocomplete="off" required><p class="hint">DEMO ACCESS PHRASE: <strong>${DEMO_PASS}</strong><br>Shown intentionally; this is not a real authentication mechanism.</p><button class="button" type="submit">Enter preview ↗</button><div id="loginError" class="error" role="alert"></div></form></div>`}
-  function intranetInterface(){return `<div><div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap"><div><div class="eyebrow">PREVIEW ACCESS / UNLOCKED</div><h2 style="font-size:clamp(32px,4vw,55px);margin:20px 0 0">Research workspace.</h2></div><button class="button small ghost" id="lockIntranet">Lock preview ↗</button></div><div class="intranet-tabs"><button class="chip intranet-tab ${intranetTab==='calendar'?'active':''}" data-tab="calendar" aria-pressed="${intranetTab==='calendar'}">Instrument booking</button><button class="chip intranet-tab ${intranetTab==='sops'?'active':''}" data-tab="sops" aria-pressed="${intranetTab==='sops'}">SOP &amp; resources</button></div><div id="intranetTabBody">${intranetTab==='calendar'?calendarHTML():sopsHTML()}</div></div>`}
-  function mondayOfWeek(){const t=new Date();t.setHours(12,0,0,0);t.setDate(t.getDate()-((t.getDay()+6)%7)+weekShift*7);return t}
-  function calendarHTML(){
-    const start=mondayOfWeek(),days=Array.from({length:7},(_,i)=>{const d=new Date(start);d.setDate(start.getDate()+i);return d});
-    const times=['08:00','10:00','13:00','15:00'];
-    const fmt=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-    const cols=`<div class="cal-day">TIME</div>`+days.map(d=>`<div class="cal-day">${d.toLocaleDateString('en-US',{weekday:'short'}).toUpperCase()}<br>${fmt(d)}</div>`).join('');
-    const rows=times.map(time=>`<div class="cal-time">${time}</div>`+days.map(d=>{
-      const date=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
-      const key=`${demoInstrument}|${date}|${time}`;
-      const booked=demoBookings.has(key);
-      return `<div class="cal-cell"><button class="cal-slot ${booked?'booked':''}" data-book="${escAttr(key)}" aria-pressed="${booked}" title="${booked?'Release demo slot':'Reserve demo slot'}">${booked?'✓ Reserved':'＋ Available'}</button></div>`;
-    }).join('')).join('');
-    return `<div class="calendar-head"><div><h3>Instrument reservations</h3><p class="muted" style="font-size:12px;margin:7px 0 0">Sample slots only · Click a slot to reserve or release it in this preview</p></div><div class="calendar-controls"><button class="icon-button" id="prevWeek" aria-label="Previous week">←</button><button class="icon-button" id="nextWeek" aria-label="Next week">→</button></div></div><div class="field-wrap" style="max-width:310px;margin-bottom:22px"><label class="field-label" for="instrumentSelect">Instrument</label><select class="select" id="instrumentSelect">${['Potentiostat / Bay A','Potentiostat / Bay B','Spectroelectrochemistry','Impedance Station'].map(s=>`<option ${s===demoInstrument?'selected':''}>${s}</option>`).join('')}</select></div><div class="calendar-scroll"><div class="calendar-grid">${cols}${rows}</div></div><p class="muted" style="font:11px monospace;margin:18px 0">WEEK OF ${fmt(start).toUpperCase()} · ${demoBookings.size} SAMPLE RESERVATION(S) IN THIS SESSION</p>`;
-  }
-  function sopsHTML(){return `<h3 class="inner-heading">Reference library / sample entries</h3><p class="section-intro">Illustrative document titles and brief mock previews only. No actual SOP is published in this application.</p><div class="sop-grid">${SOP_LIST.map((s,i)=>`<article class="sop-card"><div class="eyebrow" style="margin-bottom:20px">DOCUMENT / 0${i+1}</div><h3>${escapeHTML(s.name)}</h3><p>${escapeHTML(s.owner)} · Sample preview</p><button class="text-link" data-sop="${i}">View sample document ↗</button></article>`).join('')}</div>`}
-  let feedPosts=[],feedTab='all',likedPosts=new Set();
-  function renderBlueskySection(){return `
-    <div class="x-live-section"><div class="bluesky-compact-header"><div><strong>Boettcher Lab</strong><span>@BoettcherLab · Live posts on X</span></div>${external(SOURCES.bluesky,'View on X ↗')}</div>
-    <div class="x-live-frame" id="xLiveFrame"><a class="twitter-timeline" data-height="390" data-theme="light" data-chrome="noheader nofooter" href="https://x.com/BoettcherLab">Recent posts by @BoettcherLab</a><div class="x-live-fallback">If posts do not appear, <a href="https://x.com/BoettcherLab" target="_blank" rel="noopener noreferrer">view the Boettcher Lab's posts on X ↗</a>.</div></div>
-    <p class="bluesky-disclaimer">Live timeline supplied by X. Display depends on browser privacy settings and X widget availability.</p></div>`; }
-  function updateFeed(){
-    if(!document.getElementById('xLiveFrame'))return;
-    if(window.twttr?.widgets?.load){window.twttr.widgets.load(document.getElementById('xLiveFrame'));return;}
-    if(document.getElementById('boettcherXWidgetScript'))return;
-    const script=document.createElement('script');script.id='boettcherXWidgetScript';script.async=true;script.src='https://platform.twitter.com/widgets.js';
-    script.onload=()=>window.twttr?.widgets?.load?.(document.getElementById('xLiveFrame'));
-    document.head.appendChild(script);
-  }
+  function renderIntranet(){return pageShell('INTERNAL','Internal website','Resources for Boettcher Lab members.',`<section class="page-section migrated-copy"><h2>Lab resources.</h2><p>The group’s internal website is hosted on Google Sites.</p>${external(SOURCES.intranet,'Open the lab internal website')}<p>For access questions, contact <a href="mailto:boettcher@berkeley.edu">boettcher@berkeley.edu</a>.</p></section>`)}
   let waveChartInstance=null;
   let researchFilter='all';
   let activeSlide=0;
@@ -273,7 +252,7 @@
   const sstep=v=>{v=clamp(v,0,1);return v*v*v*(v*(v*6-15)+10)};
   const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
   const xpos=52, ypos=i=>54+step*i;
-  const siteHitNames=['Group Name','Research','Recent News and Publications','Group Members','Learn Electrochemistry!','Join the Team!'];
+  const siteHitNames=['Group Name','Research','Publications','Group Members','Learn Electrochemistry!','Join the Team!'];
   function svgEl(tag,attrs={},parent){const el=document.createElementNS(svgNS,tag);for(const [key,value] of Object.entries(attrs))el.setAttribute(key,value);if(parent)parent.appendChild(el);return el;}
   let nextHydrogenId=0;
   const H=(angle)=>({id:++nextHydrogenId,a:angle,velocity:0,bond:null,ball:null});
@@ -714,17 +693,20 @@
     if(home){document.title='Boettcher Lab';window.scrollTo({top:homeScrollY,behavior:'instant'});setActiveSlide(activeSlide);return}
     stopWaterAnimation();
     document.body.dataset.slideTone='paper';
-    
+
     let html;
     switch(key){
+      case 'about':html=renderAbout();break;
+      case 'ceset':html=renderCeset();break;
+      case 'archive':html=renderArchive();break;
       case 'join':html=renderJoin();break;
       case 'research':{
         const params=new URLSearchParams(raw.split('?')[1]||'');
         const desired=params.get('topic');const found=RESEARCH.findIndex(r=>r.slug===desired);researchIndex=found>=0?found:0;
         html=renderResearch();break;
       }
-      case 'news':publicationFilter='all';publicationYear='all';publicationRole='all';html=renderPublications();break;
-      case 'publications':publicationFilter='all';publicationYear='all';publicationRole='all';html=renderPublications();break;
+      case 'news':html=renderPublications();break;
+      case 'publications':html=renderPublications();break;
       case 'team':html=renderTeam();break;
       case 'outreach':html=renderOutreach();break;
       case 'intranet':html=renderIntranet();break;
@@ -738,10 +720,9 @@
     let heading=$('h1',target);
     document.title=(heading?.textContent.trim()||'Boettcher Lab')+' | Boettcher Lab';
     if(key==='research'){renderResearchCards()}
-    if(key==='publications'||key==='news'){updatePublicationResults();$('#pubCategory').value=publicationFilter;$('#pubYear').value=publicationYear;$('#pubRole').value=publicationRole;updateFeed();}
+    if(key==='publications'||key==='news'){updatePublicationResults();}
     heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});
   }
-  function updateIntranetBody(){const root=$('#intranetApp');if(!root)return;root.innerHTML=intranetInterface()}
   document.addEventListener('click',async e=>{
     if(e.target.closest('.skip')){
       e.preventDefault();
@@ -769,40 +750,19 @@
     if(btn.id==='researchNext'){advanceResearch(1);return}
     if(btn.matches('[data-research-index]')){researchIndex=Number(btn.dataset.researchIndex);renderResearchCards();history.replaceState(null,'','#/research?topic='+encodeURIComponent(RESEARCH[researchIndex].slug));return}
     if(btn.matches('[data-bibtex]')){const paper=paperById(btn.dataset.bibtex);if(paper)openModal('BibTeX / '+paper.year,bibtex(paper));return}
-    if(btn.id==='clearPubFilters'){publicationFilter='all';publicationYear='all';publicationRole='all';publicationSearch='';$('#pubSearch').value='';$('#pubCategory').value='all';$('#pubYear').value='all';$('#pubRole').value='all';updatePublicationResults();return}
-    if(btn.id==='lockIntranet'){intranetUnlocked=false;intranetTab='calendar';updateIntranetBody();toast('Preview locked');return}
-    if(btn.matches('.intranet-tab')){intranetTab=btn.dataset.tab;updateIntranetBody();return}
-    if(btn.id==='prevWeek'){weekShift--;$('#intranetTabBody').innerHTML=calendarHTML();return}
-    if(btn.id==='nextWeek'){weekShift++;$('#intranetTabBody').innerHTML=calendarHTML();return}
-    if(btn.matches('.cal-slot')){const key=btn.dataset.book;if(demoBookings.has(key)){demoBookings.delete(key);toast('Demo reservation released')}else{demoBookings.add(key);toast('Demo reservation added')}$('#intranetTabBody').innerHTML=calendarHTML();return}
-    if(btn.matches('[data-sop]')){const sop=SOP_LIST[Number(btn.dataset.sop)];if(sop)openModal(sop.name,sop.text);return}
-    if(btn.matches('.feed-tab')){feedTab=btn.dataset.feed;updateFeed();return}
-    if(btn.matches('[data-like]')){const id=Number(btn.dataset.like);if(likedPosts.has(id))likedPosts.delete(id);else likedPosts.add(id);updateFeed();return}
-    if(btn.matches('[data-copy-post]')){const post=feedPosts.find(p=>p.id===Number(btn.dataset.copyPost));if(post){const success=await copyText(post.text);toast(success?'Sample post copied':'Copy unavailable in this browser')}return}
+    if(btn.matches('[data-publication-topic]')){const id=btn.dataset.publicationTopic;selectedPublicationTopics.has(id)?selectedPublicationTopics.delete(id):selectedPublicationTopics.add(id);updatePublicationResults();updatePublicationURL();return}
+    if(btn.id==='clearPubFilters'){selectedPublicationTopics.clear();publicationYear='all';publicationSearch='';$('#pubSearch').value='';$('#pubYear').value='all';updatePublicationResults();updatePublicationURL();return}
     if(btn.id==='modalClose'||btn.id==='modalDismiss'){closeModal();return}
     if(btn.id==='modalCopy'){const success=await copyText(modalText);$('#modalStatus').textContent=success?'Copied to clipboard.':'Select and copy the text above if clipboard access is unavailable.';return}
   });
   document.addEventListener('input',e=>{
-    if(e.target.id==='pubSearch'){publicationSearch=e.target.value;updatePublicationResults()}
+    if(e.target.id==='archiveSearch')filterArchive(e.target.value);
+    if(e.target.id==='pubSearch'){publicationSearch=e.target.value;updatePublicationResults();updatePublicationURL()}
     if(e.target.id==='slopeSlider')updateWave(e.target.value);
-    if(e.target.id==='composeText')$('#charCount').textContent=`${e.target.value.length} / 260 characters`;
   });
   document.addEventListener('change',e=>{
-    if(e.target.id==='pubRole'){publicationRole=e.target.value;updatePublicationResults()}
-    if(e.target.id==='pubCategory'){publicationFilter=e.target.value;updatePublicationResults()}
-    if(e.target.id==='pubYear'){publicationYear=e.target.value;updatePublicationResults()}
+    if(e.target.id==='pubYear'){publicationYear=e.target.value;updatePublicationResults();updatePublicationURL()}
     if(e.target.id==='instrumentSelect'){demoInstrument=e.target.value;$('#intranetTabBody').innerHTML=calendarHTML()}
-  });
-  document.addEventListener('submit',e=>{
-    if(e.target.id==='intranetLogin'){
-      e.preventDefault();const phrase=$('#demoPassword').value.trim();
-      if(phrase===DEMO_PASS){intranetUnlocked=true;weekShift=0;updateIntranetBody();toast('Demo workspace unlocked')}else{$('#loginError').textContent='Incorrect demo phrase. Use the displayed LAB-PREVIEW phrase.'}
-    }
-    if(e.target.id==='composeForm'){
-      e.preventDefault();const text=$('#composeText').value.trim();if(!text)return;
-      const id=Math.max(...feedPosts.map(p=>p.id),0)+1;feedPosts.unshift({id,type:'community',text,likes:0});
-      feedTab='all';$('#composeText').value='';$('#charCount').textContent='0 / 260 characters';updateFeed();toast('Sample post added to the local preview');
-    }
   });
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){if(!$('#modalBackdrop').hidden){closeModal();return}if(document.body.classList.contains('drawer-open')){closeDrawer();$('#menuButton').focus();return}}

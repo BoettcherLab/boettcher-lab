@@ -9,7 +9,7 @@ Upload everything in this directory to your existing public GitHub repository, p
 ## Publications: free weekly sync
 
 - **Source:** OpenAlex author [Shannon W. Boettcher (A5032458792)](https://explore.openalex.org/authors/a5032458792).
-- **Policy:** New automatically imported records must list Boettcher as the **final author**. This is deliberately narrower than a complete Google Scholar or faculty bibliography. The local archive is preserved, including earlier records with different authorship order.
+- **Policy:** Import verified Boettcher-authored research records from 2020–2026, including collaborations. Preserve curated records, topic annotations, and graphics; exclude conference abstracts, datasets and duplicate preprints.
 - **Metadata:** Crossref is queried for journal volume/pages/issue for up to 12 recent works with missing data on each run.
 - **Storage:** `data/publications.json`, loaded by `js/app.js`; `js/content.js` remains a fallback if loading fails.
 - **Automation:** `.github/workflows/sync-publications.yml`, Monday 12:25 UTC or on demand.
@@ -31,7 +31,7 @@ To run locally: `python -m http.server 8000`, then open `http://localhost:8000`.
 
 ## Automatic research categories and collaborative publications
 
-The weekly OpenAlex sync imports works where Shannon W. Boettcher appears anywhere in the verified OpenAlex byline. Papers with him **last** are labeled **Boettcher last author**; papers with him in another position are **Collaborations**. Older records with abbreviated author lists may be **Legacy / unverified**, and are retained without asserting an unsupported author position. Use the **Authorship** dropdown to filter these groups.
+The weekly OpenAlex sync imports works where Shannon W. Boettcher appears anywhere in the verified OpenAlex byline. The interface shows **Collaboration** only for verified non-final-author records. Other papers have no authorship label. Topic bubbles, text search and year selection control the displayed results.
 
 `CATEGORY_RULES` in `scripts/sync_publications.py` maps title/abstract keywords to the six existing research topics. Papers may have multiple topics or none. To override a particular paper, set `manual_tags` to an array of topic indices (0–5) in `data/publications.json`. `tags` are automatically regenerated each run; `manual_tags` are never overwritten. Review the category mappings periodically, especially for interdisciplinary publications.
 
@@ -46,3 +46,17 @@ Research topics are selected manually, with shareable URLs such as `#/research?t
 Lab photos are stored in `assets/` and listed in `GROUP_PHOTOS` in `js/content.js`. The homepage and Group Members page share the same manually controlled gallery. Images retain their full aspect ratio, with captions below the image. No visual editor or CMS is configured.
 
 Member portraits are stored in `assets/team/`. Maintain names, categories, roles, and image paths in `TEAM` in `js/content.js`; see `docs/team-photo-sources.json` for image provenance. The roster reflects an imported snapshot of the official team page and is not automatically synchronized.
+
+## Migrated public text and CESET
+
+Long-form lab, research, recruitment and education content is maintained in `js/migrated-content.js`. Member biographies remain with `TEAM` in `js/content.js`. The historical 116-citation source bibliography remains at `#/archive` for existing bookmarks. The public Publications page focuses on verified 2020–2026 records, with no links to Scholar or the historical archive.
+
+`#/about` contains the lab overview and principles. `#/ceset` contains the Berkeley center summary, linked immediately above Oregon Center in the menu. Public documents are served from `assets/documents/`. See `docs/content-migration.md` for the source inventory and maintenance notes. Source-domain URLs appear only in provenance records, not in public page hyperlinks.
+
+When changing JavaScript or CSS, bump the asset query versions in `index.html` together so returning browsers fetch a compatible set of files.
+
+## Publication topics and graphics
+
+The Publications page offers 20 topic bubbles. Selecting multiple topics uses AND matching, combined with text search and year filtering; filter state is retained in the URL. `data/publication-topics.json` defines the taxonomy and classification rules; `js/publication-topics.js` supplies the same definitions to the browser. `keywords` and `metadata_keywords` in each publication record support the topic index. The weekly sync preserves existing graphic metadata and assigns topics to incoming records.
+
+Article graphics live in `assets/publications/`. Verified source URLs, source pages, and TOC-versus-figure classifications are recorded in `docs/publication-graphics.json`. Missing or unverified graphics are omitted without placeholder boxes. See `docs/publication-index.md` for the corpus and validation notes.

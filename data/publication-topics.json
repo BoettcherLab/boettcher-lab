@@ -1,0 +1,228 @@
+[
+  {
+    "id": "bipolar-membranes",
+    "label": "Bipolar membranes",
+    "patterns": [
+      "bipolar.?membran",
+      "\\bbpm\\b"
+    ]
+  },
+  {
+    "id": "anion-exchange",
+    "label": "Anion-exchange membranes",
+    "patterns": [
+      "anion.?exchange",
+      "hydroxide.?exchange",
+      "alkaline.?membran",
+      "\\baem\\b"
+    ]
+  },
+  {
+    "id": "water-electrolysis",
+    "label": "Water electrolysis",
+    "patterns": [
+      "water.?electrolys",
+      "water.?splitting",
+      "water.?electrolyz",
+      "green.hydrogen"
+    ]
+  },
+  {
+    "id": "water-dissociation",
+    "label": "Water dissociation",
+    "patterns": [
+      "water.?dissociat",
+      "proton.?hydroxide.recombin",
+      "water.formation"
+    ]
+  },
+  {
+    "id": "hydrogen-evolution",
+    "label": "Hydrogen evolution",
+    "patterns": [
+      "hydrogen.?evolution",
+      "\\bher\\b"
+    ]
+  },
+  {
+    "id": "oxygen-evolution",
+    "label": "Oxygen evolution",
+    "patterns": [
+      "oxygen.?evolution",
+      "water.?oxidation",
+      "\\boer\\b"
+    ]
+  },
+  {
+    "id": "photoelectrochemistry",
+    "label": "Photoelectrochemistry",
+    "patterns": [
+      "photoelectro",
+      "photoanod",
+      "photocathod",
+      "photocatal",
+      "solar.fuel",
+      "solar.energy.conversion"
+    ]
+  },
+  {
+    "id": "semiconductor-interfaces",
+    "label": "Semiconductor interfaces",
+    "patterns": [
+      "semiconductor",
+      "band.edge",
+      "charge.separation",
+      "carrier.selective",
+      "schottky"
+    ]
+  },
+  {
+    "id": "ionomers-electrolytes",
+    "label": "Ionomers & electrolytes",
+    "patterns": [
+      "ionomer",
+      "electrolyte",
+      "polymer",
+      "ion.exchange.capacity"
+    ]
+  },
+  {
+    "id": "ion-transfer",
+    "label": "Ion transfer & transport",
+    "patterns": [
+      "ion.transfer",
+      "proton.transfer",
+      "ion.transport",
+      "ionic.transport",
+      "nanopipett",
+      "nanopore",
+      "ion.dynamics"
+    ]
+  },
+  {
+    "id": "stability",
+    "label": "Stability & degradation",
+    "patterns": [
+      "degrad",
+      "durab",
+      "stabilit",
+      "corrosion",
+      "leach",
+      "dissolution",
+      "reconstruct"
+    ]
+  },
+  {
+    "id": "carbon",
+    "label": "CO₂ capture & conversion",
+    "patterns": [
+      "co2",
+      "co₂",
+      "carbon.dioxide",
+      "carbon.cycle",
+      "syngas",
+      "reactive.capture"
+    ]
+  },
+  {
+    "id": "separations",
+    "label": "Electrodialysis & separations",
+    "patterns": [
+      "electrodialysis",
+      "ion.separation",
+      "ion.selectiv",
+      "carbon.capture",
+      "co2.capture",
+      "co₂.capture"
+    ]
+  },
+  {
+    "id": "energy-storage",
+    "label": "Batteries & energy storage",
+    "patterns": [
+      "batter",
+      "capacitor",
+      "energy.storage",
+      "nmc",
+      "li6ps5cl",
+      "solid.state"
+    ]
+  },
+  {
+    "id": "metals-corrosion",
+    "label": "Corrosion & metal deposition",
+    "patterns": [
+      "corrosion",
+      "electrodepos",
+      "electrodissolution",
+      "ironmaking",
+      "electrowinning",
+      "metal.refin"
+    ]
+  },
+  {
+    "id": "organic-oxidation",
+    "label": "Organic & biomass oxidation",
+    "patterns": [
+      "glycerol",
+      "biomass",
+      "methanol",
+      "aldehyde",
+      "organic.electro",
+      "organic.oxidation"
+    ]
+  },
+  {
+    "id": "operando",
+    "label": "Operando & spectroscopy",
+    "patterns": [
+      "operando",
+      "in.situ",
+      "spectroscop",
+      "atomic.force.microscop",
+      "spectroelectro"
+    ]
+  },
+  {
+    "id": "modeling",
+    "label": "Modeling & simulation",
+    "patterns": [
+      "model",
+      "simulat",
+      "first.principles",
+      "density.functional",
+      "computational",
+      "theory",
+      "continuum"
+    ]
+  },
+  {
+    "id": "materials-synthesis",
+    "label": "Materials synthesis",
+    "patterns": [
+      "synthesi",
+      "morpholog",
+      "nanocrystal",
+      "nanopartic",
+      "perovskite",
+      "core.shell",
+      "thin.film",
+      "materials.descriptor",
+      "3d.junction"
+    ]
+  },
+  {
+    "id": "fundamentals-education",
+    "label": "Fundamentals & education",
+    "patterns": [
+      "education",
+      "roadmap",
+      "fundamental",
+      "perspective",
+      "potentials.in.electrochemistry",
+      "thermodynamic",
+      "green.hydrogen",
+      "heterogeneous.electrocatalysis"
+    ]
+  }
+]
