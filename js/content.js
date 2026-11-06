@@ -155,7 +155,7 @@
     {type:'GROUP MILESTONE',date:'2025',title:'Durable pure-water electrolyzers in Science',summary:'A group publication highlights interphase engineering in anion-exchange membrane electrolysis.',doi:'10.1126/science.adw7100',paper:'hou-2025'},
     {type:'EDUCATION',date:'2026 PROGRAM',title:'Summer Electrochemistry Academy at Berkeley',summary:'CESET offers hands-on summer electrochemistry courses spanning fundamentals and advanced electrochemical technologies.',url:'https://electrochemistry.berkeley.edu/summer-electrochemistry-academy'}
   ];
-  // Snapshot of the official team page. Image provenance: docs/team-photo-sources.json.
+  // Roster imported from the official team page, with owner-supplied additions. Image provenance: docs/team-photo-sources.json.
   const TEAM = [
   {
     "name": "Anthony Ekennia",
@@ -404,6 +404,29 @@
     "image": "assets/team/sree-sundararaman.webp",
     "imageWidth": 300,
     "imageHeight": 288
+  },
+  {
+    "name": "Matthew Zoerb",
+    "role": "Graduate Student",
+    "category": "Graduate Students",
+    "image": "assets/team/matthew-zoerb.webp",
+    "imageWidth": 663,
+    "imageHeight": 856
+  },
+  {
+    "name": "Abigail Derrico",
+    "role": "Graduate Student",
+    "category": "Graduate Students"
+  },
+  {
+    "name": "Nadia Barnard",
+    "role": "Graduate Student",
+    "category": "Graduate Students"
+  },
+  {
+    "name": "Lavanya Gupta",
+    "role": "Graduate Student",
+    "category": "Graduate Students"
   },
   {
     "name": "Yun-Seok Kang",

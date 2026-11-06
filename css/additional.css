@@ -104,3 +104,5 @@ body.drawer-open .desktop-nav{visibility:hidden}
 .member-details h3{overflow-wrap:anywhere}
 
 .principal-portrait{display:block;width:100%;height:auto}
+
+.member-portrait-placeholder{display:grid;place-items:center;color:#48606d;font-size:clamp(24px,4vw,48px);font-weight:600}

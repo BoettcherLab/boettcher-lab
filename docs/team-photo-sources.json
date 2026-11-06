@@ -343,5 +343,25 @@
     "page": "https://chemistry.berkeley.edu/people/shannon-boettcher",
     "sourceImage": "https://chemistry.berkeley.edu/sites/default/files/styles/openberkeley_brand_widgets_rectangle/public/shannon-boettcher-768x512.jpg?itok=EPnm2rc_&timestamp=1700507529",
     "image": "assets/team/shannon-boettcher.webp"
-  }
+  },
+  "ownerSuppliedMembers": [
+    {
+      "name": "Matthew Zoerb",
+      "category": "Graduate Students",
+      "image": "assets/team/matthew-zoerb.webp",
+      "source": "Matthew Zoerb Profile.zip / Matthew Zoerb Profile.jpeg"
+    },
+    {
+      "name": "Abigail Derrico",
+      "category": "Graduate Students"
+    },
+    {
+      "name": "Nadia Barnard",
+      "category": "Graduate Students"
+    },
+    {
+      "name": "Lavanya Gupta",
+      "category": "Graduate Students"
+    }
+  ]
 }
