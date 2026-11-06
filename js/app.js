@@ -42,7 +42,7 @@
   }
   const external = (url,label,cls='text-link')=>`<a class="${cls}" href="${escAttr(url)}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`;
   const goButton = (href,label,variant='')=>`<a href="${href}" class="button ${variant}">${label} <span class="arrow">↗</span></a>`;
-  const footer = ()=>`<footer class="site-footer"><div><strong>BOETTCHER LAB</strong><br>UC BERKELEY · CHEMISTRY + CHEMICAL & BIOMOLECULAR ENGINEERING</div><div><a target="_blank" rel="noopener noreferrer" href="${SOURCES.lab}">Original Lab Website ↗</a><br><a href="#/home">Return to slideshow ↑</a></div></footer>`;
+  const footer = ()=>`<footer class="site-footer"><div><strong>BOETTCHER LAB</strong><br>UC BERKELEY · CHEMISTRY + CHEMICAL & BIOMOLECULAR ENGINEERING</div><div><a target="_blank" rel="noopener noreferrer" href="${SOURCES.lab}">Original Lab Website ↗</a><br><a href="#/home">Return to home ↑</a></div></footer>`;
   const pageShell = (section,title,intro,content)=>`<div class="page-topline"><div class="breadcrumb"><a href="#/home">Home</a><span>/</span>${section.replace(/^\d+\s*\/\s*/,'')}</div></div><header class="page-hero"><div><h1>${title}</h1></div><p class="lead">${intro}</p></header>${content}${footer()}`;
   // Blank, locally drawn SVG figure placeholder. No remotely hosted images or external assets.
   let figureSequence=0;
@@ -71,37 +71,31 @@
     return `<div class="research-fullscreen">
       <div class="research-program-header"><a href="#/home" class="research-home-link">← Home</a><h1>Research</h1><a class="research-home-link" href="${SOURCES.research}" target="_blank" rel="noopener noreferrer">Full research overview ↗</a></div>
       <section class="research-carousel-section" aria-label="Research topics">
-        <div class="research-feature" role="region" aria-roledescription="carousel" aria-label="Research projects">
+        <nav id="researchPagination" class="research-pager" aria-label="Choose a research topic">${RESEARCH.map((item,i)=>`<button type="button" class="research-topic" data-research-index="${i}" aria-controls="researchResults">${escapeHTML(item.title)}</button>`).join('')}</nav>
+        <p class="research-intro">Explore our research in electrochemical interfaces and energy technologies.</p>
+        <div class="research-feature" role="region" aria-label="Research projects">
           <button type="button" class="research-arrow" id="researchPrev" aria-label="Previous research topic">←</button>
           <div id="researchResults" class="research-feature-inner" aria-live="polite"></div>
           <button type="button" class="research-arrow" id="researchNext" aria-label="Next research topic">→</button>
         </div>
-        <div id="researchPagination" class="research-pager" aria-label="Research topic position"></div>
       </section>
     </div>`;
   }
-  let researchIndex=0,researchTimer=null;
+  let researchIndex=0;
   function renderResearchCards(){
     const target=$('#researchResults');if(!target)return;
     const r=RESEARCH[researchIndex];
     const papers=(r.papers||[]).map(paperById).filter(Boolean);
     target.innerHTML=`<article class="research-single" aria-label="${escapeHTML(r.title)}"><div class="eyebrow research-eyebrow">${escapeHTML(r.eyebrow)}</div><h2>${escapeHTML(r.title)}</h2><p class="research-description">${escapeHTML(r.description)}</p><p class="research-application">${escapeHTML(r.application)}</p><div class="research-reading"><h3>Related publications</h3>${papers.map(p=>`<a class="research-paper" href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer"><span>${escapeHTML(p.title)}</span><small>${escapeHTML(p.journal)} · ${p.year} ↗</small></a>`).join('')}</div><a class="text-link research-archive" href="#/publications">Explore the publication archive ↗</a></article>`;
-    const pagination=$('#researchPagination');
-    if(pagination)pagination.innerHTML=RESEARCH.map((item,i)=>`<button type="button" class="research-pip ${i===researchIndex?'active':''}" data-research-index="${i}" aria-label="Show ${escapeHTML(item.title)}" aria-current="${i===researchIndex?'true':'false'}"></button>`).join('');
+    $$('#researchPagination button').forEach((button,i)=>{
+      button.classList.toggle('active',i===researchIndex);
+      button.setAttribute('aria-pressed',String(i===researchIndex));
+    });
   }
   function advanceResearch(delta){
     researchIndex=(researchIndex+delta+RESEARCH.length)%RESEARCH.length;
     renderResearchCards();
-    restartResearchTimer();
-  }
-  function restartResearchTimer(){
-    clearInterval(researchTimer);researchTimer=null;
-    if($('#researchResults'))researchTimer=setInterval(()=>{
-      if(document.visibilityState==='visible'&&$('#researchResults')){
-        researchIndex=(researchIndex+1)%RESEARCH.length;
-        renderResearchCards();
-      }
-    },60000);
+    history.replaceState(null,'','#/research?topic='+encodeURIComponent(RESEARCH[researchIndex].slug));
   }
   function initWaveChart(){
     const panel=$('#chartPanel');if(!panel)return;
@@ -247,14 +241,14 @@
     // Some browsers restrict async clipboard use when opening a local file.
     const temp=document.createElement('textarea');temp.value=value;temp.style.position='fixed';temp.style.left='-9999px';document.body.appendChild(temp);temp.select();let success=false;try{success=document.execCommand('copy')}catch(e){}temp.remove();return success;
   }
-  function openDrawer(){document.body.classList.add('drawer-open');$('#menuButton').setAttribute('aria-expanded','true');$('#menuButton').setAttribute('aria-label','Close navigation menu');$('.menu-label').textContent='CLOSE';$('#navDrawer').inert=false;$('.drawer-link')?.focus()}
-  function closeDrawer(){document.body.classList.remove('drawer-open');$('#menuButton').setAttribute('aria-expanded','false');$('#menuButton').setAttribute('aria-label','Open navigation menu');$('.menu-label').textContent='MENU';$('#navDrawer').inert=true}
+  function openDrawer(){document.body.classList.add('drawer-open');$('#menuButton').setAttribute('aria-expanded','true');$('#menuButton').setAttribute('aria-label','Close navigation menu');$('.menu-label').textContent='CLOSE';$('#navDrawer').inert=false;deck.inert=true;$('#pageView').inert=true;$('#slideControls').inert=true;$('.drawer-link')?.focus()}
+  function closeDrawer(){document.body.classList.remove('drawer-open');$('#menuButton').setAttribute('aria-expanded','false');$('#menuButton').setAttribute('aria-label','Open navigation menu');$('.menu-label').textContent='MENU';$('#navDrawer').inert=true;deck.inert=false;$('#pageView').inert=false;$('#slideControls').inert=false}
   function toggleDrawer(){document.body.classList.contains('drawer-open')?closeDrawer():openDrawer()}
   const deck=$('#homeView');
   const allSlides=$$('.slide',deck);
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
   const slideTones=['paper','navy','gold','black','paper','navy'];
-  let slideAnimation=null;
+  let homeScrollY=0;
   // Electrostatic, non-inertial water orientation for the proton navigation.
   // The O center is fixed and partially negative; both H atoms are partially
   // positive. An excess + charge at the hydronium site changes each water's
@@ -687,66 +681,35 @@
   }
   function slideTo(index,behavior='smooth',source='normal'){
     const n=Math.min(allSlides.length-1,Math.max(0,Number(index)||0));
-    const target=allSlides[n]?.offsetTop;
-    if(target===undefined)return;
-    if(slideAnimation!==null){cancelAnimationFrame(slideAnimation);slideAnimation=null}
-    deck.classList.add('is-animating');
     setActiveSlide(n,source);
-    const start=deck.scrollTop, distance=target-start;
-    if(reducedMotion.matches||behavior==='instant'||Math.abs(distance)<1){
-      deck.scrollTop=target;deck.classList.remove('is-animating');return;
-    }
-    const duration=980; // identical, measured easing for every adjacent slide
-    const begin=performance.now();
-    const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-    function frame(now){
-      const t=Math.min(1,(now-begin)/duration);
-      deck.scrollTop=start+distance*ease(t);
-      if(t<1)slideAnimation=requestAnimationFrame(frame);
-      else{deck.scrollTop=target;deck.classList.remove('is-animating');slideAnimation=null}
-    }
-    slideAnimation=requestAnimationFrame(frame);
+    window.scrollTo({top:allSlides[n].offsetTop,behavior:reducedMotion.matches?'instant':behavior});
   }
-  // A wheel gesture (including a 1px trackpad delta) advances exactly one slide.
-  // Latching until wheel events fall quiet avoids accidental multi-slide trackpad flings.
-  let wheelLatched=false,wheelQuietTimer=null;
-  deck.addEventListener('wheel',e=>{
-    if(deck.hidden||document.body.classList.contains('drawer-open')||!$('#modalBackdrop').hidden)return;
-    if(e.ctrlKey||Math.abs(e.deltaX)>Math.abs(e.deltaY)*1.3)return;
-    e.preventDefault();
-    if(Math.abs(e.deltaY)<.01)return;
-    clearTimeout(wheelQuietTimer);
-    wheelQuietTimer=setTimeout(()=>{wheelLatched=false},300);
-    if(wheelLatched||slideAnimation!==null)return;
-    wheelLatched=true;
-    slideTo(activeSlide+(e.deltaY>0?1:-1));
-  },{passive:false});
-  // On touch devices, retain horizontal research-card swiping but use vertical
-  // swipes to move one slide rather than exposing native momentum scrolling.
-  let touchOrigin=null;
-  deck.addEventListener('touchstart',e=>{
-    if(e.touches.length!==1){touchOrigin=null;return}
-    touchOrigin={x:e.touches[0].clientX,y:e.touches[0].clientY};
+  // Observe the document scroll without replacing native wheel, touch, or keyboard input.
+  function syncActiveSection(){
+    if(deck.hidden)return;
+    const marker=window.scrollY+window.innerHeight*.4;
+    let index=0;
+    allSlides.forEach((slide,i)=>{if(slide.offsetTop<=marker)index=i});
+    setActiveSlide(index);
+  }
+  let scrollPending=false;
+  window.addEventListener('scroll',()=>{
+    if(scrollPending)return;
+    scrollPending=true;
+    requestAnimationFrame(()=>{scrollPending=false;syncActiveSection()});
   },{passive:true});
-  deck.addEventListener('touchend',e=>{
-    if(!touchOrigin||!e.changedTouches.length)return;
-    const dx=e.changedTouches[0].clientX-touchOrigin.x;
-    const dy=e.changedTouches[0].clientY-touchOrigin.y;
-    touchOrigin=null;
-    if(Math.abs(dy)>34&&Math.abs(dy)>Math.abs(dx)*1.15&&!deck.hidden){
-      if(e.cancelable)e.preventDefault();
-      if(slideAnimation===null)slideTo(activeSlide+(dy<0?1:-1));
-    }
-  },{passive:false});
+  window.addEventListener('resize',syncActiveSection);
   function route(){
     closeDrawer();closeModal();
     const raw=(location.hash||'#/home').replace(/^#\/?/,'');
     const key=raw.split(/[/?]/)[0]||'home';
     const home=key==='home';
+    if(!deck.hidden)homeScrollY=window.scrollY;
     $('#homeView').hidden=!home;$('#slideControls').hidden=!home;$('#pageView').hidden=home;
-    if(home){clearInterval(researchTimer);researchTimer=null;document.title='Boettcher Lab';setActiveSlide(activeSlide);return}
+    $$('.desktop-nav a,.drawer-link').forEach(a=>{if(a.getAttribute('href')==='#/'+key)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    $('.skip').setAttribute('href',home?'#homeView':'#pageView');
+    if(home){document.title='Boettcher Lab';window.scrollTo({top:homeScrollY,behavior:'instant'});setActiveSlide(activeSlide);return}
     stopWaterAnimation();
-    clearInterval(researchTimer);
     document.body.dataset.slideTone='paper';
     
     let html;
@@ -769,15 +732,21 @@
     const target=$('#pageView');target.innerHTML=html;
     window.scrollTo({top:0,behavior:'instant'});
     target.scrollTop=0;
-    $$('.drawer-link').forEach(a=>{if(a.getAttribute('href')==='#/'+key)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
     let heading=$('h1',target);
     document.title=(heading?.textContent.trim()||'Boettcher Lab')+' | Boettcher Lab';
-    if(key==='research'){renderResearchCards();restartResearchTimer()}
+    if(key==='research'){renderResearchCards()}
     if(key==='publications'||key==='news'){updatePublicationResults();$('#pubCategory').value=publicationFilter;$('#pubYear').value=publicationYear;$('#pubRole').value=publicationRole;updateFeed();}
     heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});
   }
   function updateIntranetBody(){const root=$('#intranetApp');if(!root)return;root.innerHTML=intranetInterface()}
   document.addEventListener('click',async e=>{
+    if(e.target.closest('.skip')){
+      e.preventDefault();
+      const target=deck.hidden?$('#pageView'):deck;
+      target.focus({preventScroll:true});
+      target.scrollIntoView({behavior:'instant'});
+      return;
+    }
     const btn=e.target.closest('button');
     if(e.target.closest('#menuButton')){toggleDrawer();return}
     if(e.target.closest('#drawerScrim')||e.target.closest('#drawerClose')){closeDrawer();return}
@@ -795,7 +764,7 @@
     }
     if(btn.id==='researchPrev'){advanceResearch(-1);return}
     if(btn.id==='researchNext'){advanceResearch(1);return}
-    if(btn.matches('[data-research-index]')){researchIndex=Number(btn.dataset.researchIndex);renderResearchCards();restartResearchTimer();return}
+    if(btn.matches('[data-research-index]')){researchIndex=Number(btn.dataset.researchIndex);renderResearchCards();history.replaceState(null,'','#/research?topic='+encodeURIComponent(RESEARCH[researchIndex].slug));return}
     if(btn.matches('[data-bibtex]')){const paper=paperById(btn.dataset.bibtex);if(paper)openModal('BibTeX / '+paper.year,bibtex(paper));return}
     if(btn.id==='clearPubFilters'){publicationFilter='all';publicationYear='all';publicationRole='all';publicationSearch='';$('#pubSearch').value='';$('#pubCategory').value='all';$('#pubYear').value='all';$('#pubRole').value='all';updatePublicationResults();return}
     if(btn.id==='lockIntranet'){intranetUnlocked=false;intranetTab='calendar';updateIntranetBody();toast('Preview locked');return}
@@ -843,24 +812,14 @@
       return;
     }
     if(document.body.classList.contains('drawer-open')&&e.key==='Tab'){
-      const els=[$('#menuButton'),...$$('a',$('#navDrawer'))];
+      const els=[$('#menuButton'),...$$('button,a',$('#navDrawer'))];
       const first=els[0],last=els[els.length-1];
       if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
       if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
     }
-    if(!$('#homeView').hidden&&!document.body.classList.contains('drawer-open')&&$('#modalBackdrop').hidden&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)){
-      if(e.key==='PageDown'||e.key==='ArrowDown'){e.preventDefault();slideTo(Math.min(allSlides.length-1,activeSlide+1))}
-      if(e.key==='PageUp'||e.key==='ArrowUp'){e.preventDefault();slideTo(Math.max(0,activeSlide-1))}
-      if(e.key==='Home'){e.preventDefault();slideTo(0)}
-      if(e.key==='End'){e.preventDefault();slideTo(allSlides.length-1)}
-    }
+
   });
   $('#modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeModal()});
-  const slideObserver=new IntersectionObserver(entries=>{
-    if($('#homeView').hidden||deck.classList.contains('is-animating'))return;
-    entries.forEach(entry=>{if(entry.isIntersecting&&entry.intersectionRatio>=.55)setActiveSlide(Number(entry.target.id.split('-')[1])-1)})
-  },{root:$('#homeView'),threshold:[.55,.7]});
-  $$('.slide').forEach(s=>slideObserver.observe(s));
   window.addEventListener('hashchange',route);
   renderLanding();
   document.body.dataset.slideTone='init';
@@ -868,3 +827,4 @@
   route();
 
   renderFeaturedPublications();
+

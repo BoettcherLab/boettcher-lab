@@ -35,3 +35,12 @@ The weekly OpenAlex sync imports works where Shannon W. Boettcher appears anywhe
 
 `CATEGORY_RULES` in `scripts/sync_publications.py` maps title/abstract keywords to the six existing research topics. Papers may have multiple topics or none. To override a particular paper, set `manual_tags` to an array of topic indices (0–5) in `data/publications.json`. `tags` are automatically regenerated each run; `manual_tags` are never overwritten. Review the category mappings periodically, especially for interdisciplinary publications.
 
+
+
+## Navigation and layout
+
+The homepage uses native document scrolling for wheel, touch, and keyboard input. Section arrows and the labeled molecular navigation are optional shortcuts. Sections grow to fit their content; do not add fixed heights or nested scrolling to homepage content. Main page links are visible on desktop and available in the menu on smaller screens.
+
+Research topics are selected manually, with shareable URLs such as `#/research?topic=bipolar`. They do not advance automatically. Topic content remains in `js/content.js`. Responsive layout rules are in `css/additional.css`; base visual styles are in `css/styles.css`.
+
+Group photos remain explicitly marked placeholders until real photographs are supplied. No visual editor or CMS is configured.
