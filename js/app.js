@@ -70,11 +70,16 @@
   function insertFigurePlaceholders(root=document){$$('[data-figure]',root).forEach(el=>{el.outerHTML=figureMarkup({label:el.dataset.figure,ratio:el.dataset.ratio,code:el.dataset.code,caption:el.dataset.caption,kind:el.dataset.kind})});}
   function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),2800)}
   function renderLanding(){ $('#homeGroupGallery').innerHTML=groupGalleryMarkup(); }
-  function renderJoin(){return pageShell('JOIN','Join the team','Research opportunities at UC Berkeley and Lawrence Berkeley National Laboratory.',`<section class="page-section migrated-copy">${MIGRATED.join}</section>`)}
+  function fellowshipLinks(items){return `<ul>${items.map(item=>`<li>${external(item.url,item.title)}</li>`).join('')}</ul>`}
+  function renderFellowships(){const f=MIGRATED.recruitment.fellowships;return `<div class="fellowship-section"><h3>Postdoctoral fellowships</h3><div class="fellowship-grid"><section><h4>United States</h4>${fellowshipLinks(f.unitedStates)}</section><section><h4>International fellowships</h4>${fellowshipLinks(f.international)}</section></div><p>${external(f.additional.url,f.additional.title)}</p></div>`}
+  function renderJoin(){const r=MIGRATED.recruitment;return pageShell('JOIN','Join the team','Research opportunities at UC Berkeley and Lawrence Berkeley National Laboratory.',`<section class="page-section migrated-copy">${r.intro}<p class="disclosure-hint">Select a position to see how to apply.</p><div class="content-accordions position-accordions">${r.positions.map(position=>`<details class="content-accordion" id="${escAttr(position.id)}"><summary>${escapeHTML(position.title)}</summary><div class="accordion-content">${position.description}${position.id==='postdocs'?renderFellowships():''}</div></details>`).join('')}</div>${r.afterword}</section>`)}
+  function renderAcademy(){const a=MIGRATED.summerAcademy;return `${a.intro}<p class="disclosure-hint">Select a course to view its description, prerequisites, and enrollment details.</p><div class="content-accordions course-offerings">${a.offerings.map(course=>`<details class="content-accordion"><summary><span class="course-title"><span class="course-code">${escapeHTML(course.code)}</span><span>${escapeHTML(course.title)}</span></span><span class="course-meta">${course.units} units · ${escapeHTML(course.session)}</span></summary><div class="accordion-content">${course.description}<h4>2026 schedule and enrollment</h4><p>${escapeHTML(course.session)}<br>${escapeHTML(course.meeting)}<br>In-person instruction</p><ul>${course.enrollment.map(link=>`<li>${external(link.url,link.title+' — course catalog')}</li>`).join('')}</ul></div></details>`).join('')}</div>${a.afterword}<p>${external('https://summer.berkeley.edu/apply','Apply through Berkeley Summer Sessions')}</p>`}
+  function renderSeminars(){return `<section class="research-seminars" aria-labelledby="seminars-heading"><h2 id="seminars-heading">Seminars</h2><div class="seminar-grid">${MIGRATED.seminars.youtube.map(video=>`<article class="seminar-card"><div class="seminar-player"><button type="button" class="seminar-play" data-video-id="${escAttr(video.id)}" data-video-title="${escAttr(video.title)}" aria-label="Play ${escAttr(video.title)}"><img src="https://i.ytimg.com/vi/${escAttr(video.id)}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy"><span class="seminar-play-icon" aria-hidden="true">▶</span><span class="seminar-play-label">Play seminar</span></button></div><div class="seminar-card-copy"><h3>${escapeHTML(video.title)}</h3><p>Shannon Boettcher</p>${external('https://www.youtube.com/watch?v='+video.id,'Watch on YouTube')}</div></article>`).join('')}</div><details class="seminar-recordings"><summary>More seminar recordings</summary><div class="recording-grid">${MIGRATED.seminars.recordings.map(video=>`<article><h3>${escapeHTML(video.title)}</h3>${external(video.url,'Watch recording')}</article>`).join('')}</div></details></section>`}
+
   function renderResearch(){
     return `<div class="research-fullscreen">
       <div class="research-program-header"><a href="#/home" class="research-home-link">← Home</a><h1>Research</h1><a class="research-home-link" href="#/publications">Publications →</a></div>
-      <section class="page-section migrated-copy research-overview"><details><summary>Research overview, talks, and selected publications</summary>${MIGRATED.research}<p><a href="https://www.youtube.com/watch?v=KPh20c1vLcc" target="_blank" rel="noopener noreferrer">From Catalyst Fundamentals to Advanced Alkaline Membrane Electrolyzers ↗</a></p><p><a href="https://www.youtube.com/watch?v=nPFTczw4F1k" target="_blank" rel="noopener noreferrer">Electrochemistry Everywhere — Shannon Boettcher ↗</a></p></details></section>
+      <section class="page-section migrated-copy research-overview"><details><summary>Research overview</summary>${MIGRATED.research}</details></section>
       <section class="research-carousel-section" aria-label="Research topics">
         <nav id="researchPagination" class="research-pager" aria-label="Choose a research topic">${RESEARCH.map((item,i)=>`<button type="button" class="research-topic" data-research-index="${i}" aria-controls="researchResults">${escapeHTML(item.title)}</button>`).join('')}</nav>
         <p class="research-intro">Explore our research in electrochemical interfaces and energy technologies.</p>
@@ -84,14 +89,14 @@
           <button type="button" class="research-arrow" id="researchNext" aria-label="Next research topic">→</button>
         </div>
       </section>
+      ${renderSeminars()}
     </div>`;
   }
   let researchIndex=0;
   function renderResearchCards(){
     const target=$('#researchResults');if(!target)return;
     const r=RESEARCH[researchIndex];
-    const papers=(r.papers||[]).map(paperById).filter(Boolean);
-    target.innerHTML=`<article class="research-single" aria-label="${escapeHTML(r.title)}"><h2>${escapeHTML(r.title)}</h2>${publicationGraphic(paperById(r.paper),'research-topic-graphic')}<p class="research-description">${escapeHTML(r.description)}</p><p class="research-application">${escapeHTML(r.application)}</p><div class="research-reading"><h3>Related publications</h3>${papers.map(p=>`<a class="research-paper" href="${escAttr(publicationURL(p))}" target="_blank" rel="noopener noreferrer"><span>${escapeHTML(p.title)}</span><small>${escapeHTML(p.journal)} · ${p.year} ↗</small></a>`).join('')}</div><a class="text-link research-archive" href="#/publications">View publications →</a></article>`;
+    target.innerHTML=`<article class="research-single" aria-label="${escapeHTML(r.title)}"><h2>${escapeHTML(r.title)}</h2>${publicationGraphic(paperById(r.paper),'research-topic-graphic')}<p class="research-description">${escapeHTML(r.description)}</p><p class="research-application">${escapeHTML(r.application)}</p><a class="text-link research-archive" href="#/publications">View publications →</a></article>`;
     $$('#researchPagination button').forEach((button,i)=>{
       button.classList.toggle('active',i===researchIndex);
       button.setAttribute('aria-pressed',String(i===researchIndex));
@@ -190,7 +195,7 @@
   function renderOutreach(){return pageShell('LEARN','Learn Electrochemistry','',`
     <section class="page-section migrated-copy">${MIGRATED.learning}</section>
     <section class="page-section"><h2 class="page-section-title">Berkeley programs.</h2><div class="resource-cards"><article class="resource-card"><h3>Electrochemistry minor</h3><p>A five-course summer sequence in electrochemical science, engineering, and technology.</p>${external('https://undergraduate.catalog.berkeley.edu/programs/10I178U','Minor requirements')}</article><article class="resource-card"><h3>Summer Sessions</h3><p>Courses welcome Berkeley students, visiting students, international students, nontraditional students, and industry professionals.</p>${external('https://summer.berkeley.edu/apply','Summer Sessions applications')}</article><article class="resource-card"><h3>Berkeley CESET</h3><p>The center connects electrochemical research, technology development, and education.</p><a class="text-link" href="#/ceset">About Berkeley CESET →</a></article></div></section>
-    <section class="page-section migrated-copy"><h2>Summer Electrochemistry Academy — 2026 program.</h2>${MIGRATED.academy}<details class="course-schedule"><summary>2026 course schedule and enrollment details</summary>${MIGRATED.courses}</details></section>`)}
+    <section class="page-section migrated-copy"><h2>Summer Electrochemistry Academy — 2026 program.</h2>${renderAcademy()}</section>`)}
   function renderOregon(){return pageShell('07 / OREGON CENTER','Oregon Center','An important part of the group’s history – linking graduate training, industry partnerships, and fundamental electrochemical research.',`
     <section class="page-section"><div class="team-pi"><div><h2 class="page-section-title">A foundation in electrochemistry.</h2><p class="section-intro">Before the group's transition to UC Berkeley and Lawrence Berkeley National Laboratory in January 2024, Prof. Boettcher founded the Oregon Center for Electrochemistry and a graduate program in electrochemical science and technology.</p><p class="body-copy">The center is a separate program. Visit its official website for current programs, resources, and information.</p>${external(SOURCES.oregon,'Visit the Oregon Center for Electrochemistry')}</div><div>${figureMarkup({label:'Oregon Center / archival imagery',ratio:'4:3',code:'ARCHIVE / 01',caption:'HISTORICAL IMAGE PLACEHOLDER'})}</div></div></section>
     <section class="page-section"><div class="timeline"><div class="year">OREGON</div><div class="timeline-body"><h3>Training and research infrastructure</h3><p>Interdisciplinary education and partnerships created a foundation for electrochemical technology development.</p></div><div class="year">2024</div><div class="timeline-body"><h3>Transition to Berkeley</h3><p>The Boettcher laboratory transitioned to UC Berkeley and LBNL in January 2024.</p></div><div class="year">BERKELEY</div><div class="timeline-body"><h3>CESET and the Summer Academy</h3><p>Berkeley's Center for Electrochemical Science, Engineering, and Technology extends this work through education, research, and collaboration.</p></div></div></section>`)}
@@ -723,6 +728,7 @@
     if(key==='publications'||key==='news'){updatePublicationResults();}
     heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});
   }
+  document.addEventListener('error',e=>{if(e.target.matches?.('.seminar-play img'))e.target.hidden=true},true);
   document.addEventListener('click',async e=>{
     if(e.target.closest('.skip')){
       e.preventDefault();
@@ -738,6 +744,15 @@
     if(e.target.closest('[data-next]')){slideTo(e.target.closest('[data-next]').dataset.next);return}
     if(e.target.closest('[data-slide]')){const item=e.target.closest('[data-slide]');slideTo(item.dataset.slide,'smooth',item.classList.contains('water-hit')?'water-click':'normal');return}
     if(!btn)return;
+    if(btn.matches('.seminar-play')){
+      const frame=document.createElement('iframe');
+      frame.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(btn.dataset.videoId)+'?autoplay=1&rel=0';
+      frame.title=btn.dataset.videoTitle;
+      frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      frame.allowFullscreen=true;
+      frame.referrerPolicy='strict-origin-when-cross-origin';
+      btn.replaceWith(frame);frame.focus();return;
+    }
     if(btn.matches('.video-toggle')){
       const wrapper=btn.closest('.slide-video');
       const interactive=wrapper.classList.toggle('is-interactive');
