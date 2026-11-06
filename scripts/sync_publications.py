@@ -18,7 +18,8 @@ AUTHOR_ID = 'A5032458792'  # Shannon W. Boettcher, verified OpenAlex author prof
 BASE = 'https://api.openalex.org'
 MAIL = os.getenv('CONTACT_EMAIL', '').strip()
 HEADERS = {'User-Agent': 'BoettcherLabPublications/2.0' + (f' (mailto:{MAIL})' if MAIL else '')}
-ALLOWED_TYPES = {'article', 'review', 'preprint', 'letter', 'editorial', 'book-chapter', 'proceedings-article'}
+ALLOWED_TYPES = {'article', 'review', 'letter', 'editorial', 'book-chapter'}
+TOPIC_RULES = json.loads((ROOT / 'data' / 'publication-topics.json').read_text(encoding='utf-8'))
 
 
 def request_json(url, params=None):
@@ -42,7 +43,7 @@ def openalex_works():
     cursor = '*'
     results = []
     for _ in range(30):  # 30 x 200 > expected author output
-        params = {'filter': f'authorships.author.id:{AUTHOR_ID}', 'per_page': 200, 'cursor': cursor}
+        params = {'filter': f'authorships.author.id:{AUTHOR_ID},from_publication_date:2020-01-01,to_publication_date:2026-12-31', 'per_page': 200, 'cursor': cursor}
         if os.getenv('OPENALEX_API_KEY'):
             params['api_key'] = os.environ['OPENALEX_API_KEY']
         data = request_json(BASE + '/works', params)
@@ -65,7 +66,7 @@ def authorship_role(work):
     if not authorships or len(authorships) >= 100:
         return None
     positions = [i for i, item in enumerate(authorships)
-                 if (item.get('author') or {}).get('id', '').rstrip('/').endswith('/' + AUTHOR_ID)]
+                 if ((item.get('author') or {}).get('id') or '').rstrip('/').endswith('/' + AUTHOR_ID)]
     if len(positions) != 1:
         return None
     return 'group' if positions[0] == len(authorships) - 1 else 'collaboration' 
@@ -91,6 +92,16 @@ def classify(title, abstract='', manual_tags=None):
     if manual_tags is not None:
         return sorted(set(tag for tag in manual_tags if isinstance(tag, int) and 0 <= tag < 6))
     return predicted
+
+
+def classify_keywords(title, abstract='', metadata_keywords=None, manual_keywords=None):
+    valid = {topic['id'] for topic in TOPIC_RULES}
+    if manual_keywords is not None:
+        return sorted(set(key for key in manual_keywords if key in valid))
+    text = ' '.join([title, abstract or '', *(metadata_keywords or [])]).lower()
+    text = text.replace('–', '-').replace('‐', '-').replace('₂', '2').replace('₄', '4')
+    return [topic['id'] for topic in TOPIC_RULES
+            if any(re.search(pattern, text) for pattern in topic['patterns'])]
 
 
 def abstract_text(work):
@@ -133,20 +144,26 @@ def convert_work(w, old):
     if w.get('type') not in ALLOWED_TYPES:
         return None
     doi = normalized_doi(w.get('doi'))
+    if not doi:
+        return None
     prior = old.get('doi:' + doi, {}) if doi else {}
     prior = prior or old.get('title:' + norm(title), {})
     authors = ', '.join((a.get('author') or {}).get('display_name') or '' for a in w['authorships']).strip(', ')
     venue = (((w.get('primary_location') or {}).get('source') or {}).get('display_name') or '')
     record = dict(prior)
     record.update({'id': prior.get('id') or 'openalex-' + w['id'].rsplit('/', 1)[-1],
-                   'title': title, 'year': int(w.get('publication_year') or 0),
+                   'title': prior.get('title') or title, 'year': int(prior.get('year') or w.get('publication_year') or 0),
                    'authors': authors or prior.get('authors', ''),
                    'journal': venue or prior.get('journal', 'Publication'),
                    'doi': doi or prior.get('doi', ''),
                    'url': 'https://doi.org/' + doi if doi else (w.get('id') or prior.get('url', '')),
                    'tags': classify(title, abstract_text(w), prior.get('manual_tags')),
                    'role': role, 'source': 'OpenAlex',
-                   'openalex_id': w.get('id', '')})
+                   'openalex_id': w.get('id', ''),
+                   'abstract': abstract_text(w),
+                   'metadata_keywords': [k['display_name'] for k in w.get('keywords', []) if k.get('display_name')]})
+    record['keywords'] = classify_keywords(record['title'], record['abstract'], record['metadata_keywords'], prior.get('manual_keywords'))
+    record.pop('abstract', None)  # Abstracts are used to classify, not republished.
     return record
 
 
@@ -163,6 +180,7 @@ def main():
     for p in previous:
         p['role'] = p.get('role') if p.get('role') in ('group', 'collaboration') else infer_legacy_role(p)
         p['tags'] = classify(p.get('title', ''), manual_tags=p.get('manual_tags'))
+        p['keywords'] = classify_keywords(p.get('title', ''), p.get('abstract', ''), p.get('metadata_keywords'), p.get('manual_keywords')) if p.get('manual_keywords') is not None or not p.get('keywords') else p['keywords']
     works = openalex_works()
     generated = [p for w in works if (p := convert_work(w, old_lookup))]
     if len(generated) < 15:
@@ -200,3 +218,4 @@ if __name__ == '__main__':
     except Exception as error:
         print('Sync failed; existing bibliography preserved: ' + str(error), file=sys.stderr)
         sys.exit(1)
+
