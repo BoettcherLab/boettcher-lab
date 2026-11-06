@@ -97,11 +97,11 @@ body.drawer-open .desktop-nav{visibility:hidden}
 @media(max-width:360px){.brand-tagline{display:none}}
 
 
-/* Preserve complete member portraits, including photos with wider compositions. */
-.member-portrait{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:contain;background:#eef0ed}
+/* Square frames crop individual portraits while preserving the group galleries. */
+.member-portrait{display:block;width:100%;height:auto;aspect-ratio:1 / 1;object-fit:cover;object-position:center 35%;background:#eef0ed}
 .member-details h3{overflow-wrap:anywhere}
 
-.principal-portrait{display:block;width:100%;height:auto}
+.principal-portrait{display:block;width:100%;height:auto;aspect-ratio:1 / 1;object-fit:cover;object-position:center 35%}
 
 .member-portrait-placeholder{display:grid;place-items:center;color:#48606d;font-size:clamp(24px,4vw,48px);font-weight:600}
 
@@ -182,3 +182,42 @@ details>summary{cursor:pointer;font-weight:600;line-height:1.5;padding:14px 0}
  .team-gallery-section .group-gallery{margin-top:16px}
  .team-gallery-section .group-gallery-frame img{width:auto;max-width:100%;height:auto;max-height:calc(100svh - var(--header) - 350px);object-fit:contain;margin:auto}
 }
+
+/* Expandable course and recruitment descriptions. */
+.content-accordions{margin:24px 0 40px;border-top:1px solid var(--border)}
+.content-accordion{border-bottom:1px solid var(--border)}
+.content-accordion>summary{position:relative;list-style:none;padding:23px 44px 23px 0;color:var(--navy);font-size:23px}
+.content-accordion>summary::-webkit-details-marker{display:none}
+.content-accordion>summary::after{content:'+';position:absolute;right:8px;top:23px;font-size:27px;line-height:1}
+.content-accordion[open]>summary::after{content:'−'}
+.content-accordion>summary:hover{color:#706019}
+.content-accordion>summary:focus-visible,.seminar-play:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.accordion-content{padding:0 0 26px;max-width:100%}
+.course-title{display:flex;flex-wrap:wrap;gap:5px 15px;align-items:baseline}
+.course-code{font-size:14px;font-weight:600;letter-spacing:.02em}
+.course-meta{display:block;margin-top:8px;font-size:14px;font-weight:400;color:#52616a}
+.disclosure-hint{font-size:14px;color:#52616a}
+.fellowship-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+.fellowship-grid section{min-width:0}
+.fellowship-grid h4{margin-top:10px}
+.fellowship-grid ul{padding-left:20px}
+.fellowship-grid a{font-size:15px;line-height:1.6;text-transform:none;letter-spacing:normal}
+.research-seminars{max-width:1100px;width:100%;margin:35px auto 60px;padding-top:35px;border-top:1px solid var(--border)}
+.research-seminars>h2{font-size:clamp(30px,4vw,48px);margin:0 0 25px}
+.seminar-grid,.recording-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.seminar-card{border:1px solid var(--border);background:#fcfcf8;min-width:0}
+.seminar-player{position:relative;aspect-ratio:16 / 9;background:var(--navy);overflow:hidden}
+.seminar-player :is(button,iframe){display:block;width:100%;height:100%;border:0}
+.seminar-play{position:relative;padding:0;background:var(--navy);color:#fff;cursor:pointer}
+.seminar-play img{width:100%;height:100%;object-fit:cover;opacity:.75}
+.seminar-play-icon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:#fff;color:var(--navy);font-size:24px;padding-left:4px}
+.seminar-play-label{position:absolute;bottom:15px;left:20px;font-size:14px;font-weight:600;text-shadow:0 1px 4px #000}
+.seminar-play:hover img{opacity:1}
+.seminar-card-copy{padding:23px}
+.seminar-card h3{font-size:22px;line-height:1.35;margin:0 0 12px}
+.seminar-card p{font-size:14px;color:#52616a;margin:0 0 20px}
+.seminar-recordings{margin-top:25px;border-top:1px solid var(--border)}
+.recording-grid{padding:15px 0}
+.recording-grid article{padding:20px;border:1px solid var(--border)}
+.recording-grid h3{font-size:18px;line-height:1.5;margin:0 0 20px}
+@media(max-width:760px){.fellowship-grid,.seminar-grid,.recording-grid{grid-template-columns:minmax(0,1fr)}.fellowship-grid{gap:12px}.content-accordion>summary{font-size:20px}.course-title{display:block}.course-code{display:block;margin-bottom:6px}}
