@@ -1,0 +1,1455 @@
+{
+  "updated": "2026-11-13",
+  "sections": [
+    {
+      "id": "administration",
+      "title": "Administrative Setup",
+      "subtitle": "Accounts, access, communications and data storage",
+      "icon": "id-card"
+    },
+    {
+      "id": "safety",
+      "title": "Lab Safety & EH&S Training",
+      "subtitle": "Courses, PPE, SOPs, hazard assessments and safety walkthroughs",
+      "icon": "shield-check"
+    },
+    {
+      "id": "logistics",
+      "title": "Lab Logistics & Citizenship",
+      "subtitle": "Chemical inventory, waste management, housekeeping and lab operations",
+      "icon": "boxes"
+    },
+    {
+      "id": "equipment",
+      "title": "Instruments & Equipment",
+      "subtitle": "Equipment orientation and facility-specific access",
+      "icon": "microscope"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "calnet-id-and-cal-1-card",
+      "title": "1.1 — University / Lab Credentials",
+      "lines": [
+        {
+          "html": "Set up your CalNet ID using your Employee ID and the non-Berkeley email you provided in DocuSign: <a href=\"https://calnet.berkeley.edu/activate/employee\" target=\"_blank\" rel=\"noopener noreferrer\">calnet.berkeley.edu/activate/employee</a>",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Get your Cal 1 Card (university ID) — wait until the next business day after your hire date, bring a government-issued photo ID and your UCB Employee ID: <a href=\"https://transportation.berkeley.edu/services/cal-1-card\" target=\"_blank\" rel=\"noopener noreferrer\">Cal 1 Card info</a>",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "administration",
+      "name": "CalNet ID and Cal 1 Card",
+      "sourceTitle": "1.1 — University / Lab Credentials"
+    },
+    {
+      "id": "lbnl-identity-account-badge-and-orientation",
+      "title": "1.1 — University / Lab Credentials",
+      "lines": [
+        {
+          "html": "You will receive an email from LBNL HR with your Badge Number, Identity Account, and email. Complete all actions in that email first. Then ride the LBNL shuttle with your offer letter and government ID to the badge office (get off at the first stop — takes 10–15 min).",
+          "list": false,
+          "location": "lbnl",
+          "roles": "all"
+        }
+      ],
+      "location": "lbnl",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "administration",
+      "name": "LBNL identity account, badge, and orientation",
+      "sourceTitle": "1.1 — University / Lab Credentials"
+    },
+    {
+      "id": "lbnl-training-system-and-worker-protection-checklist",
+      "title": "1.1 — University / Lab Credentials",
+      "lines": [
+        {
+          "html": "Immediately complete required LBNL trainings and Worker Protection Checklist (WPC) actions — failure to do so promptly generates follow-up emails to Shannon:",
+          "list": false,
+          "location": "lbnl",
+          "roles": "all"
+        },
+        {
+          "html": "Training system: <a href=\"https://training.lbl.gov\" target=\"_blank\" rel=\"noopener noreferrer\">training.lbl.gov</a>",
+          "list": true,
+          "location": "lbnl",
+          "roles": "all"
+        },
+        {
+          "html": "WPC: <a href=\"http://wpc.lbl.gov\" target=\"_blank\" rel=\"noopener noreferrer\">wpc.lbl.gov</a>",
+          "list": true,
+          "location": "lbnl",
+          "roles": "all"
+        },
+        {
+          "html": "Email Yang (yangzhao0105@berkeley.edu) with details of your planned LBNL activities and any upcoming equipment training (SEM, XPS, etc.) so you can be added to the right WPCs.",
+          "list": false,
+          "location": "lbnl",
+          "roles": "all"
+        }
+      ],
+      "location": "lbnl",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "safety",
+      "name": "LBNL training system and Worker Protection Checklist",
+      "sourceTitle": "1.1 — University / Lab Credentials"
+    },
+    {
+      "id": "tan-hall-access-and-keys",
+      "title": "1.2 — Building Access & Keys",
+      "lines": [
+        {
+          "html": "Before requesting campus building access, complete EHS 101 (or the applicable required refresher) and download your completion certificate.",
+          "list": false
+        },
+        {
+          "html": "Apply for building access through the <a href=\"https://chemnet.berkeley.edu/buildingaccess\" target=\"_blank\" rel=\"noopener noreferrer\">College Access System</a>. Upload the EHS 101 certificate.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Cal 1 Card access: after-hours + chemical storeroom + cylinder cage",
+          "list": true,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Use Chemical and Biomolecular Engineering as Primary Department (NOT College of Chemistry)",
+          "list": true,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Request keys for:",
+          "list": true,
+          "location": "ucb",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Tan 383 or Tan 271, depending on your floor",
+          "list": true,
+          "location": "ucb",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Freight elevator + gas cylinder cage key",
+          "list": true,
+          "location": "ucb",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Each key requires a $30 deposit. They will charge you through CalCentral billing or you can pay with a physical check written to UC Regents.",
+          "list": true,
+          "location": "ucb",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Once FSA (Nathalie Grogan) approves, you can pick up your key at 119 Gilman Hall (Building Management Office)",
+          "list": true,
+          "location": "ucb",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Skip speedtype, storeroom, and BearBuy steps — your mentor handles research supplies.",
+          "list": false,
+          "location": "all",
+          "roles": [
+            "undergrad"
+          ]
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "administration",
+      "name": "Tan Hall access and keys",
+      "sourceTitle": "1.2 — Building Access & Keys"
+    },
+    {
+      "id": "lbnl-building-and-restricted-area-access",
+      "title": "1.2 — Building Access & Keys",
+      "lines": [
+        {
+          "html": "Request after-hours (30-perimeter) and restricted area access:",
+          "list": false,
+          "location": "lbnl",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://securityandemergencyservices.lbl.gov/service/badging/buildingaccess/\" target=\"_blank\" rel=\"noopener noreferrer\">securityandemergencyservices.lbl.gov</a>",
+          "list": true,
+          "location": "lbnl",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://access.lbl.gov/SAFE/\" target=\"_blank\" rel=\"noopener noreferrer\">access.lbl.gov/SAFE</a>",
+          "list": true,
+          "location": "lbnl",
+          "roles": "all"
+        }
+      ],
+      "location": "lbnl",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "administration",
+      "name": "LBNL building and restricted-area access",
+      "sourceTitle": "1.2 — Building Access & Keys"
+    },
+    {
+      "id": "group-communications-and-introductions",
+      "title": "1.3 — Group Communications",
+      "lines": [
+        {
+          "html": "Email Yang Zhao (yangzhao0105@berkeley.edu) and ask to: join the group events calendar, group mailing list, and Slack groups. Include your phone number for internal contact.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "The group mailing list address is <a href=\"mailto:Boettcherlab@lists.berkeley.edu\" target=\"_blank\" rel=\"noopener noreferrer\">Boettcherlab@lists.berkeley.edu</a> — emails here go to everyone. The <a href=\"https://sites.google.com/d/19Fjd0CMEWwpa8XryQcNrWcvhFVEdqwWU/p/1iZXTzNXh0WTTo57NsKpfNJ84Zv2hUYDS/edit\" target=\"_blank\" rel=\"noopener noreferrer\">UCB Internal Website</a> is the central hub for group resources: SOPs, meeting schedules, Zoom links, and more. Check here before asking around.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Email Nicole Sagui (nsagui@berkeley.edu) with: a one-paragraph bio, a photo, and your LinkedIn link (optional) for the group public website. See other lab members&#x27; profiles as a guide.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Mark your out-of-office days on the Group Events Calendar.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Email Yiwen Sun (yiwen_sun74@berkeley.edu) to schedule your 20-minute Intro Talk at group meeting. Let her know your degree level (grad or postdoc).",
+          "list": false,
+          "location": "all",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Graduate students and postdocs: also add class schedules and TA duties to the calendar.",
+          "list": false,
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "administration",
+      "name": "Group communications and introductions",
+      "sourceTitle": "1.3 — Group Communications"
+    },
+    {
+      "id": "desk-printing-network-and-purchasing",
+      "title": "1.4 — Desk, Bench & Purchasing",
+      "lines": [
+        {
+          "html": "Talk to Yang to get assigned an office desk and lab bench.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Printing: To print using lab printers (Tan 399 or 272), see the <a href=\"https://docs.google.com/document/d/171_t7m0Kcy8aXXLDzlLUUG4EU8DFmQ9LjKuTBy2oQWs/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Lab Printing Instructions</a>. Options include uploading to the shared Google Drive or emailing boettcherlab@gmail.com and accessing from the laptop on the printer.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Set up BearBuy for lab purchasing:",
+          "list": false,
+          "location": "all",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Log in at <a href=\"https://supplychain.berkeley.edu/bearbuy\" target=\"_blank\" rel=\"noopener noreferrer\">supplychain.berkeley.edu/bearbuy</a>",
+          "list": true,
+          "location": "all",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Ask Yang which speedtype to use (finalize your research plan with Shannon first)",
+          "list": true,
+          "location": "all",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Read the FSA purchasing notes on the internal site — especially the &quot;Fabrication&quot; category for equipment",
+          "list": true,
+          "location": "all",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Important: Do not use your UC Berkeley email for personal Amazon purchases — it will convert to a business account. Use campus WiFi or VPN for BearBuy",
+          "list": true,
+          "location": "all",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "WiFi, VPN, and ethernet:",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Use Berkeley Visitor or Eduroam wifi on campus",
+          "list": true,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "VPN for off-campus journal/BearBuy access: <a href=\"https://security.berkeley.edu/services/bsecure/bsecure-remote-access-vpn\" target=\"_blank\" rel=\"noopener noreferrer\">bSecure VPN</a>",
+          "list": true,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Register your device for campus ethernet (uses CalNet ID): <a href=\"https://security.berkeley.edu/services/socreg-asset-registration-portal/registeredassets/dhcp-device-registration\" target=\"_blank\" rel=\"noopener noreferrer\">SocReg portal</a>",
+          "list": true,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "administration",
+      "name": "Desk, printing, network, and purchasing",
+      "sourceTitle": "1.4 — Desk, Bench & Purchasing"
+    },
+    {
+      "id": "shared-drive-and-data-management",
+      "title": "1.5 — Google Drive Setup",
+      "lines": [
+        {
+          "html": "All experimental data is stored in the Boettcher Group Share drive.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Create a folder under your name in <a href=\"https://drive.google.com/drive/folders/17Eq37HXSb0hm4dCcY1t3cxWQwefktBsN\" target=\"_blank\" rel=\"noopener noreferrer\">Group Lab Data</a>. Store your daily experimental data here. Making a personal copy is strongly recommended.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "By default, files in a shared drive are accessible and editable by all group members. If you need privacy, create a folder in your personal drive and add a shortcut to Group Lab Data — this lets you control permissions (e.g., read-only for others). Ask Yang if you need help.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Keep these essential shared folders updated — Shannon and Yang will follow up regularly:",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Boettcher Manuscripts",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Boettcher Group Member Presentations",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Boettcher Proposals",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Group Posters",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "[OPTIONAL] Create a personal folder under Individual Folders to share specific documents with select colleagues.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "The Group Internal Site folder has a specific organization system — talk to Yang before adding anything there.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "administration",
+      "name": "Shared Drive and data management",
+      "sourceTitle": "1.5 — Google Drive Setup"
+    },
+    {
+      "id": "lhat-ppe-quiz-and-lab-coat-fitting",
+      "title": "3.1 — LHAT & Lab Coat Fitting",
+      "lines": [
+        {
+          "html": "There are two RSS (Risk &amp; Safety Solutions) requirements alongside the EHS online trainings:",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "LHAT: Acknowledge the group Laboratory Hazard Assessment Tool document under &quot;Workspace&quot; in RSS. Ask Yang to add you — you will receive an email with a link.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "PPE Training Quiz: Complete the PPE Training Quiz in RSS.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "After completing both, book a lab coat fitting as soon as possible: <a href=\"https://calppe.simplybook.me/v2/\" target=\"_blank\" rel=\"noopener noreferrer\">calppe.simplybook.me</a>",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 1,
+      "section": "safety",
+      "name": "LHAT, PPE quiz, and lab coat fitting",
+      "sourceTitle": "3.1 — LHAT & Lab Coat Fitting"
+    },
+    {
+      "id": "uc-berkeley-eh-s-courses-and-transcript",
+      "title": "3.2 — EHS Required Online Trainings",
+      "lines": [
+        {
+          "html": "Complete all required trainings at the <a href=\"https://uc.sumtotal.host/rcore/c/dash/home?domain=4&amp;isDeepLink=1\" target=\"_blank\" rel=\"noopener noreferrer\">UC Learning Center</a>. Send a screenshot of your Training Transcript page to Wenbo Zhang (wen_zhang@berkeley.edu) when done — this is required before the lab walk-through.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 2,
+      "section": "safety",
+      "name": "UC Berkeley EH&S courses and transcript",
+      "sourceTitle": "3.2 — EHS Required Online Trainings",
+      "trainingTable": true
+    },
+    {
+      "id": "read-and-sign-relevant-sops",
+      "title": "2.1 — SOPs (Standard Operating Procedures)",
+      "lines": [
+        {
+          "html": "Read and sign every SOP relevant to your work before beginning experiments — this is a required part of onboarding. SOPs are available in hard copy in the lab and in the <a href=\"https://drive.google.com/drive/folders/1Diuzh0W3g_fPP5IxU_ZEvkzjZr1n-Qes?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Group SOP folder on shared Drive</a>. Categories include: Cryogens, Acutely Toxic Gases, Acutely Toxic Chemicals, Corrosives, Mutagens, Perchloric Acid, Peroxide Forming Chemicals, Pyrophoric Materials, Strong Oxidizing Agents, Hydrofluoric Acid, Self-Heating Substances, Water Reactive Materials, and Flammable Liquids and Solids.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "safety",
+      "name": "Read and sign relevant SOPs",
+      "sourceTitle": "2.1 — SOPs (Standard Operating Procedures)"
+    },
+    {
+      "id": "chemical-hygiene-plan-and-sop-handbook",
+      "title": "3.3 — Chemical Hygiene Plan & SOP Handbook",
+      "lines": [
+        {
+          "html": "Read the Boettcher Lab Chemical Hygiene Plan in full. Then read and sign every SOP in the lab handbook binder.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Note the physical binder location.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Note where Safety Data Sheets (SDS) are stored for chemicals you will use",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Chemical Hygiene Plan: link pending — ask the lab safety officer for the current approved version.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 3,
+      "section": "safety",
+      "name": "Chemical Hygiene Plan and SOP handbook",
+      "sourceTitle": "3.3 — Chemical Hygiene Plan & SOP Handbook"
+    },
+    {
+      "id": "in-person-safety-walk-through",
+      "title": "3.4 — Lab Walk-Through with Safety Officer",
+      "lines": [
+        {
+          "html": "After completing your EHS trainings (3.2) and sending your transcript to Wenbo, schedule your in-person lab walk-through. Wear PPE when in the lab.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Everyone has work-stop authority. If something looks unsafe, stop and check with your advisor or a senior lab member before proceeding — it is always better to pause than to risk an incident.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "The walk-through covers Tan 271, 272, 373, 379, and 383. You will locate every emergency response item, chemical storage area, waste station, and gas shutoff in person. Have the floor map open:",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://docs.google.com/presentation/d/1_fYEPd2Rz0mn66kidahSieNFR5qkvVeJvbubRvSQ2Dw/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Lab Floor Map</a>",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Get the Safety Officer’s signature for this step.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 4,
+      "section": "safety",
+      "name": "In-person safety walk-through",
+      "sourceTitle": "3.4 — Lab Walk-Through with Safety Officer"
+    },
+    {
+      "id": "ppe-fitting-and-glove-compatibility",
+      "title": "3.5 — PPE Fitting & Gloves Selection",
+      "lines": [
+        {
+          "html": "Complete with your trainer. You will be fitted for safety glasses and confirm your lab coat, and learn to select the correct glove for lab chemicals.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Glove guide:",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Nitrile (standard): everyday handling of aqueous solutions and most salts",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Thicker nitrile or neoprene: concentrated acids and bases",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Double-glove: acutely toxic chemicals — Ni, Co, Cr(VI), Pt compounds, V compounds",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Butyl rubber gloves: required for Piranha solution (H₂SO₄ / H₂O₂) — nitrile is not adequate",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Always check the SDS for any chemical you haven&#x27;t handled before",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "⚠️ Piranha solution (H₂SO₄ / H₂O₂) requires specific training before use. Contact Meg Takezawa for training on handling and disposal before working with Piranha. Butyl rubber gloves are mandatory — standard nitrile is not adequate.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 5,
+      "section": "safety",
+      "name": "PPE fitting and glove compatibility",
+      "sourceTitle": "3.5 — PPE Fitting & Gloves Selection"
+    },
+    {
+      "id": "fume-hood-training",
+      "title": "3.6 — Fume Hood Training",
+      "lines": [
+        {
+          "html": "NEVER PUT YOUR FACE INSIDE THE FUME HOOD. Keep the sash at or below the marked line at all times; keep your face outside the sash plane",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Position materials at least 6 inches from the front edge; no clutter blocking airflow",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "If the hood alarm sounds: stop work, close sash, notify supervisor immediately",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Your trainer will verify airflow and demonstrate correct posture.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 6,
+      "section": "safety",
+      "name": "Fume hood training",
+      "sourceTitle": "3.6 — Fume Hood Training"
+    },
+    {
+      "id": "emergency-response-quest",
+      "title": "3.7 — Emergency Response Quest",
+      "lines": [
+        {
+          "html": "Using the lab floor map, physically walk to every emergency response item in the building. Each has a Lord of the Rings code name on white painter&#x27;s tape. Enter code names as your answers.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Items: Class ABC fire extinguisher · Sand bucket · Fire alarm · Eye wash station + shower · Chemical spill kit · First aid kit · AED · Calgonate Gel (HF spills)",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://forms.gle/BXydnqvcbinGpudG8\" target=\"_blank\" rel=\"noopener noreferrer\">→ Open Emergency Response Quest</a>",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 7,
+      "section": "safety",
+      "name": "Emergency Response Quest",
+      "sourceTitle": "3.7 — Emergency Response Quest"
+    },
+    {
+      "id": "first-experiment-risk-assessment",
+      "title": "3.10 — First Experiment Risk Assessment",
+      "lines": [
+        {
+          "html": "Before you begin a new experiment, you MUST complete the Boettcher Lab Risk Assessment Form with your mentor. The form covers hazards, likelihood and severity ratings, and contingency plans.",
+          "list": false,
+          "location": "all",
+          "roles": [
+            "undergrad",
+            "grad"
+          ]
+        },
+        {
+          "html": "Complete a risk assessment each time you do something new that carries a hazard of injury -- not just your first time. Post the completes form in Slack #RiskAssessments",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Any experiment scoring above 15 (Extreme risk) requires Shannon’s signature before it begins.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://docs.google.com/document/d/1dQYLk5eyWDl_IlVBrkAW8bfh0C7eBA2N4qjeKI_Y-bc/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">→ Open Risk Assessment Form</a>",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": [
+        "grad",
+        "undergrad"
+      ],
+      "condition": "always",
+      "signoff": 10,
+      "section": "safety",
+      "name": "First experiment risk assessment",
+      "sourceTitle": "3.10 — First Experiment Risk Assessment"
+    },
+    {
+      "id": "cryogen-safety",
+      "name": "Cryogen safety training (EHS 109)",
+      "section": "safety",
+      "location": "ucb",
+      "roles": "all",
+      "condition": "cryogens",
+      "lines": [
+        {
+          "html": "If working with cryogens at UC Berkeley, complete <strong>EHS 109 — Cryogens Safety</strong> in the UC Learning Center before this work. Verify facility-specific requirements with your supervisor.",
+          "list": false
+        }
+      ],
+      "signoff": null
+    },
+    {
+      "id": "compressed-gas-safety",
+      "name": "Compressed gas safety training (EHS 111)",
+      "section": "safety",
+      "location": "ucb",
+      "roles": "all",
+      "condition": "gases",
+      "lines": [
+        {
+          "html": "If working with compressed gases at UC Berkeley, complete <strong>EHS 111 — Compressed Gas Safety</strong> in the UC Learning Center before this work.",
+          "list": false
+        }
+      ],
+      "signoff": null
+    },
+    {
+      "id": "piranha-training",
+      "name": "Specialized Piranha solution training",
+      "section": "safety",
+      "location": "ucb",
+      "roles": "all",
+      "condition": "piranha",
+      "lines": [
+        {
+          "html": "Contact Meg Takezawa for specific training and approval before handling or disposing of Piranha solution. Follow the current SOP, hazard assessment, and chemical-specific glove compatibility guidance.",
+          "list": false
+        }
+      ],
+      "signoff": null
+    },
+    {
+      "id": "lab-citizenship-and-chemical-labeling",
+      "title": "Lab Norms & Housekeeping",
+      "lines": [
+        {
+          "html": "Chemical labeling: Every container must be labeled with your initials, the date, and the contents — described in enough detail that a stranger could identify the substance without guessing. Unlabeled chemicals result in heavy fines and costly disposal. We have had many instances of forgotten unknown chemicals. No exceptions.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Lost and found: If you find something lying around the lab, put it in the lost and found. It is cleared after each group clean-up — anything unclaimed by then is gone.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "logistics",
+      "name": "Lab citizenship and chemical labeling",
+      "sourceTitle": "Lab Norms & Housekeeping"
+    },
+    {
+      "id": "tan-hall-group-cleanup",
+      "title": "Group Cleanup",
+      "lines": [
+        {
+          "html": "Group cleanup takes place every other Friday in Tan 2 and Tan 3 (campus members). If you have a specific task that you would like to help with, inform Sree and Martha in advance. Otherwise, they will assign you a task. All group members must be present for the entire group clean up.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "logistics",
+      "name": "Tan Hall group cleanup",
+      "sourceTitle": "Group Cleanup"
+    },
+    {
+      "id": "uc-berkeley-chemical-inventory-rss-and-quest",
+      "title": "3.8 — Chemical Inventory Quest",
+      "lines": [
+        {
+          "html": "RSS inventory: All UCB lab members must add new chemicals promptly when they arrive and delete containers as soon as emptied.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Log in to the RSS Chemical Inventory App at <a href=\"https://app.riskandsafety.com\" target=\"_blank\" rel=\"noopener noreferrer\">app.riskandsafety.com</a> using your @berkeley.edu email. Download the mobile app for barcode scanning (<a href=\"https://apps.apple.com/us/app/risk-safety-solutions/id1049868338\" target=\"_blank\" rel=\"noopener noreferrer\">iOS</a> · <a href=\"https://play.google.com/store/apps/details?id=com.riskandsafety.rss\" target=\"_blank\" rel=\"noopener noreferrer\">Android</a>). See also the <a href=\"https://ehs.berkeley.edu/safety-subjects/chemical-safety/chemical-inventory\" target=\"_blank\" rel=\"noopener noreferrer\">EHS RSS Inventory Tutorial</a>. If the lab inventory doesn&#x27;t appear, email Matthew Zoerb (matthew.zoerb@berkeley.edu) to be added to the roster.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "You can also browse the Lab Chemical Inventory Spreadsheet (link pending) to familiarize yourself with what&#x27;s on the shelves.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "The quest has two parts:",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Part A — App tasks: Search a chemical and read its hazards · Add a test container · Delete the test container. Show each step to your trainer live.",
+          "list": true,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Part B — Scavenger hunt: Find each chemical storage location; each has a Pokémon code name on white tape.",
+          "list": true,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "→ Open Chemical Inventory Quest (link pending)",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 8,
+      "section": "logistics",
+      "name": "UC Berkeley chemical inventory (RSS) and quest",
+      "sourceTitle": "3.8 — Chemical Inventory Quest"
+    },
+    {
+      "id": "lbnl-chemical-management",
+      "name": "LBNL chemical inventory (CMS)",
+      "section": "logistics",
+      "location": "lbnl",
+      "roles": "all",
+      "condition": "always",
+      "lines": [
+        {
+          "html": "LBNL members use the <a href=\"https://ehs.lbl.gov/resource/apps-databases/chemical-management-system-cms\" target=\"_blank\" rel=\"noopener noreferrer\">Chemical Management System (CMS)</a> instead of the UCB RSS inventory quest. Confirm the required inventory orientation and access with your LBNL supervisor.",
+          "list": false
+        }
+      ],
+      "signoff": null
+    },
+    {
+      "id": "waste-compliance-and-disposal-rules",
+      "title": "2.2 — Waste Compliance",
+      "lines": [
+        {
+          "html": "Waste handling requirements are covered in the Waste Disposal Quest (3.9) and during your lab walk-through (3.4). Detailed compliance rules are covered in EHS 105.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "For full guidance on labeling, storage, accumulation limits, pickup requests, and waste categories (chemical, sharps, universal waste), read the <a href=\"https://docs.google.com/document/d/1PXDiYrRuzuyBB_32CXQ5Gp9rUqSOWUxPddKNDb8vn_w/edit?tab=t.0\" target=\"_blank\" rel=\"noopener noreferrer\">UCB Hazardous Waste Management Fact Sheet</a>. Use <a href=\"https://app.ehs.berkeley.edu/hwp\" target=\"_blank\" rel=\"noopener noreferrer\">app.ehs.berkeley.edu/hwp</a> to create waste labels and submit pickup requests.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": null,
+      "section": "logistics",
+      "name": "Waste compliance and disposal rules",
+      "sourceTitle": "2.2 — Waste Compliance"
+    },
+    {
+      "id": "waste-disposal-quest-and-eh-s-labels",
+      "title": "3.9 — Waste Disposal Quest",
+      "lines": [
+        {
+          "html": "Proper waste disposal is a legal requirement. First declare your expected waste streams, then find all waste containers. Create EH&amp;S waste tags whenever a container approaches capacity — don&#x27;t wait until it&#x27;s full.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Common waste streams in this lab: aqueous heavy metals (Ni, Co, Cu, Fe, Cr, V, Ba) · platinum group metals (recoverable — separate stream) · strong acids · strong bases · strong oxidizers · non-halogenated flammable solvents · halogenated solvents · contaminated solids / wipes · sharps and broken glass",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Each waste location has a code name on white tape. When a container is full, label it before EH&amp;S pickup:",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://app.ehs.berkeley.edu/hwp\" target=\"_blank\" rel=\"noopener noreferrer\">→ Create an EH&amp;S Waste Label</a>",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "→ Open Waste Disposal Quest (link pending)",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "always",
+      "signoff": 9,
+      "section": "logistics",
+      "name": "Waste Disposal Quest and EH&S labels",
+      "sourceTitle": "3.9 — Waste Disposal Quest"
+    },
+    {
+      "id": "lbnl-waste",
+      "name": "LBNL waste management orientation",
+      "section": "logistics",
+      "location": "lbnl",
+      "roles": "all",
+      "condition": "always",
+      "lines": [
+        {
+          "html": "Before generating or disposing of waste at LBNL, receive facility-specific waste segregation, labeling, accumulation, and pickup instructions from your LBNL supervisor or EHS contact. Campus EH&S waste labeling procedures do not automatically apply at LBNL.",
+          "list": false
+        }
+      ],
+      "signoff": null
+    },
+    {
+      "id": "potentiostat-orientation-and-etiquette",
+      "title": "4.1 — Potentiostat Orientation",
+      "lines": [
+        {
+          "html": "Read the full <a href=\"https://drive.google.com/file/d/1-wHL_3X9mDEhFgI-o2C_kM1AFsW10DHe/view?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Boettcher Lab Potentiostat Etiquette Guide</a> before using any potentiostat. Key rules:",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Reserve channels on the lab Google Calendar (boettcherlab gmail) — include your name, potentiostat name, and channel(s). [GRAD/POSTDOC] Mentors must be named in the reservation; mentees cannot book independently.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "If you haven&#x27;t started within 30 minutes of your booking, the channel is open to anyone.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Max 3 Biologic channels per person at once; max 100 hours back-to-back.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "For long experiments (100+ hrs) not requiring continuous EIS, use a Squidstat or other power supply first — not a Biologic.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "After a 100-hour block, you may not rebook that channel for 3 days.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Conflicts → speak to the people involved first. If unresolved, contact the current Potentiostat Governor.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Your trainer will walk through cell assembly, electrode handling, electrolyte degassing, gas line use, and emergency shutdown.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "potentiostat",
+      "signoff": 11,
+      "section": "equipment",
+      "name": "Potentiostat orientation and etiquette",
+      "sourceTitle": "4.1 — Potentiostat Orientation"
+    },
+    {
+      "id": "other-instrument-and-facility-training",
+      "title": "4.2 — Other Instrument Training",
+      "lines": [
+        {
+          "html": "For B30 equipment at Chu Hall (SEM, XPS, major instruments), ask Yang for access to the equipment lists and ensure you are added to the relevant WPCs before training.",
+          "list": false,
+          "location": "lbnl",
+          "roles": "all"
+        },
+        {
+          "html": "Add instrument-specific training here as your project develops. Each new instrument requires sign-off from the responsible lab member before independent use.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "instruments",
+      "signoff": null,
+      "section": "equipment",
+      "name": "Other instrument and facility training",
+      "sourceTitle": "4.2 — Other Instrument Training"
+    },
+    {
+      "id": "gas-cylinder-ordering-and-dewars",
+      "title": "4.3 — Gas Cylinders & Dewars",
+      "lines": [
+        {
+          "html": "The two most common gas suppliers for UC Berkeley labs are Airgas and Linde-Praxair — both deliver directly to the lab. See the <a href=\"https://drive.google.com/file/d/1lXMHrwPW0uRBrFvAL5uLEbAjNtVU9KMO/view?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Airgas ordering instructions</a> for how to place an order. Ask Yang for the correct speedtype before ordering.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "ucb",
+      "roles": "all",
+      "condition": "gases",
+      "signoff": null,
+      "section": "equipment",
+      "name": "Gas cylinder ordering and Dewars",
+      "sourceTitle": "4.3 — Gas Cylinders & Dewars"
+    },
+    {
+      "id": "bakar-nanoengineering-center-bnc",
+      "title": "4.4 — BNC Facility",
+      "lines": [
+        {
+          "html": "The Bakar NanoEngineeering Center (BNC) has shared equipment including SEM, metal deposition tools, and more. Access requires separate training and registration.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Link to BNC equipment: (link pending)",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "bnc",
+      "signoff": null,
+      "section": "equipment",
+      "name": "Bakar NanoEngineering Center (BNC)",
+      "sourceTitle": "4.4 — BNC Facility"
+    }
+  ],
+  "resources": [
+    {
+      "label": "Lab Floor Map",
+      "display": "<a href=\"https://docs.google.com/presentation/d/1_fYEPd2Rz0mn66kidahSieNFR5qkvVeJvbubRvSQ2Dw/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Floor Map</a>",
+      "missing": false
+    },
+    {
+      "label": "Lab Chemical Inventory Spreadsheet",
+      "display": "<a href=\"https://docs.google.com/spreadsheets/d/11Cd8lXPrM9p8zfYp1xj6KzO5DKMiEF7X/edit?usp=sharing&amp;ouid=105583035705962912869&amp;rtpof=true&amp;sd=true\" target=\"_blank\" rel=\"noopener noreferrer\">11-13-2026 Updated Inventory</a>",
+      "missing": false
+    },
+    {
+      "label": "RSS Chemical Inventory App",
+      "display": "<a href=\"https://app.riskandsafety.com\" target=\"_blank\" rel=\"noopener noreferrer\">app.riskandsafety.com</a>",
+      "missing": false
+    },
+    {
+      "label": "EH&S Waste Label Creation",
+      "display": "<a href=\"https://app.ehs.berkeley.edu/hwp\" target=\"_blank\" rel=\"noopener noreferrer\">app.ehs.berkeley.edu/hwp</a>",
+      "missing": false
+    },
+    {
+      "label": "Signals Notebook (ELN)",
+      "display": "Included with UCB account — ask Shannon",
+      "missing": false
+    },
+    {
+      "label": "Potentiostat Etiquette Guide",
+      "display": "<a href=\"https://drive.google.com/file/d/1-wHL_3X9mDEhFgI-o2C_kM1AFsW10DHe/view?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Open guide</a>",
+      "missing": false
+    },
+    {
+      "label": "Chemical Hygiene Plan",
+      "display": "(add link)",
+      "missing": true
+    },
+    {
+      "label": "Risk Assessment Form",
+      "display": "<a href=\"https://docs.google.com/document/d/1dQYLk5eyWDl_IlVBrkAW8bfh0C7eBA2N4qjeKI_Y-bc/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Open form</a>",
+      "missing": false
+    },
+    {
+      "label": "Emergency Response Quest",
+      "display": "<a href=\"https://forms.gle/BXydnqvcbinGpudG8\" target=\"_blank\" rel=\"noopener noreferrer\">forms.gle/BXydnqvcbinGpudG8</a>",
+      "missing": false
+    },
+    {
+      "label": "Chemical Inventory Quest",
+      "display": "(in progress)",
+      "missing": true
+    },
+    {
+      "label": "Waste Disposal Quest",
+      "display": "(in progress)",
+      "missing": true
+    },
+    {
+      "label": "UC Learning Center (EHS trainings)",
+      "display": "<a href=\"https://uc.sumtotal.host/rcore/c/dash/home?domain=4&amp;isDeepLink=1\" target=\"_blank\" rel=\"noopener noreferrer\">uc.sumtotal.host</a>",
+      "missing": false
+    },
+    {
+      "label": "Lab Coat Fitting",
+      "display": "<a href=\"https://calppe.simplybook.me/v2/\" target=\"_blank\" rel=\"noopener noreferrer\">calppe.simplybook.me</a>",
+      "missing": false
+    },
+    {
+      "label": "BearBuy",
+      "display": "<a href=\"https://supplychain.berkeley.edu/bearbuy\" target=\"_blank\" rel=\"noopener noreferrer\">supplychain.berkeley.edu/bearbuy</a>",
+      "missing": false
+    },
+    {
+      "label": "Berkeley VPN",
+      "display": "<a href=\"https://security.berkeley.edu/services/bsecure/bsecure-remote-access-vpn\" target=\"_blank\" rel=\"noopener noreferrer\">bSecure VPN</a>",
+      "missing": false
+    },
+    {
+      "label": "LBNL Training System",
+      "display": "<a href=\"https://training.lbl.gov\" target=\"_blank\" rel=\"noopener noreferrer\">training.lbl.gov</a>",
+      "missing": false
+    },
+    {
+      "label": "LBNL WPC",
+      "display": "<a href=\"http://wpc.lbl.gov\" target=\"_blank\" rel=\"noopener noreferrer\">wpc.lbl.gov</a>",
+      "missing": false
+    },
+    {
+      "label": "LBNL Chemical Management System",
+      "display": "<a href=\"https://ehs.lbl.gov/resource/apps-databases/chemical-management-system-cms/\" target=\"_blank\" rel=\"noopener noreferrer\">ehs.lbl.gov/resource/apps-databases/chemical-management-system-cms</a>",
+      "missing": false
+    },
+    {
+      "label": "LBNL Building Access Request",
+      "display": "<a href=\"https://securityandemergencyservices.lbl.gov/service/badging/buildingaccess/\" target=\"_blank\" rel=\"noopener noreferrer\">securityandemergencyservices.lbl.gov</a>",
+      "missing": false
+    },
+    {
+      "label": "Boettcher Internal Site",
+      "display": "<a href=\"https://sites.google.com/berkeley.edu/boettcher-internal/home?authuser=0\" target=\"_blank\" rel=\"noopener noreferrer\">Open site</a>",
+      "missing": false
+    },
+    {
+      "label": "Hazardous Waste Fact Sheet",
+      "display": "<a href=\"https://docs.google.com/document/d/1PXDiYrRuzuyBB_32CXQ5Gp9rUqSOWUxPddKNDb8vn_w/edit?tab=t.0\" target=\"_blank\" rel=\"noopener noreferrer\">Open fact sheet</a>",
+      "missing": false
+    },
+    {
+      "label": "Lab Printing Instructions",
+      "display": "<a href=\"https://drive.google.com/file/d/1lXMHrwPW0uRBrFvAL5uLEbAjNtVU9KMO/view?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Open instructions</a>",
+      "missing": false
+    },
+    {
+      "label": "Gas Cylinders (Airgas ordering)",
+      "display": "<a href=\"https://drive.google.com/file/d/1lXMHrwPW0uRBrFvAL5uLEbAjNtVU9KMO/view?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Open instructions</a>",
+      "missing": false
+    }
+  ],
+  "contacts": [
+    {
+      "role": "Group Coordinator",
+      "name": "Yang Zhao",
+      "email": "yangzhao0105@berkeley.edu",
+      "responsibility": "Calendar, Slack, mailing list, Drive, desk/bench, LBNL WPC, purchasing speedtype"
+    },
+    {
+      "role": "Chemical Inventory",
+      "name": "Matthew Zoerb",
+      "email": "matthew.zoerb@berkeley.edu",
+      "responsibility": "RSS access + training, L@B roster, inventory training"
+    },
+    {
+      "role": "Lab Safety Officer",
+      "name": "Yang Zhao",
+      "email": "yangzhao0105@berkeley.edu",
+      "responsibility": "Overall safety, EHS inspection coordination"
+    },
+    {
+      "role": "Safety Walk-Through",
+      "name": "Wenbo Zhang",
+      "email": "wen_zhang@berkeley.edu",
+      "responsibility": "Walk-through, EHS transcript review, SOP handbook sign-off"
+    },
+    {
+      "role": "Hazardous Waste — Tan 2",
+      "name": "Meg Takezawa",
+      "email": "meg_takezawa@berkeley.edu",
+      "responsibility": "Waste management and pickup, Piranha training"
+    },
+    {
+      "role": "Hazardous Waste — Tan 3",
+      "name": "Richik Haldar",
+      "email": "richikhaldar25@berkeley.edu",
+      "responsibility": "Waste management and pickup"
+    },
+    {
+      "role": "Potentiostat Governor",
+      "name": "Catherine Wallace",
+      "email": "cswallace@berkeley.edu",
+      "responsibility": "Potentiostat scheduling conflicts"
+    },
+    {
+      "role": "Purchasing Officer",
+      "name": "Jihan Zhang",
+      "email": "jihan_zhang@berkeley.edu",
+      "responsibility": "AEM/BPM purchasing orders"
+    },
+    {
+      "role": "Snacks Manager",
+      "name": "Jihan Zhang",
+      "email": "",
+      "responsibility": "Group meeting snacks"
+    },
+    {
+      "role": "Website",
+      "name": "Nicole Sagui",
+      "email": "",
+      "responsibility": "Public group website profiles"
+    },
+    {
+      "role": "Intro Talk",
+      "name": "Yiwen Sun",
+      "email": "yiwen_sun74@berkeley.edu",
+      "responsibility": "20-min intro talk scheduling [GRAD/POSTDOC]"
+    },
+    {
+      "role": "Packages + Cardboard",
+      "name": "All visiting students",
+      "email": "",
+      "responsibility": "Bring cardboard boxes downstairs and bring packages up from the shipping bay."
+    },
+    {
+      "role": "PI",
+      "name": "Shannon Boettcher",
+      "email": "boettcher@berkeley.edu",
+      "responsibility": ""
+    }
+  ],
+  "trainings": [
+    {
+      "course": "EHS 101 / EHS 103",
+      "title": "Lab Safety Fundamentals (101 = initial; 103 = refresher)",
+      "frequency": "Every 3 years",
+      "notes": ""
+    },
+    {
+      "course": "EHS 105",
+      "title": "Hazardous Waste Program (HWP)",
+      "frequency": "One time",
+      "notes": "Required before disposing any waste"
+    },
+    {
+      "course": "EHS 106",
+      "title": "Hazardous Materials Spill Response",
+      "frequency": "Annual",
+      "notes": ""
+    },
+    {
+      "course": "EHS 502",
+      "title": "Workplace Safety Program (WSP)",
+      "frequency": "One time",
+      "notes": ""
+    },
+    {
+      "course": "EHS 506",
+      "title": "Fire Extinguisher for Labs",
+      "frequency": "One time",
+      "notes": ""
+    },
+    {
+      "course": "EHS 109",
+      "title": "Cryogens Safety",
+      "frequency": "One time",
+      "notes": "If working with cryogens"
+    },
+    {
+      "course": "EHS 111",
+      "title": "Compressed Gas Safety",
+      "frequency": "One time",
+      "notes": "If working with any compressed gases"
+    }
+  ],
+  "signatures": [
+    {
+      "number": "1",
+      "label": "LHAT acknowledged + lab coat fitting booked"
+    },
+    {
+      "number": "2",
+      "label": "EHS required online trainings completed"
+    },
+    {
+      "number": "3",
+      "label": "Chemical Hygiene Plan read + all SOPs signed"
+    },
+    {
+      "number": "4",
+      "label": "Physical lab walk-through"
+    },
+    {
+      "number": "5",
+      "label": "PPE fitting and gloves selection"
+    },
+    {
+      "number": "6",
+      "label": "Fume hood training and airflow check"
+    },
+    {
+      "number": "7",
+      "label": "Emergency Response Quest"
+    },
+    {
+      "number": "8",
+      "label": "Chemical Inventory Quest"
+    },
+    {
+      "number": "9",
+      "label": "Waste Disposal Quest"
+    },
+    {
+      "number": "10",
+      "label": "1st Experiment Risk Assessment Form"
+    },
+    {
+      "number": "11",
+      "label": "Potentiostat orientation (if needed)"
+    }
+  ],
+  "intro": [
+    {
+      "html": "Now that you know how to be safe, it is equally important to know how to be a good lab citizen. This phase covers lab norms and housekeeping, then walks you through the signed safety training steps required before independent work.",
+      "list": false,
+      "position": 82,
+      "location": "all",
+      "roles": "all"
+    },
+    {
+      "html": "Read the <a href=\"https://docs.google.com/document/d/1zt2NizQI1uUIvCRMQmV2SHacfpcgcAqK/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Group Philosophy Guide</a> before your first week. It covers Shannon&#x27;s expectations on research culture, work-life balance, communication, safety, and what it means to be a good lab member.",
+      "list": false,
+      "position": 83,
+      "location": "all",
+      "roles": "all"
+    }
+  ]
+}
