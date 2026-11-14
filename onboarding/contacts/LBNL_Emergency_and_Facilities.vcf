@@ -1,0 +1,35 @@
+BEGIN:VCARD
+VERSION:3.0
+N:;LBNL Emergency & Facilities;;;
+FN:LBNL Emergency & Facilities
+ORG:Lawrence Berkeley National Laboratory
+item1.TEL;TYPE=WORK,VOICE:911
+item1.X-ABLabel:Life-threatening emergency — police / fire / ambulance
+item2.TEL;TYPE=WORK,VOICE:+15104866999
+item2.X-ABLabel:Site Operations Center — 24/7 non-emergency / urgent faci
+ lities
+item3.TEL;TYPE=WORK,VOICE:+15104866266
+item3.X-ABLabel:Health Services — injuries / medical
+item4.TEL;TYPE=WORK,VOICE:+15104866274
+item4.X-ABLabel:Facilities Support Hotline — business hours
+item5.TEL;TYPE=WORK,VOICE:+15104866515
+item5.X-ABLabel:Off-hours Facilities Area Manager
+item6.TEL;TYPE=WORK,VOICE:+18004455830
+item6.X-ABLabel:Emergency Status Information Line
+item7.TEL;TYPE=WORK,VOICE:+15104864000
+item7.X-ABLabel:Berkeley Lab main number
+item8.TEL;TYPE=WORK,VOICE:+15104864165
+item8.X-ABLabel:Shuttle / Bus Services
+item9.EMAIL;TYPE=INTERNET,WORK:SOC@lbl.gov
+item9.X-ABLabel:Site Operations Center
+item10.EMAIL;TYPE=INTERNET,WORK:wrc@lbl.gov
+item10.X-ABLabel:Facilities Work Request Center
+item11.EMAIL;TYPE=INTERNET,WORK:HealthServices@lbl.gov
+item11.X-ABLabel:Health Services
+item12.EMAIL;TYPE=INTERNET,WORK:emergencymanagement@lbl.gov
+item12.X-ABLabel:Emergency Management
+item13.EMAIL;TYPE=INTERNET,WORK:BusServices@lbl.gov
+item13.X-ABLabel:Shuttle / Bus Services
+URL:https://securityandemergencyservices.lbl.gov/service/em/berkeley-lab-no
+ tify/
+END:VCARD
