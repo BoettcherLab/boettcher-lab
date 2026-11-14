@@ -61,6 +61,12 @@
           "list": false,
           "location": "lbnl",
           "roles": "all"
+        },
+        {
+          "html": "LBNL Shuttle Tracking Website: <a href=\"https://lbnl.tripshot.com/\" target=\"_blank\" rel=\"noopener noreferrer\">https://lbnl.tripshot.com/</a>",
+          "list": false,
+          "location": "lbnl",
+          "roles": "all"
         }
       ],
       "location": "lbnl",
