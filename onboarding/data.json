@@ -747,7 +747,7 @@
           ]
         },
         {
-          "html": "Complete a risk assessment each time you do something new that carries a hazard of injury -- not just your first time. Post the completes form in Slack #RiskAssessments",
+          "html": "Complete a risk assessment each time you do something new that carries a hazard of injury -- not just your first time. Post the completes form in Slack #risk-assessments",
           "list": false,
           "location": "all",
           "roles": "all"
