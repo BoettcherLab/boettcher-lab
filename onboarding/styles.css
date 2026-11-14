@@ -12,3 +12,6 @@
 
 /* Emergency and facilities contacts: compact table with blank lab phone spaces */
 #emergency-contacts{scroll-margin-top:120px}.emergency-alert{padding:8px 10px;border-left:3px solid #002a54;background:#f1f4f7;margin:10px 0 15px}.emergency-table{font-size:13px}.emergency-table th,.emergency-table td{padding:8px 10px;line-height:1.4}.emergency-table td:nth-child(3){min-width:156px}.phone-blank{display:inline-block;white-space:nowrap;color:#777;letter-spacing:.5px}.contact-note{font-size:12px;color:#555}
+
+/* WCGW — shared troubleshooting and incident-learning issue board */
+#wcgw{scroll-margin-top:135px}.wcgw-form{display:grid;gap:13px;margin:15px 0}.wcgw-form label{display:grid;gap:5px;font-weight:600}.wcgw-form input,.wcgw-form select,.wcgw-form textarea{font:inherit;min-width:0;width:100%;border:1px solid #aaa;background:#fff;color:#222;border-radius:2px;padding:8px 10px;font-weight:400}.wcgw-form textarea{resize:vertical}.wcgw-form button{justify-self:start}.wcgw-inline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.wcgw-footnote{font-size:12px;color:#555;margin:10px 0}.wcgw-table td,.wcgw-table th{padding:8px 10px}@media(max-width:720px){.wcgw-inline{grid-template-columns:1fr}}
