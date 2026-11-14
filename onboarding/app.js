@@ -46,7 +46,6 @@ function render(){
  }
  $('#phases').innerHTML=page;
  $('#phases').querySelectorAll('details[data-task]').forEach(el=>{el.open=openedTasks.has(el.dataset.task)});
- $('#contact-rows').innerHTML=data.contacts.map(c=>'<tr><td>'+esc(c.role)+'</td><td>'+esc(c.name)+'</td><td>'+(c.email?'<a href="mailto:'+esc(c.email)+'">'+esc(c.email)+'</a>':'')+'</td><td>'+esc(c.responsibility)+'</td></tr>').join('');
  $('#resource-rows').innerHTML=data.resources.map(r=>'<tr><td>'+esc(r.label)+'</td><td>'+r.display+'</td></tr>').join('');
  $('#signature-preview').innerHTML=signatureHtml();
  progress();
