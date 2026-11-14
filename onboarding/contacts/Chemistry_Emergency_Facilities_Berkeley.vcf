@@ -1,0 +1,33 @@
+BEGIN:VCARD
+VERSION:3.0
+N:;Chemistry Emergency & Facilities @ Berkeley;;;
+FN:Chemistry Emergency & Facilities @ Berkeley
+ORG:UC Berkeley Chemistry
+item1.TEL;TYPE=WORK,VOICE:911
+item1.X-ABLabel:Life-threatening emergency — police / fire / ambulance
+item2.TEL;TYPE=WORK,VOICE:+15106423333
+item2.X-ABLabel:UCPD — emergency (cell / off campus)
+item3.TEL;TYPE=WORK,VOICE:+15106426760
+item3.X-ABLabel:UCPD — non-emergency / after hours
+item4.TEL;TYPE=WORK,VOICE:+15106423073
+item4.X-ABLabel:Campus EH&S — urgent response / spills
+item5.TEL;TYPE=WORK,VOICE:+15106436060
+item5.X-ABLabel:College of Chemistry — Building Management / urgent facil
+ ities
+item6.TEL;TYPE=WORK,VOICE:+15106421032
+item6.X-ABLabel:Campus Facilities Services — after-hours / 24-7
+item7.TEL;TYPE=WORK,VOICE:+15104470307
+item7.X-ABLabel:CoC Facilities Operations & Research Safety — Senior Assi
+ stant Dean
+item8.TEL;TYPE=WORK,VOICE:+15106430648
+item8.X-ABLabel:College Research Safety — incident reporting
+item9.TEL;TYPE=WORK,VOICE:+15106434220
+item9.X-ABLabel:College Building Management Unit — follow-up message
+item10.TEL;TYPE=WORK,VOICE:+15106426891
+item10.X-ABLabel:Occupational Health — workplace injury / exposure
+item11.TEL;TYPE=WORK,VOICE:+15106423188
+item11.X-ABLabel:Tang Center — urgent care / UC Berkeley employees
+item12.TEL;TYPE=WORK,VOICE:+15106427197
+item12.X-ABLabel:Tang Center — Advice Nurse (manual)
+URL:https://chemistry.berkeley.edu/research-safety/manual/section-10
+END:VCARD
