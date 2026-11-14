@@ -322,7 +322,7 @@
           ]
         },
         {
-          "html": "Ask Yang which speedtype to use (finalize your research plan with Shannon first)",
+          "html": "Find your assigned speedtype in the <a href=\"https://docs.google.com/spreadsheets/d/10JSOmpkA9MbAl59Z_J0-FoDNwpFc48jA1itPwIeRje4/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">Index Information Spreadsheet</a> (finalize your research plan with Shannon first). Ask Yang if you need clarification.",
           "list": true,
           "location": "all",
           "roles": [
@@ -1274,6 +1274,16 @@
     {
       "label": "Group Philosophy Guide",
       "display": "<a href=\"https://docs.google.com/document/d/1zt2NizQI1uUIvCRMQmV2SHacfpcgcAqK/edit?usp=sharing&amp;ouid=105583035705962912869&amp;rtpof=true&amp;sd=true\" target=\"_blank\" rel=\"noopener noreferrer\">Open guide</a>",
+      "missing": false
+    },
+    {
+      "label": "Index Information Spreadsheet",
+      "display": "<a href=\"https://docs.google.com/spreadsheets/d/10JSOmpkA9MbAl59Z_J0-FoDNwpFc48jA1itPwIeRje4/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">Open spreadsheet</a>",
+      "missing": false
+    },
+    {
+      "label": "Current Group Jobs Spreadsheet",
+      "display": "<a href=\"https://docs.google.com/spreadsheets/d/1Z7RrsoEdxLm7JeBpL2ujAhubBuPMMLZ0RDjtRDfDG5k/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">Open spreadsheet</a>",
       "missing": false
     }
   ],
