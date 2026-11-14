@@ -34,13 +34,15 @@ function render(){
   const s=sections[i],tasks=tasksFor(s.id);
   page+='<section class="phase" id="phase-'+s.id+'"><details class="phase-details" '+(closedPhases.has('phase-'+s.id)?'':'open')+'><summary class="phase-heading">Phase '+roman[i]+' — '+esc(names[s.id])+'</summary><div class="phase-content">';
   if(s.id==='administration') page+='<p>Complete these before your first day in the lab and as soon as possible. Most can be done remotely.</p>';
-  if(s.id==='logistics')page+='<p>Read the Group Philosophy Guide before your first week. It covers Shannon&#39;s expectations on research culture, work-life balance, communication, safety, and what it means to be a good lab member.</p>';
+  if(s.id==='logistics')page+='<p>Read the <a href="https://docs.google.com/document/d/1zt2NizQI1uUIvCRMQmV2SHacfpcgcAqK/edit?usp=sharing&amp;ouid=105583035705962912869&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer">Group Philosophy Guide</a> before your first week. It covers Shannon&#39;s expectations on research culture, work-life balance, communication, safety, and what it means to be a good lab member.</p>';
   page+='<div class="table-scroll"><table class="task-table"><thead><tr><th>#</th><th>Section / Instructions</th><th>Done</th></tr></thead><tbody>';
   tasks.forEach((t,j)=>{
    const title=(t.sourceTitle||t.title||t.name).replace(/^\d+\.\d+\s*[—–-]\s*/, '');
    page+='<tr><td class="number">'+(j+1)+'</td><td><details data-task="'+esc(t.id)+'"><summary>'+esc(title)+'</summary><div class="instructions">'+taskText(t)+'</div></details></td><td class="check-col"><input type="checkbox" aria-label="Mark '+esc(title)+' complete" data-check="'+esc(t.id)+'" '+(saved.complete[t.id]?'checked':'')+'></td></tr>';
   });
-  page+='</tbody></table></div></div></details></section>';
+  page+='</tbody></table></div>';
+  if(s.id==='equipment')page+='<h3>Equipment / Instrument Trainers</h3><div class="table-scroll"><table class="equipment-table"><thead><tr><th>Equipment / Instrument</th><th>Designated Trainer</th></tr></thead><tbody>'+data.equipmentTrainers.map(t=>'<tr><td>'+esc(t.instrument)+'</td><td>'+esc(t.trainer)+'</td></tr>').join('')+'</tbody></table></div>';
+  page+='</div></details></section>';
  }
  $('#phases').innerHTML=page;
  $('#phases').querySelectorAll('details[data-task]').forEach(el=>{el.open=openedTasks.has(el.dataset.task)});
