@@ -25,12 +25,14 @@ function taskText(t){
 }
 function tasksFor(s){return applicable().filter(t=>t.section===s)}
 function render(){
+ const closedPhases=new Set([...document.querySelectorAll('.phase-details:not([open])')].map(el=>el.closest('.phase')?.id));
+ const openedTasks=new Set([...document.querySelectorAll('details[data-task][open]')].map(el=>el.dataset.task));
  const sections=data.sections;
  $('#phase-nav').innerHTML=sections.map((s,i)=>'<a href="#phase-'+s.id+'">'+roman[i]+'. '+esc(names[s.id])+'</a>').join('');
  let page='';
  for(let i=0;i<sections.length;i++){
   const s=sections[i],tasks=tasksFor(s.id);
-  page+='<section class="phase" id="phase-'+s.id+'"><h2>Phase '+roman[i]+' — '+esc(names[s.id])+'</h2>';
+  page+='<section class="phase" id="phase-'+s.id+'"><details class="phase-details" '+(closedPhases.has('phase-'+s.id)?'':'open')+'><summary class="phase-heading">Phase '+roman[i]+' — '+esc(names[s.id])+'</summary><div class="phase-content">';
   if(s.id==='administration') page+='<p>Complete these before your first day in the lab and as soon as possible. Most can be done remotely.</p>';
   if(s.id==='logistics')page+='<p>Read the Group Philosophy Guide before your first week. It covers Shannon&#39;s expectations on research culture, work-life balance, communication, safety, and what it means to be a good lab member.</p>';
   page+='<div class="table-scroll"><table class="task-table"><thead><tr><th>#</th><th>Section / Instructions</th><th>Done</th></tr></thead><tbody>';
@@ -38,15 +40,16 @@ function render(){
    const title=(t.sourceTitle||t.title||t.name).replace(/^\d+\.\d+\s*[—–-]\s*/, '');
    page+='<tr><td class="number">'+(j+1)+'</td><td><details data-task="'+esc(t.id)+'"><summary>'+esc(title)+'</summary><div class="instructions">'+taskText(t)+'</div></details></td><td class="check-col"><input type="checkbox" aria-label="Mark '+esc(title)+' complete" data-check="'+esc(t.id)+'" '+(saved.complete[t.id]?'checked':'')+'></td></tr>';
   });
-  page+='</tbody></table></div></section>';
+  page+='</tbody></table></div></div></details></section>';
  }
  $('#phases').innerHTML=page;
+ $('#phases').querySelectorAll('details[data-task]').forEach(el=>{el.open=openedTasks.has(el.dataset.task)});
  $('#contact-rows').innerHTML=data.contacts.map(c=>'<tr><td>'+esc(c.role)+'</td><td>'+esc(c.name)+'</td><td>'+(c.email?'<a href="mailto:'+esc(c.email)+'">'+esc(c.email)+'</a>':'')+'</td><td>'+esc(c.responsibility)+'</td></tr>').join('');
  $('#resource-rows').innerHTML=data.resources.map(r=>'<tr><td>'+esc(r.label)+'</td><td>'+r.display+'</td></tr>').join('');
  $('#signature-preview').innerHTML=signatureHtml();
  progress();
 }
-function progress(){const t=applicable(),n=t.filter(x=>saved.complete[x.id]).length;$('#progress').textContent=n+' / '+t.length+' complete';}
+function progress(){const t=applicable(),n=t.filter(x=>saved.complete[x.id]).length,pct=t.length?Math.round(100*n/t.length):0;$('#progress').textContent=n+' / '+t.length+' complete';$('#progressFill').style.width=pct+'%';$('#progressTrack').setAttribute('aria-valuenow',String(pct));}
 const ORIGINAL_ITEMS=[
 'LHAT acknowledged + lab coat fitting booked',
 'EHS required online trainings completed',
