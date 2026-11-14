@@ -35,7 +35,7 @@ function render(){
   if(s.id==='logistics')page+='<p>Read the Group Philosophy Guide before your first week. It covers Shannon&#39;s expectations on research culture, work-life balance, communication, safety, and what it means to be a good lab member.</p>';
   page+='<div class="table-scroll"><table class="task-table"><thead><tr><th>#</th><th>Section / Instructions</th><th>Done</th></tr></thead><tbody>';
   tasks.forEach((t,j)=>{
-   const title=t.sourceTitle||t.title||t.name;
+   const title=(t.sourceTitle||t.title||t.name).replace(/^\d+\.\d+\s*[—–-]\s*/, '');
    page+='<tr><td class="number">'+(j+1)+'</td><td><details data-task="'+esc(t.id)+'"><summary>'+esc(title)+'</summary><div class="instructions">'+taskText(t)+'</div></details></td><td class="check-col"><input type="checkbox" aria-label="Mark '+esc(title)+' complete" data-check="'+esc(t.id)+'" '+(saved.complete[t.id]?'checked':'')+'></td></tr>';
   });
   page+='</tbody></table></div></section>';
