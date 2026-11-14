@@ -1280,16 +1280,40 @@
       "responsibility": "RSS access + training, L@B roster, inventory training"
     },
     {
-      "role": "Lab Safety Officer",
+      "role": "Campus Safety Officer",
       "name": "Yang Zhao",
       "email": "yangzhao0105@berkeley.edu",
-      "responsibility": "Overall safety, EHS inspection coordination"
+      "responsibility": "Campus lab safety and EHS inspection coordination"
     },
     {
       "role": "Safety Walk-Through",
       "name": "Wenbo Zhang",
       "email": "wen_zhang@berkeley.edu",
       "responsibility": "Walk-through, EHS transcript review, SOP handbook sign-off"
+    },
+    {
+      "role": "Campus Safety Officer",
+      "name": "Martha",
+      "email": "",
+      "responsibility": "Campus lab safety guidance and training"
+    },
+    {
+      "role": "Campus Safety Officer",
+      "name": "Sree",
+      "email": "",
+      "responsibility": "Campus lab safety guidance and training"
+    },
+    {
+      "role": "Campus Safety Officer",
+      "name": "Matthew Zoerb",
+      "email": "matthew.zoerb@berkeley.edu",
+      "responsibility": "Campus lab safety guidance, chemical inventory and RSS"
+    },
+    {
+      "role": "Campus Safety Officer",
+      "name": "Wenbo Zhang",
+      "email": "wen_zhang@berkeley.edu",
+      "responsibility": "Campus lab safety guidance, walk-throughs, EHS training transcript review and SOP sign-off"
     },
     {
       "role": "Hazardous Waste — Tan 2",
@@ -1342,7 +1366,7 @@
     {
       "role": "PI",
       "name": "Shannon Boettcher",
-      "email": "boettcher@berkeley.edu",
+      "email": "",
       "responsibility": ""
     }
   ],
