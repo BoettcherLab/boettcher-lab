@@ -41,7 +41,7 @@ function render(){
    page+='<tr><td class="number">'+(j+1)+'</td><td><details data-task="'+esc(t.id)+'"><summary>'+esc(title)+'</summary><div class="instructions">'+taskText(t)+'</div></details></td><td class="check-col"><input type="checkbox" aria-label="Mark '+esc(title)+' complete" data-check="'+esc(t.id)+'" '+(saved.complete[t.id]?'checked':'')+'></td></tr>';
   });
   page+='</tbody></table></div>';
-  if(s.id==='equipment')page+='<h3>Equipment / Instrument Trainers</h3><div class="table-scroll"><table class="equipment-table"><thead><tr><th>Equipment / Instrument</th><th>Designated Trainer</th></tr></thead><tbody>'+data.equipmentTrainers.map(t=>'<tr><td>'+esc(t.instrument)+'</td><td>'+esc(t.trainer)+'</td></tr>').join('')+'</tbody></table></div>';
+  if(s.id==='equipment')page+='<p><a href="https://docs.google.com/spreadsheets/d/1ZQLSnmgJmGB6u2VnZDe9SOowm1mUqNwXzju2ESyFlTo/edit?gid=1956073340#gid=1956073340" target="_blank" rel="noopener noreferrer">Equipment Everywhere + Superuser Spreadsheet</a> — equipment list and designated superusers/trainers.</p>';
   page+='</div></details></section>';
  }
  $('#phases').innerHTML=page;
