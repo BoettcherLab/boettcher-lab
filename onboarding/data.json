@@ -1285,6 +1285,11 @@
       "label": "Current Group Jobs Spreadsheet",
       "display": "<a href=\"https://docs.google.com/spreadsheets/d/1Z7RrsoEdxLm7JeBpL2ujAhubBuPMMLZ0RDjtRDfDG5k/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">Open spreadsheet</a>",
       "missing": false
+    },
+    {
+      "label": "Equipment Everywhere + Superuser Spreadsheet",
+      "display": "<a href=\"https://docs.google.com/spreadsheets/d/1ZQLSnmgJmGB6u2VnZDe9SOowm1mUqNwXzju2ESyFlTo/edit?gid=1956073340#gid=1956073340\" target=\"_blank\" rel=\"noopener noreferrer\">Open spreadsheet</a>",
+      "missing": false
     }
   ],
   "contacts": [
@@ -1495,20 +1500,6 @@
       "position": 83,
       "location": "all",
       "roles": "all"
-    }
-  ],
-  "equipmentTrainers": [
-    {
-      "instrument": "Rotating (Ring) Disc Electrode",
-      "trainer": "Catherine Wallace"
-    },
-    {
-      "instrument": "Biologic Potentiostats",
-      "trainer": "Catherine Wallace"
-    },
-    {
-      "instrument": "SEM",
-      "trainer": "Wenbo Zhang"
     }
   ]
 }
