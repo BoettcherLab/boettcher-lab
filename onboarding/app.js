@@ -1,45 +1,85 @@
-/* Boettcher Lab onboarding v1.1 — static GitHub Pages, no backend.
-   Checklist is personal and not an official safety / compliance record. */
 'use strict';
-const STORAGE_KEY = 'boettcher-onboarding-v1-1';
-const DEFAULT = {role:'grad',location:'both', activities:{potentiostat:true,instruments:false,cryogens:false,gases:false,bnc:false,piranha:false},name:'',mentor:'',startDate:'',completed:{}};
-let data=null;
-let state=loadState();
-function loadState(){try{const o=JSON.parse(localStorage.getItem(STORAGE_KEY));if(!o||typeof o!=='object')return structuredClone(DEFAULT);return {...structuredClone(DEFAULT),...o,activities:{...DEFAULT.activities,...(o.activities||{})},completed:o.completed||{}};}catch{return structuredClone(DEFAULT)}}
-function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));document.getElementById('saveState').textContent='Saved in this browser';}catch{document.getElementById('saveState').textContent='Storage unavailable · progress may not persist';}}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function bothOrMatch(allowed,value){return allowed==='all'||allowed.includes(value)}
-function locMatches(location){return location==='all'||state.location==='both'||location===state.location}
-function roleMatches(roles){return roles==='all'||roles.includes(state.role)}
-function taskVisible(t){return locMatches(t.location)&&roleMatches(t.roles)&&(t.condition==='always'||Boolean(state.activities[t.condition]));}
-function lineVisible(l){return locMatches(l.location||'all')&&roleMatches(l.roles||'all')}
-function visibleTasks(){return data.tasks.filter(taskVisible)}
-function secTasks(section){return visibleTasks().filter(t=>t.section===section)}
-function isComplete(t){return Boolean(state.completed[t.id])}
-function titleRole(){return ({undergrad:'Undergraduate researcher',grad:'Graduate student',postdoc:'Postdoctoral researcher'})[state.role]}
-function titleLoc(){return ({ucb:'UC Berkeley · Tan Hall',lbnl:'LBNL',both:'UC Berkeley + LBNL'})[state.location]}
-function renderProfile(){document.querySelectorAll('input[name="role"]').forEach(el=>el.checked=el.value===state.role);document.querySelectorAll('input[name="location"]').forEach(el=>el.checked=el.value===state.location);for(const [input,key] of [['memberName','name'],['mentorName','mentor'],['startDate','startDate']])document.getElementById(input).value=state[key]||'';const activityLabels={potentiostat:'Using potentiostats',instruments:'Other specialized instruments',cryogens:'Working with cryogens',gases:'Compressed gases / gas cylinders',bnc:'BNC facility access',piranha:'Piranha solution handling'};document.getElementById('activities').innerHTML=Object.entries(activityLabels).map(([key,label])=>`<label class="activity-item"><input type="checkbox" data-activity="${key}" ${state.activities[key]?'checked':''}> ${esc(label)}</label>`).join('');document.getElementById('profileDescription').textContent=`${titleRole()} · ${titleLoc()} · ${visibleTasks().length} applicable checklist items`}
-function renderNavigation(){const roman=['I','II','III','IV'];const entries=[['print-first','','Print signature sheet'],['profile','','Your details'],...data.sections.map((s,i)=>[s.id,roman[i],s.title]),['resources','','Useful links'],['contacts','','People & roles'],['signoff','','Final sign-off']];document.getElementById('nav').innerHTML=entries.map(([id,n,label])=>`<a href="#${id}">${n?`<span class="nav-num">${n}</span>`:''}<span>${esc(label)}</span></a>`).join('')}
-function sectionCount(sec){const tasks=secTasks(sec);return `${tasks.filter(isComplete).length} / ${tasks.length} complete`}
-function trainingMarkup(){const filtered=data.trainings.filter(t=>!(t.course.includes('109')&&!state.activities.cryogens)&&!(t.course.includes('111')&&!state.activities.gases));return `<div class="training-wrapper"><strong>Required / conditional courses from the guide</strong><div style="overflow-x:auto"><table class="training-table"><thead><tr><th>Course</th><th>Training</th><th>Frequency</th><th>Notes</th></tr></thead><tbody>${filtered.map(t=>`<tr><td>${esc(t.course)}</td><td>${esc(t.title)}</td><td>${esc(t.frequency)}</td><td>${esc(t.notes)}</td></tr>`).join('')}</tbody></table></div><p class="muted small">Use EHS 101 for initial Lab Safety Fundamentals or EHS 103 when the refresher applies. Course assignment and equivalencies must be confirmed with UC Learning Center and the safety officer.</p></div>`}
-function taskMarkup(t,i){const lines=t.lines.filter(lineVisible);let body='';let list=[];const flush=()=>{if(list.length){body+=`<ul>${list.map(s=>`<li>${s}</li>`).join('')}</ul>`;list=[];}};for(const l of lines){if(l.list){list.push(l.html)}else{flush();body+=`<p>${l.html}</p>`;}}flush();if(t.trainingTable)body+=trainingMarkup();const sectionLabel=data.sections.find(s=>s.id===t.section)?.title||'';return `<details class="task-card ${isComplete(t)?'completed':''}" data-task="${esc(t.id)}"><summary><span class="task-index">${i+1}.</span><span class="task-headline"><span class="task-title">${esc(t.name)}</span></span><span class="task-done">${isComplete(t)?'Marked complete':'To do'}</span><span class="chevron" aria-hidden="true">›</span></summary><div class="task-body"><div class="task-meta">${t.location!=='all'?`<span class="pill">${t.location==='ucb'?'UC BERKELEY':'LBNL'}</span>`:''}${t.signoff?'<span class="pill">TRAINER SIGNATURE REQUIRED</span>':''}${t.condition!=='always'?'<span class="pill">ACTIVITY-BASED</span>':''}</div>${body||'<p class="muted">Ask your supervisor for the applicable site-specific instructions.</p>'}${t.signoff?'<div class="approval-note">A signature or trainer verification is required for this item on the printed sheet. Marking it complete here is not official approval.</div>':''}<label class="completion"><input type="checkbox" class="complete-checkbox" data-id="${esc(t.id)}" ${isComplete(t)?'checked':''}><span>Mark this step complete in my personal checklist</span></label></div></details>`}
-function renderTasks(){const oldOpen=new Set([...document.querySelectorAll('details.task-card[open]')].map(el=>el.dataset.task));document.getElementById('taskSections').innerHTML=data.sections.map(s=>{const tasks=secTasks(s.id);return `<section class="task-section" id="${s.id}"><div class="task-section-header"><div><h3><span class="phase-roman">${['I','II','III','IV'][data.sections.indexOf(s)]}.</span> ${esc(s.title)}</h3></div><div class="count">${sectionCount(s.id)}</div></div>${tasks.length?tasks.map((t,i)=>taskMarkup(t,i)).join(''):'<p class="empty">No additional tasks for this section based on your current selections.</p>'}</section>`}).join('');document.querySelectorAll('details.task-card').forEach(el=>el.open=oldOpen.has(el.dataset.task));}
-function updateProgress(){const items=visibleTasks(),count=items.filter(isComplete).length, pct=items.length?Math.round(100*count/items.length):0;document.getElementById('progressLabel').textContent=`${count} of ${items.length}`;document.getElementById('progressPercent').textContent=pct+'%';document.getElementById('progressFill').style.width=pct+'%';document.getElementById('progressContext').textContent=`${titleRole()} · ${titleLoc()}`;document.querySelectorAll('.task-section').forEach(el=>{const counter=el.querySelector('.count');if(counter)counter.textContent=sectionCount(el.id)});document.getElementById('profileDescription').textContent=`${titleRole()} · ${titleLoc()} · ${items.length} applicable checklist items`}
-function renderResources(){const search=(document.getElementById('resourceSearch').value||'').toLowerCase();const found=data.resources.filter(r=>`${r.label} ${r.display}`.toLowerCase().includes(search));document.getElementById('resourceList').innerHTML=found.length?found.map(r=>`<div class="resource-entry"><strong>${esc(r.label)}</strong><div class="${r.missing?'missing':''}">${r.display}</div></div>`).join(''):'<p class="empty">No matching resources.</p>'}
-function renderContacts(){document.getElementById('contactsList').innerHTML=data.contacts.map(c=>`<div class="contact-entry"><strong>${esc(c.role)}</strong><div>${esc(c.name)}</div>${c.email?`<div><a href="mailto:${encodeURIComponent(c.email.trim())}">${esc(c.email)}</a></div>`:''}<div style="margin-top:8px">${esc(c.responsibility)}</div></div>`).join('')}
-function renderPrint(){const signoffTasks=visibleTasks().filter(t=>Number.isInteger(t.signoff)).sort((a,b)=>a.signoff-b.signoff);const special=visibleTasks().filter(t=>['lbnl-wpc','lbnl-chemical-management','lbnl-waste','cryogen-safety','compressed-gas-safety','piranha-training'].includes(t.id));const info=[['TRAINEE',state.name],['MENTOR',state.mentor],['START DATE',state.startDate]];const row=(t,n)=>`<div class="print-step"><span>${esc(n)}</span><span>${esc(t.name)}</span><span>________________________</span><span>__________</span></div>`;let html=`<div class="print-header"><h1>Boettcher Lab · Onboarding Sign-Off</h1><p>${esc(titleRole())} · ${esc(titleLoc())}</p><p>Personalized from onboarding guide v2 (Nov 13, 2026). Generated ${new Date().toLocaleDateString('en-US')}.</p></div><div class="print-info">${info.map(([label,value])=>`<div><small>${label}</small>${esc(value)||'&nbsp;'}</div>`).join('')}</div><div class="print-body"><p class="print-note">Collect signatures for applicable training and orientation steps. This is a paper verification sheet, not an electronic record. Facility-specific requirements may add steps. No independent lab work until required training and PI authorization are complete.</p><h2>Required trainer sign-offs (applicable steps)</h2><div class="print-head"><span>#</span><span>Item</span><span>Trainer signature / initials</span><span>Date</span></div>${signoffTasks.map((t,i)=>row(t,i+1)).join('')}${signoffTasks.length?'':'<p>No original UCB trainer sign-off items are included for this profile. Confirm alternate LBNL requirements with your supervisor.</p>'}`;if(special.length)html+=`<h2>Additional site- and activity-specific verification</h2><div class="print-head"><span>#</span><span>Item</span><span>Trainer signature / initials</span><span>Date</span></div>${special.map((t,i)=>row(t,i+1)).join('')}`;html+=`<div class="print-signatures"><h2>Final authorization</h2><p class="print-note">I confirm that the trainee named above has completed the applicable training and orientation steps. Signatures must be obtained from the authorized people through the lab’s approved process.</p><div class="print-sigrow"><div class="print-line">Trainee signature</div><div class="print-line">Date</div><div></div></div><div class="print-sigrow"><div class="print-line">Mentor signature</div><div class="print-line">Date</div><div></div></div><div class="print-sigrow"><div class="print-line">PI Shannon Boettcher signature</div><div class="print-line">Date</div><div></div></div></div><p class="print-footer">Boettcher Lab onboarding portal · Not submitted electronically · Verify site-specific and institutional policies</p></div>`;document.getElementById('printSheet').innerHTML=html}
-function rerender(){renderProfile();renderTasks();updateProgress();renderPrint();save()}
-function listen(){document.querySelectorAll('input[name="role"]').forEach(el=>el.addEventListener('change',e=>{state.role=e.target.value;rerender()}));document.querySelectorAll('input[name="location"]').forEach(el=>el.addEventListener('change',e=>{state.location=e.target.value;rerender()}));document.getElementById('activities').addEventListener('change',e=>{if(e.target.matches('[data-activity]')){state.activities[e.target.dataset.activity]=e.target.checked;rerender()}});for(const [input,key] of [['memberName','name'],['mentorName','mentor'],['startDate','startDate']])document.getElementById(input).addEventListener('input',e=>{state[key]=e.target.value;renderPrint();save()});document.getElementById('taskSections').addEventListener('change',e=>{if(e.target.matches('.complete-checkbox')){state.completed[e.target.dataset.id]=e.target.checked;const task=e.target.closest('.task-card');task.classList.toggle('completed',e.target.checked);task.querySelector('.task-done').textContent=e.target.checked?'Marked complete':'To do';updateProgress();save()}});document.getElementById('resourceSearch').addEventListener('input',renderResources);document.getElementById('beginButton').addEventListener('click',()=>document.getElementById('dashboard').scrollIntoView({behavior:'smooth',block:'start'}));document.getElementById('printButtonFirst').addEventListener('click',print);document.getElementById('printButton').addEventListener('click',print);document.getElementById('printButtonBottom').addEventListener('click',print);document.getElementById('resetButton').addEventListener('click',()=>document.getElementById('resetDialog').showModal());document.getElementById('resetDialog').addEventListener('close',e=>{if(e.target.returnValue==='confirm'){state=structuredClone(DEFAULT);rerender();}})}
-function print(){
-  renderPrint();
-  const sheet = document.getElementById('printSheet').innerHTML;
-  const stylesheet = document.querySelector('link[rel="stylesheet"]')?.href || 'styles.css';
-  const w = window.open('', '_blank');
-  if (!w) { window.print(); return; }
-  w.document.open();
-  w.document.write('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Boettcher Lab · Signature Sheet</title><link rel="stylesheet" href="'+stylesheet+'"><style>body{background:white!important;color:#111!important;font-family:Arial,Helvetica,sans-serif}.print-only{display:block!important}.print-tools{display:flex;gap:12px;justify-content:space-between;align-items:center;max-width:850px;margin:20px auto 28px;padding:12px 18px;background:#f0f3f5;border:1px solid #dce2e7;border-radius:6px}.print-page{max-width:850px;margin:0 auto 60px;padding:34px;border:1px solid #ddd;background:#fff}.print-header{border-bottom:2px solid #002a54;padding-bottom:12px}.print-header h1{font-size:25px}.print-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.print-info div{border-bottom:1px solid #999;min-height:42px;padding:8px 0}.print-info small{display:block;font-size:11px;color:#667}.print-body h2{font-size:16px;border-bottom:1px solid #aab;padding-bottom:8px}.print-head,.print-step{display:grid;grid-template-columns:26px 1fr 170px 75px;gap:8px;padding:9px 3px;border-bottom:1px solid #ccc;font-size:12px}.print-head{font-weight:bold}.print-sigrow{display:grid;grid-template-columns:1fr 1fr 70px;gap:25px;padding-top:33px;font-size:12px}.print-line{border-top:1px solid #555;padding-top:5px}.print-note{font-size:12px;line-height:1.5}.print-footer{font-size:11px;margin-top:20px}.print-step,.print-signatures{break-inside:avoid}@media print{.print-tools{display:none!important}.print-page{max-width:none;margin:0;padding:0;border:0}.print-only{display:block!important}}@media(max-width:650px){.print-page{padding:10px;overflow-x:auto}.print-head,.print-step{min-width:620px}}</style></head><body><div class="print-tools"><strong>Boettcher Lab — Printable signature sheet</strong><button type="button" onclick="window.print()" style="padding:12px 18px;background:#002a54;color:white;border:0;border-radius:5px;cursor:pointer">Print / Save as PDF</button></div><main class="print-only print-page">'+sheet+'</main></body></html>');
-  w.document.close();
-  w.focus();
+const KEY='boettcher-document-guide-v2';
+let data;
+let saved={role:'grad',location:'both',activities:{potentiostat:true,instruments:false,cryogens:false,gases:false,bnc:false,piranha:false},complete:{}};
+try {const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x) saved={...saved,...x,activities:{...saved.activities,...x.activities},complete:x.complete||{}};}catch{}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const roman=['I','II','III','IV'];
+const names={'administration':'Administrative Setup','safety':'Lab Safety & EH&S Training','logistics':'Lab Logistics & Citizenship','equipment':'Instruments & Equipment'};
+const labels={potentiostat:'Potentiostat',instruments:'Other instruments',cryogens:'Cryogens',gases:'Compressed gases',bnc:'BNC facility',piranha:'Piranha solution'};
+function store(){try{localStorage.setItem(KEY,JSON.stringify(saved));}catch{}}
+function matchesLocation(x){return x==='all'||saved.location==='both'||x===saved.location}
+function matchesRole(x){return x==='all'||x.includes(saved.role)}
+function visible(t){return matchesLocation(t.location)&&matchesRole(t.roles)&&(t.condition==='always'||!!saved.activities[t.condition])}
+function visibleLine(l){return matchesLocation(l.location||'all')&&matchesRole(l.roles||'all')}
+function applicable(){return data.tasks.filter(visible)}
+function courseTable(){return '<div class="table-scroll"><table><thead><tr><th>Course</th><th>Title</th><th>Frequency</th><th>Notes</th></tr></thead><tbody>'+data.trainings.filter(t=>(!t.course.includes('109')||saved.activities.cryogens)&&(!t.course.includes('111')||saved.activities.gases)).map(t=>'<tr><td>'+esc(t.course)+'</td><td>'+esc(t.title)+'</td><td>'+esc(t.frequency)+'</td><td>'+esc(t.notes)+'</td></tr>').join('')+'</tbody></table></div>'}
+function taskText(t){
+ let output='',list=[];
+ const flush=()=>{if(list.length){output+='<ul>'+list.map(x=>'<li>'+x+'</li>').join('')+'</ul>';list=[]}};
+ for(const line of t.lines.filter(visibleLine)){if(line.list){list.push(line.html)}else{flush();output+='<p>'+line.html+'</p>'}}flush();
+ if(t.trainingTable)output+=courseTable();
+ if(t.signoff!==null&&t.signoff!==undefined)output+='<p>Get a Safety Officer’s signature for this step.</p>';
+ return output;
 }
-async function init(){try{const r=await fetch('data.json',{cache:'no-cache'});if(!r.ok)throw new Error('Could not load onboarding data');data=await r.json();renderNavigation();renderResources();renderContacts();listen();rerender()}catch(err){document.getElementById('dashboard').innerHTML=`<div class="empty"><strong>Unable to load onboarding guide.</strong><p>${esc(err.message)}</p><p>Open this website through a local web server or GitHub Pages, not by double-clicking index.html. See README.md for instructions.</p></div>`;console.error(err)}}
+function tasksFor(s){return applicable().filter(t=>t.section===s)}
+function render(){
+ const sections=data.sections;
+ $('#phase-nav').innerHTML=sections.map((s,i)=>'<a href="#phase-'+s.id+'">'+roman[i]+'. '+esc(names[s.id])+'</a>').join('');
+ let page='';
+ for(let i=0;i<sections.length;i++){
+  const s=sections[i],tasks=tasksFor(s.id);
+  page+='<section class="phase" id="phase-'+s.id+'"><h2>Phase '+roman[i]+' — '+esc(names[s.id])+'</h2>';
+  if(s.id==='administration') page+='<p>Complete these before your first day in the lab and as soon as possible. Most can be done remotely.</p>';
+  if(s.id==='logistics')page+='<p>Read the Group Philosophy Guide before your first week. It covers Shannon&#39;s expectations on research culture, work-life balance, communication, safety, and what it means to be a good lab member.</p>';
+  page+='<div class="table-scroll"><table class="task-table"><thead><tr><th>#</th><th>Section / Instructions</th><th>Done</th></tr></thead><tbody>';
+  tasks.forEach((t,j)=>{
+   const title=t.sourceTitle||t.title||t.name;
+   page+='<tr><td class="number">'+(j+1)+'</td><td><details data-task="'+esc(t.id)+'"><summary>'+esc(title)+'</summary><div class="instructions">'+taskText(t)+'</div></details></td><td class="check-col"><input type="checkbox" aria-label="Mark '+esc(title)+' complete" data-check="'+esc(t.id)+'" '+(saved.complete[t.id]?'checked':'')+'></td></tr>';
+  });
+  page+='</tbody></table></div></section>';
+ }
+ $('#phases').innerHTML=page;
+ $('#contact-rows').innerHTML=data.contacts.map(c=>'<tr><td>'+esc(c.role)+'</td><td>'+esc(c.name)+'</td><td>'+(c.email?'<a href="mailto:'+esc(c.email)+'">'+esc(c.email)+'</a>':'')+'</td><td>'+esc(c.responsibility)+'</td></tr>').join('');
+ $('#resource-rows').innerHTML=data.resources.map(r=>'<tr><td>'+esc(r.label)+'</td><td>'+r.display+'</td></tr>').join('');
+ $('#signature-preview').innerHTML=signatureHtml();
+ progress();
+}
+function progress(){const t=applicable(),n=t.filter(x=>saved.complete[x.id]).length;$('#progress').textContent=n+' / '+t.length+' complete';}
+const ORIGINAL_ITEMS=[
+'LHAT acknowledged + lab coat fitting booked',
+'EHS required online trainings completed',
+'Chemical Hygiene Plan read + all SOPs signed',
+'Physical lab walk-through',
+'PPE fitting and gloves selection',
+'Fume hood training and airflow check',
+'Emergency Response Quest',
+'Chemical Inventory Quest',
+'Waste Disposal Quest',
+'1st Experiment Risk Assessment Form',
+'Potentiostat orientation (if needed)'
+];
+function signatureHtml(){
+return '<article class="signature-document"><h2>Signature Sheet</h2><p>Trainee name: ______________________ Start date: ____________ Mentor: ____________________</p><p>Complete steps in order. Each step requires initials from both trainee and trainer before the next begins. PI Shannon Boettcher must sign before independent work begins.</p><table><thead><tr><th>#</th><th>Item</th><th>Trainer’s Signature + Initials</th><th>Date</th></tr></thead><tbody>'+ORIGINAL_ITEMS.map((x,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(x)+'</td><td>____________________________</td><td>__________</td></tr>').join('')+'</tbody></table><h3>Final Sign-Off</h3><p>I confirm that the trainee named above has completed all required onboarding steps and is authorized to begin independent laboratory work.</p><p>Trainee signature: _________________________ Date: ____________</p><p>Mentor signature: _________________________ Date: ____________</p><p>PI signature: _________________________ Date: ____________</p></article>'
+}
+function printSheet(){
+ const w=window.open('','_blank');
+ if(!w){alert('Please allow pop-ups to print the signature sheet.');return}
+ w.document.open();w.document.write('<!doctype html><html><head><title>Boettcher Lab — Signature Sheet</title><meta charset="utf-8"><style>body{font:12px Arial,sans-serif;margin:36px;color:#111}h2{font-size:22px}h3{font-size:16px;margin-top:30px}p{line-height:1.6}table{width:100%;border-collapse:collapse;margin:18px 0}th,td{border:1px solid #888;padding:10px 7px;text-align:left;vertical-align:top}th{background:#eee}tr{break-inside:avoid}.print-action{margin-bottom:20px;padding:10px 16px;background:#002a54;color:white;border:0;cursor:pointer}@media print{.print-action{display:none}body{margin:0}}</style></head><body><button class="print-action" onclick="window.print()">Print / Save as PDF</button>'+signatureHtml()+'</body></html>');w.document.close();w.focus();
+}
+async function init(){
+ try{const res=await fetch('data.json',{cache:'no-store'});if(!res.ok)throw Error('Could not load onboarding guide');data=await res.json();
+ $('#role').value=saved.role;$('#location').value=saved.location;
+ $('#activity-options').innerHTML=Object.entries(labels).map(([id,t])=>'<label><input type="checkbox" data-activity="'+id+'" '+(saved.activities[id]?'checked':'')+'> '+esc(t)+'</label>').join('');
+ $('#role').addEventListener('change',e=>{saved.role=e.target.value;store();render()});
+ $('#location').addEventListener('change',e=>{saved.location=e.target.value;store();render()});
+ $('#activity-options').addEventListener('change',e=>{if(e.target.dataset.activity){saved.activities[e.target.dataset.activity]=e.target.checked;store();render()}});
+ $('#phases').addEventListener('change',e=>{if(e.target.dataset.check){saved.complete[e.target.dataset.check]=e.target.checked;store();progress()}});
+ $('#reset').addEventListener('click',()=>{if(confirm('Clear this browser’s checklist checkmarks?')){saved.complete={};store();render()}});
+ $('#print-top').addEventListener('click',printSheet);
+ $('#print-bottom').addEventListener('click',printSheet);
+ render();
+ }catch(error){$('#phases').innerHTML='<p>Unable to load guide: '+esc(error.message)+'</p>'}
+}
 init();
