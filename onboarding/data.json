@@ -588,7 +588,7 @@
           "roles": "all"
         },
         {
-          "html": "Chemical Hygiene Plan: link pending — ask the lab safety officer for the current approved version.",
+          "html": "UC Berkeley Chemical Hygiene Plan: <a href=\"https://ehs.berkeley.edu/safety-subjects/chemical-safety/chemical-hygiene-plan\" target=\"_blank\" rel=\"noopener noreferrer\">Read the UC Berkeley Chemical Hygiene Plan</a>. Ask the lab safety officer for the current Boettcher Lab-specific approved plan, if applicable.",
           "list": false,
           "location": "all",
           "roles": "all"
@@ -1222,9 +1222,9 @@
       "missing": false
     },
     {
-      "label": "Chemical Hygiene Plan",
-      "display": "(add link)",
-      "missing": true
+      "label": "UC Berkeley Chemical Hygiene Plan",
+      "display": "<a href=\"https://ehs.berkeley.edu/safety-subjects/chemical-safety/chemical-hygiene-plan\" target=\"_blank\" rel=\"noopener noreferrer\">Open Chemical Hygiene Plan</a>",
+      "missing": false
     },
     {
       "label": "Risk Assessment Form",
