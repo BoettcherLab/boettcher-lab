@@ -785,7 +785,7 @@
       "title": "3.10 — First Experiment Risk Assessment",
       "lines": [
         {
-          "html": "Before you begin a new experiment, you MUST complete the Boettcher Lab Risk Assessment Form with your mentor. The form covers hazards, likelihood and severity ratings, and contingency plans.",
+          "html": "All undergraduate researchers and new graduate students must complete the <strong>Boettcher Lab Risk Assessment Form</strong> with their mentor before beginning a new experiment.",
           "list": false,
           "location": "all",
           "roles": [
@@ -795,12 +795,6 @@
         },
         {
           "html": "Complete a risk assessment each time you do something new that carries a hazard of injury -- not just your first time. Post the completes form in Slack #risk-assessments",
-          "list": false,
-          "location": "all",
-          "roles": "all"
-        },
-        {
-          "html": "Any experiment scoring above 15 (Extreme risk) requires Shannon’s signature before it begins.",
           "list": false,
           "location": "all",
           "roles": "all"
