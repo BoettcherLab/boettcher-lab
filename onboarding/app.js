@@ -49,6 +49,33 @@ function render(){
  $('#resource-rows').innerHTML=data.resources.map(r=>'<tr><td>'+esc(r.label)+'</td><td>'+r.display+'</td></tr>').join('');
  $('#signature-preview').innerHTML=signatureHtml();
  progress();
+ if($('#search-query')?.value.trim())showSearch();
+}
+
+function plainText(html){const el=document.createElement('div');el.innerHTML=html;return (el.textContent||'').replace(/\s+/g,' ').trim();}
+function searchIndex(){
+ const items=[];
+ data.tasks.filter(visible).forEach(t=>{const title=(t.sourceTitle||t.title||t.name).replace(/^\d+\.\d+\s*[—–-]\s*/, '');items.push({title,section:names[t.section],body:plainText(taskText(t)),kind:'task',id:t.id});});
+ data.resources.forEach((r,i)=>items.push({title:r.label,section:'Quick Useful Links',body:plainText(r.display),kind:'resource',id:String(i)}));
+ [['wcgw','What Could Go Wrong! (WCGW)'],['contacts','Group Roles & Contacts'],['emergency-contacts','UC Berkeley — Emergency & Facilities Contacts'],['signature-sheet','Signature Sheet'],['how-to','How to Use This Page']].forEach(([id,title])=>{const el=document.getElementById(id);if(el)items.push({title,section:'Reference section',body:(el.textContent||'').replace(/\s+/g,' ').trim(),kind:'section',id});});
+ return items;
+}
+let searchMatches=[];
+function showSearch(){
+ const result=$('#search-results'),q=$('#search-query').value.trim().toLowerCase();
+ if(!q){result.hidden=true;result.innerHTML='';searchMatches=[];return}
+ const terms=q.split(/\s+/).filter(Boolean);
+ searchMatches=searchIndex().filter(x=>terms.every(term=>(x.title+' '+x.section+' '+x.body).toLowerCase().includes(term))).slice(0,30);
+ const count=searchMatches.length;result.hidden=false;
+ if(!count){result.innerHTML='<p class="search-status">No matches for this appointment. Try a shorter term or change the position, location, or activity filters.</p>';return}
+ result.innerHTML='<p class="search-status">'+count+(count===30?' or more':'')+' matching result'+(count===1?'':'s')+'</p><ul class="search-result-list">'+searchMatches.map((x,i)=>'<li><button type="button" class="search-hit" data-search-index="'+i+'"><strong>'+esc(x.title)+'</strong><span>'+esc(x.section)+'</span><small>'+esc(x.body.slice(0,190)+(x.body.length>190?'…':''))+'</small></button></li>').join('')+'</ul>';
+}
+function openSearchResult(item){
+ let target;
+ if(item.kind==='task'){target=[...document.querySelectorAll('#phases details[data-task]')].find(x=>x.dataset.task===item.id);if(target){const wrapper=target.closest('.phase')?.querySelector('.phase-details');if(wrapper)wrapper.open=true;target.open=true}}
+ else if(item.kind==='resource'){target=document.getElementById('resources');const d=target?.querySelector('details');if(d)d.open=true}
+ else{target=document.getElementById(item.id);const d=target?.querySelector('details');if(d)d.open=true}
+ if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function progress(){const t=applicable().filter(x=>!x.title?.includes('[OPTIONAL]')),n=t.filter(x=>saved.complete[x.id]).length,pct=t.length?Math.round(100*n/t.length):0;$('#progress').textContent=n+' / '+t.length+' complete';$('#progressFill').style.width=pct+'%';$('#progressTrack').setAttribute('aria-valuenow',String(pct));}
 const ORIGINAL_ITEMS=[
@@ -81,6 +108,8 @@ async function init(){
  $('#activity-options').addEventListener('change',e=>{if(e.target.dataset.activity){saved.activities[e.target.dataset.activity]=e.target.checked;store();render()}});
  $('#phases').addEventListener('change',e=>{if(e.target.dataset.check){saved.complete[e.target.dataset.check]=e.target.checked;store();progress()}});
  $('#reset').addEventListener('click',()=>{if(confirm('Clear this browser’s checklist checkmarks?')){saved.complete={};store();render()}});
+ $('#search-query').addEventListener('input',showSearch);
+ $('#search-results').addEventListener('click',e=>{const button=e.target.closest('[data-search-index]');if(button){const item=searchMatches[Number(button.dataset.searchIndex)];if(item)openSearchResult(item)}});
  $('#print-top').addEventListener('click',printSheet);
  $('#print-bottom').addEventListener('click',printSheet);
  render();
