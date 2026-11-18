@@ -785,7 +785,7 @@
       "title": "3.10 — First Experiment Risk Assessment",
       "lines": [
         {
-          "html": "All undergraduate researchers and new graduate students must complete the <strong>Boettcher Lab Risk Assessment Form</strong> with their mentor before beginning a new experiment.",
+          "html": "<strong>Required for ALL undergraduate students and ALL new graduate students:</strong> Complete the <strong>Boettcher Lab Risk Assessment Form</strong> with your mentor before beginning a new experiment.",
           "list": false,
           "location": "all",
           "roles": [
@@ -804,6 +804,15 @@
           "list": false,
           "location": "all",
           "roles": "all"
+        },
+        {
+          "html": "<strong>Mentors:</strong> Each time your mentee completes a risk assessment form, we will buy you a snack of your choice. Fill out the <a href=\"https://forms.gle/YTCpcNKuQL1uEjV2A\" target=\"_blank\" rel=\"noopener noreferrer\">Risk Assessment Snack Form</a>.",
+          "list": false,
+          "location": "all",
+          "roles": [
+            "grad",
+            "undergrad"
+          ]
         }
       ],
       "location": "all",
@@ -1351,6 +1360,11 @@
     {
       "label": "SOP Directory Spreadsheet",
       "display": "<a href=\"https://docs.google.com/spreadsheets/d/1X0uDlbuwKlX_TjQl1ka7_NNic4K_9XkJv1PGwftcoG4/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">Open SOP directory</a>",
+      "missing": false
+    },
+    {
+      "label": "Risk Assessment Snack Form",
+      "display": "<a href=\"https://forms.gle/YTCpcNKuQL1uEjV2A\" target=\"_blank\" rel=\"noopener noreferrer\">Open snack form</a>",
       "missing": false
     }
   ],
