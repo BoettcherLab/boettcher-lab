@@ -588,7 +588,7 @@
           "roles": "all"
         },
         {
-          "html": "UC Berkeley Chemical Hygiene Plan: <a href=\"https://ehs.berkeley.edu/safety-subjects/chemical-safety/chemical-hygiene-plan\" target=\"_blank\" rel=\"noopener noreferrer\">Read the UC Berkeley Chemical Hygiene Plan</a>. Ask the lab safety officer for the current Boettcher Lab-specific approved plan, if applicable.",
+          "html": "The <a href=\"https://ehs.berkeley.edu/safety-subjects/chemical-safety/chemical-hygiene-plan\" target=\"_blank\" rel=\"noopener noreferrer\">UC Berkeley Chemical Hygiene Plan</a> is <strong>supplementary</strong> to the Boettcher Lab’s existing laboratory-specific Chemical Hygiene Plan. Read the lab-specific plan and required SOPs; consult the campus plan as an additional resource, not as a replacement.",
           "list": false,
           "location": "all",
           "roles": "all"
