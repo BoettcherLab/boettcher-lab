@@ -41,7 +41,7 @@ function render(){
    page+='<tr><td class="number">'+(j+1)+'</td><td><details data-task="'+esc(t.id)+'"><summary>'+esc(title)+'</summary><div class="instructions">'+taskText(t)+'</div></details></td><td class="check-col"><input type="checkbox" aria-label="Mark '+esc(title)+' complete" data-check="'+esc(t.id)+'" '+(saved.complete[t.id]?'checked':'')+'></td></tr>';
   });
   page+='</tbody></table></div>';
-  if(s.id==='equipment')page+='<p><a href="https://docs.google.com/spreadsheets/d/1ZQLSnmgJmGB6u2VnZDe9SOowm1mUqNwXzju2ESyFlTo/edit?gid=1956073340#gid=1956073340" target="_blank" rel="noopener noreferrer">Equipment Everywhere + Superuser Spreadsheet</a> — equipment list and designated superusers/trainers.</p>';
+  if(s.id==='equipment')page+='<div class="jobs-embed"><h3>Equipment Everywhere + Superuser Spreadsheet</h3><p><a href="https://docs.google.com/spreadsheets/d/1ZQLSnmgJmGB6u2VnZDe9SOowm1mUqNwXzju2ESyFlTo/edit?gid=1956073340#gid=1956073340" target="_blank" rel="noopener noreferrer">Open spreadsheet in Google Sheets</a> — equipment list and designated superusers/trainers.</p><iframe loading="lazy" title="Equipment Everywhere + Superuser Spreadsheet" src="https://docs.google.com/spreadsheets/d/1ZQLSnmgJmGB6u2VnZDe9SOowm1mUqNwXzju2ESyFlTo/preview?gid=1956073340" referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="embed-note">Viewing requires access to the spreadsheet. If the embedded view is blocked, use the Google Sheets link above.</p></div>';
   page+='</div></details></section>';
  }
  $('#phases').innerHTML=page;
