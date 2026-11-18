@@ -120,73 +120,72 @@
       "lines": [
         {
           "html": "Before requesting campus building access, complete EHS 101 (or the applicable required refresher) and download your completion certificate.",
-          "list": false
-        },
-        {
-          "html": "Apply for building access through the <a href=\"https://chemnet.berkeley.edu/buildingaccess\" target=\"_blank\" rel=\"noopener noreferrer\">College Access System</a>. Upload the EHS 101 certificate.",
           "list": false,
           "location": "ucb",
           "roles": "all"
         },
         {
-          "html": "Cal 1 Card access: after-hours + chemical storeroom + cylinder cage",
+          "html": "Apply for building access through the <a href=\"https://chemnet.berkeley.edu/buildingaccess\" target=\"_blank\" rel=\"noopener noreferrer\">College Access System</a>.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "<strong>Under General Info:</strong>",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Primary Department: <strong>Chemical and Biomolecular Engineering</strong> (<strong>DO NOT WRITE College of Chemistry</strong>).",
           "list": true,
           "location": "ucb",
           "roles": "all"
         },
         {
-          "html": "Use Chemical and Biomolecular Engineering as Primary Department (NOT College of Chemistry)",
+          "html": "Upload your EHS 101 certificate.",
           "list": true,
           "location": "ucb",
           "roles": "all"
         },
         {
-          "html": "Request keys for:",
-          "list": true,
+          "html": "<strong>Under Appointment 1:</strong>",
+          "list": false,
           "location": "ucb",
-          "roles": [
-            "grad",
-            "postdoc"
-          ]
+          "roles": "all"
         },
         {
-          "html": "Tan 383 or Tan 271, depending on your floor",
+          "html": "Access → Add After Hour Bldg, Storeroom, and Cyl Cages &amp; Dry Ice Checkout.",
           "list": true,
           "location": "ucb",
-          "roles": [
-            "grad",
-            "postdoc"
-          ]
+          "roles": "all"
         },
         {
-          "html": "Freight elevator + gas cylinder cage key",
+          "html": "Keys → Request Tan 383 or Tan 271, depending on your floor.",
           "list": true,
           "location": "ucb",
-          "roles": [
-            "grad",
-            "postdoc"
-          ]
+          "roles": "all"
         },
         {
-          "html": "Each key requires a $30 deposit. They will charge you through CalCentral billing or you can pay with a physical check written to UC Regents.",
+          "html": "If needed, request the freight elevator and gas cylinder cage key.",
           "list": true,
           "location": "ucb",
-          "roles": [
-            "grad",
-            "postdoc"
-          ]
+          "roles": "all"
         },
         {
-          "html": "Once FSA (Nathalie Grogan) approves, you can pick up your key at 119 Gilman Hall (Building Management Office)",
+          "html": "Each key requires a <strong>$30 deposit</strong>. You will be charged through CalCentral billing, or you can pay with a physical check written to <strong>UC Regents</strong>.",
           "list": true,
           "location": "ucb",
-          "roles": [
-            "grad",
-            "postdoc"
-          ]
+          "roles": "all"
         },
         {
-          "html": "Skip speedtype, storeroom, and BearBuy steps — your mentor handles research supplies.",
+          "html": "Once FSA (Nathalie Grogan) approves, you can pick up your key at <strong>119 Gilman Hall (Building Management Office)</strong>.",
+          "list": false,
+          "location": "ucb",
+          "roles": "all"
+        },
+        {
+          "html": "Skip speedtype, storeroom, and BearBuy purchasing steps — your mentor handles research supplies.",
           "list": false,
           "location": "all",
           "roles": [
