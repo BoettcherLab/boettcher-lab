@@ -549,6 +549,12 @@
           "list": false,
           "location": "all",
           "roles": "all"
+        },
+        {
+          "html": "Chemical Safety Plans: <a href=\"https://drive.google.com/drive/folders/1OfPJU7o5DlWMjlduXT11y-AMqsCM4jxf?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">Open the Chemical Safety Plans folder on Google Drive</a>.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
         }
       ],
       "location": "all",
@@ -1323,6 +1329,11 @@
     {
       "label": "LBNL eBuy",
       "display": "<a href=\"https://procurement.lbl.gov/welcome-to-procurement-property/make-a-purchase/ebuy/\" target=\"_blank\" rel=\"noopener noreferrer\">LBNL eBuy portal</a>",
+      "missing": false
+    },
+    {
+      "label": "Chemical Safety Plans",
+      "display": "<a href=\"https://drive.google.com/drive/folders/1OfPJU7o5DlWMjlduXT11y-AMqsCM4jxf?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">Open folder</a>",
       "missing": false
     }
   ],
