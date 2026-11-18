@@ -545,7 +545,7 @@
       "title": "2.1 — SOPs (Standard Operating Procedures)",
       "lines": [
         {
-          "html": "Read and sign every SOP relevant to your work before beginning experiments — this is a required part of onboarding. SOPs are available in hard copy in the lab and in the <a href=\"https://drive.google.com/drive/folders/1Diuzh0W3g_fPP5IxU_ZEvkzjZr1n-Qes?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Group SOP folder on shared Drive</a>. Categories include: Cryogens, Acutely Toxic Gases, Acutely Toxic Chemicals, Corrosives, Mutagens, Perchloric Acid, Peroxide Forming Chemicals, Pyrophoric Materials, Strong Oxidizing Agents, Hydrofluoric Acid, Self-Heating Substances, Water Reactive Materials, and Flammable Liquids and Solids.",
+          "html": "Read and sign every SOP relevant to your work before beginning experiments — this is a required part of onboarding. SOPs are available in hard copy in the lab and in the <a href=\"https://drive.google.com/drive/folders/1Diuzh0W3g_fPP5IxU_ZEvkzjZr1n-Qes?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Group SOP folder on shared Drive</a>.",
           "list": false,
           "location": "all",
           "roles": "all"
