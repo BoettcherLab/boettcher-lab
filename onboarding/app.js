@@ -50,7 +50,7 @@ function render(){
  $('#signature-preview').innerHTML=signatureHtml();
  progress();
 }
-function progress(){const t=applicable(),n=t.filter(x=>saved.complete[x.id]).length,pct=t.length?Math.round(100*n/t.length):0;$('#progress').textContent=n+' / '+t.length+' complete';$('#progressFill').style.width=pct+'%';$('#progressTrack').setAttribute('aria-valuenow',String(pct));}
+function progress(){const t=applicable().filter(x=>!x.title?.includes('[OPTIONAL]')),n=t.filter(x=>saved.complete[x.id]).length,pct=t.length?Math.round(100*n/t.length):0;$('#progress').textContent=n+' / '+t.length+' complete';$('#progressFill').style.width=pct+'%';$('#progressTrack').setAttribute('aria-valuenow',String(pct));}
 const ORIGINAL_ITEMS=[
 'LHAT acknowledged + lab coat fitting booked',
 'EHS required online trainings completed',
