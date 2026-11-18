@@ -203,23 +203,17 @@
     },
     {
       "id": "lbnl-building-and-restricted-area-access",
-      "title": "1.2 — Building Access & Keys",
+      "title": "1.2 — Building Access & Keys [OPTIONAL]",
       "lines": [
         {
-          "html": "Request after-hours (30-perimeter) and restricted area access:",
+          "html": "<strong>[OPTIONAL]</strong> If your work requires after-hours or restricted-area building access at LBNL, review the <a href=\"https://securityandemergencyservices.lbl.gov/\" target=\"_blank\" rel=\"noopener noreferrer\">Security &amp; Emergency Services (SES) website</a> and request the appropriate access. This is separate from your standard badge and required site access.",
           "list": false,
           "location": "lbnl",
           "roles": "all"
         },
         {
-          "html": "<a href=\"https://securityandemergencyservices.lbl.gov/service/badging/buildingaccess/\" target=\"_blank\" rel=\"noopener noreferrer\">securityandemergencyservices.lbl.gov</a>",
-          "list": true,
-          "location": "lbnl",
-          "roles": "all"
-        },
-        {
-          "html": "<a href=\"https://access.lbl.gov/SAFE/\" target=\"_blank\" rel=\"noopener noreferrer\">access.lbl.gov/SAFE</a>",
-          "list": true,
+          "html": "Use the <a href=\"https://access.lbl.gov/SAFE/\" target=\"_blank\" rel=\"noopener noreferrer\">LBNL access request system</a> when directed by your host or supervisor.",
+          "list": false,
           "location": "lbnl",
           "roles": "all"
         }
@@ -229,8 +223,8 @@
       "condition": "always",
       "signoff": null,
       "section": "administration",
-      "name": "LBNL building and restricted-area access",
-      "sourceTitle": "1.2 — Building Access & Keys"
+      "name": "Optional LBNL building and restricted-area access",
+      "sourceTitle": "1.2 — Building Access & Keys [OPTIONAL]"
     },
     {
       "id": "group-communications-and-introductions",
@@ -305,7 +299,7 @@
         {
           "html": "Set up BearBuy for lab purchasing:",
           "list": false,
-          "location": "all",
+          "location": "ucb",
           "roles": [
             "grad",
             "postdoc"
@@ -323,7 +317,7 @@
         {
           "html": "Find your assigned speedtype in the <a href=\"https://docs.google.com/spreadsheets/d/10JSOmpkA9MbAl59Z_J0-FoDNwpFc48jA1itPwIeRje4/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">Index Information Spreadsheet</a> (finalize your research plan with Shannon first). Ask Yang if you need clarification.",
           "list": true,
-          "location": "all",
+          "location": "ucb",
           "roles": [
             "grad",
             "postdoc"
@@ -332,7 +326,7 @@
         {
           "html": "Read the FSA purchasing notes on the internal site — especially the &quot;Fabrication&quot; category for equipment",
           "list": true,
-          "location": "all",
+          "location": "ucb",
           "roles": [
             "grad",
             "postdoc"
@@ -341,7 +335,43 @@
         {
           "html": "Important: Do not use your UC Berkeley email for personal Amazon purchases — it will convert to a business account. Use campus WiFi or VPN for BearBuy",
           "list": true,
-          "location": "all",
+          "location": "ucb",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "<strong>LBNL purchasing — eBuy (grad students / postdocs):</strong> Berkeley Lab uses eBuy for common office, laboratory, and computer supplies. Confirm with your LBNL supervisor or division procurement representative that you have purchasing authorization and the correct project and activity codes before placing orders.",
+          "list": false,
+          "location": "lbnl",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Start at the <a href=\"https://procurement.lbl.gov/welcome-to-procurement-property/make-a-purchase/ebuy/\" target=\"_blank\" rel=\"noopener noreferrer\">LBNL eBuy portal</a>. Search the approved catalogs, choose items, confirm delivery location and funding information, and follow the required checkout/approval workflow.",
+          "list": true,
+          "location": "lbnl",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "Follow the <a href=\"https://procurement.lbl.gov/welcome-to-procurement-property/make-a-purchase/ebuy/ebuy-training-for-ebuy-users/\" target=\"_blank\" rel=\"noopener noreferrer\">official eBuy tutorials and Purchasing Guide</a>. For unavailable items or purchases outside eBuy, consult your division's procurement representative about the appropriate ePro or other purchasing process.",
+          "list": true,
+          "location": "lbnl",
+          "roles": [
+            "grad",
+            "postdoc"
+          ]
+        },
+        {
+          "html": "If you cannot access eBuy or need order assistance, contact the <a href=\"https://procurement.lbl.gov/welcome-to-procurement-property/help-desk/\" target=\"_blank\" rel=\"noopener noreferrer\">Procurement Help Desk</a>.",
+          "list": true,
+          "location": "lbnl",
           "roles": [
             "grad",
             "postdoc"
@@ -1247,7 +1277,7 @@
     },
     {
       "label": "LBNL Building Access Request",
-      "display": "<a href=\"https://securityandemergencyservices.lbl.gov/service/badging/buildingaccess/\" target=\"_blank\" rel=\"noopener noreferrer\">securityandemergencyservices.lbl.gov</a>",
+      "display": "<a href=\"https://securityandemergencyservices.lbl.gov/\" target=\"_blank\" rel=\"noopener noreferrer\">LBNL Security &amp; Emergency Services</a>",
       "missing": false
     },
     {
@@ -1288,6 +1318,11 @@
     {
       "label": "Equipment Everywhere + Superuser Spreadsheet",
       "display": "<a href=\"https://docs.google.com/spreadsheets/d/1ZQLSnmgJmGB6u2VnZDe9SOowm1mUqNwXzju2ESyFlTo/edit?gid=1956073340#gid=1956073340\" target=\"_blank\" rel=\"noopener noreferrer\">Open spreadsheet</a>",
+      "missing": false
+    },
+    {
+      "label": "LBNL eBuy",
+      "display": "<a href=\"https://procurement.lbl.gov/welcome-to-procurement-property/make-a-purchase/ebuy/\" target=\"_blank\" rel=\"noopener noreferrer\">LBNL eBuy portal</a>",
       "missing": false
     }
   ],
