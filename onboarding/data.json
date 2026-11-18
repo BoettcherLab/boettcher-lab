@@ -551,6 +551,12 @@
           "roles": "all"
         },
         {
+          "html": "Use the <a href=\"https://docs.google.com/spreadsheets/d/1X0uDlbuwKlX_TjQl1ka7_NNic4K_9XkJv1PGwftcoG4/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">SOP Directory Spreadsheet</a> to find the SOPs relevant to your work. The directory is an index; read and sign the applicable SOP documents themselves.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
           "html": "Chemical Safety Plans: <a href=\"https://drive.google.com/drive/folders/1OfPJU7o5DlWMjlduXT11y-AMqsCM4jxf?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">Open the Chemical Safety Plans folder on Google Drive</a>.",
           "list": false,
           "location": "all",
@@ -1334,6 +1340,11 @@
     {
       "label": "Chemical Safety Plans",
       "display": "<a href=\"https://drive.google.com/drive/folders/1OfPJU7o5DlWMjlduXT11y-AMqsCM4jxf?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\">Open folder</a>",
+      "missing": false
+    },
+    {
+      "label": "SOP Directory Spreadsheet",
+      "display": "<a href=\"https://docs.google.com/spreadsheets/d/1X0uDlbuwKlX_TjQl1ka7_NNic4K_9XkJv1PGwftcoG4/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">Open SOP directory</a>",
       "missing": false
     }
   ],
