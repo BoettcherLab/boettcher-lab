@@ -1070,7 +1070,19 @@
           "roles": "all"
         },
         {
-          "html": "Reserve channels on the lab Google Calendar (boettcherlab gmail) — include your name, potentiostat name, and channel(s). [GRAD/POSTDOC] Mentors must be named in the reservation; mentees cannot book independently.",
+          "html": "<strong>Google Calendar scheduling:</strong> Sign in to the Boettcher Lab Gmail account, open Google Calendar (GCal), and locate the potentiostat calendars you expect to use. From the lab account, send calendar-sharing invitations to your own email address for those calendars, then accept the invitations in your own account.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "For potentiostats still using Google Calendar, reserve the appropriate instrument/channel calendar and include your name, potentiostat name, and channel(s). Graduate students and postdocs mentoring a user must be named in the reservation; mentees cannot book independently.",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "<strong>New scheduling system:</strong> Some potentiostats, including the <strong>8-channel electrolyzer bay</strong>, are transitioning from Google Calendar to the <a href=\"https://potstat.vercel.app/\" target=\"_blank\" rel=\"noopener noreferrer\">Potentiostat Scheduling System</a>. Check which system the instrument currently uses and make reservations there rather than duplicating bookings in Google Calendar.",
           "list": true,
           "location": "all",
           "roles": "all"
