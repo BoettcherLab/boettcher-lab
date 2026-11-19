@@ -800,7 +800,7 @@
           "roles": "all"
         },
         {
-          "html": "<a href=\"https://docs.google.com/document/d/1dQYLk5eyWDl_IlVBrkAW8bfh0C7eBA2N4qjeKI_Y-bc/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">→ Open Risk Assessment Form</a>",
+          "html": "<a href=\"https://docs.google.com/document/d/1UjdFbyiJNYcUnBkVS5DkmuiCs7_Hy48M/edit?usp=sharing&ouid=109453716690976648503&rtpof=true&sd=true\" target=\"_blank\" rel=\"noopener noreferrer\">→ Open Risk Assessment Form</a>",
           "list": false,
           "location": "all",
           "roles": "all"
@@ -1249,7 +1249,7 @@
     },
     {
       "label": "Risk Assessment Form",
-      "display": "<a href=\"https://docs.google.com/document/d/1dQYLk5eyWDl_IlVBrkAW8bfh0C7eBA2N4qjeKI_Y-bc/edit?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">Open form</a>",
+      "display": "<a href=\"https://docs.google.com/document/d/1UjdFbyiJNYcUnBkVS5DkmuiCs7_Hy48M/edit?usp=sharing&ouid=109453716690976648503&rtpof=true&sd=true\" target=\"_blank\" rel=\"noopener noreferrer\">Open form</a>",
       "missing": false
     },
     {
