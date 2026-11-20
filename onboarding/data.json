@@ -551,6 +551,12 @@
           "roles": "all"
         },
         {
+          "html": "<strong>New hazardous experiments:</strong> Anyone planning to perform a new type of hazardous experiment must create a new Standard Operating Procedure (SOP) for that type of experiment. The SOP must be reviewed by <strong>Yang Zhao and EH&amp;S</strong> before any work begins.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
           "html": "Use the <a href=\"https://docs.google.com/spreadsheets/d/1X0uDlbuwKlX_TjQl1ka7_NNic4K_9XkJv1PGwftcoG4/edit?gid=0#gid=0\" target=\"_blank\" rel=\"noopener noreferrer\">SOP Directory Spreadsheet</a> to find the SOPs relevant to your work. The directory is an index; read and sign the applicable SOP documents themselves.",
           "list": false,
           "location": "all",
