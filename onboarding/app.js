@@ -80,8 +80,7 @@ function openSearchResult(item){
 function progress(){const t=applicable().filter(x=>!x.title?.includes('[OPTIONAL]')),n=t.filter(x=>saved.complete[x.id]).length,pct=t.length?Math.round(100*n/t.length):0;$('#progress').textContent=n+' / '+t.length+' complete';$('#progressFill').style.width=pct+'%';$('#progressTrack').setAttribute('aria-valuenow',String(pct));}
 const SIGNATURE_ITEMS=[
  {item:'LHAT acknowledged + PPE / lab coat fitting + online EHS trainings completed + Emergency Response, Chemical Inventory, and Waste Disposal Quests',signer:'Matthew Zoerb, Martha, or Sree (safety officer)'},
- {item:'Chemical Hygiene Plan read + all relevant SOPs signed + physical lab walk-through',signer:'Wenbo Zhang'},
- {item:'Fume hood training and airflow check',signer:''},
+ {item:'Chemical Hygiene Plan read + all relevant SOPs signed + physical lab walk-through (including fume hood training and airflow check)',signer:'Wenbo Zhang'},
  {item:'1st Experiment Risk Assessment Form',signer:'Mentor'},
  {item:'Potentiostat orientation (if needed)',signer:''}
 ];
