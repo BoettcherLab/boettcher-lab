@@ -82,7 +82,7 @@ const SIGNATURE_ITEMS=[
  {item:'LHAT acknowledged + PPE / lab coat fitting + online EHS trainings completed + Emergency Response, Chemical Inventory, and Waste Disposal Quests',signer:'Matthew Zoerb, Martha, or Sree (safety officer)'},
  {item:'Chemical Hygiene Plan read + all relevant SOPs signed + physical lab walk-through',signer:'Wenbo Zhang'},
  {item:'Fume hood training and airflow check',signer:''},
- {item:'1st Experiment Risk Assessment Form',signer:''},
+ {item:'1st Experiment Risk Assessment Form',signer:'Mentor'},
  {item:'Potentiostat orientation (if needed)',signer:''}
 ];
 function signatureHtml(){
