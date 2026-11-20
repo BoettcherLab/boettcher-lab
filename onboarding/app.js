@@ -83,7 +83,6 @@ const ORIGINAL_ITEMS=[
 'EHS required online trainings completed',
 'Chemical Hygiene Plan read + all SOPs signed',
 'Physical lab walk-through',
-'PPE fitting and gloves selection',
 'Fume hood training and airflow check',
 'Emergency Response Quest',
 'Chemical Inventory Quest',
