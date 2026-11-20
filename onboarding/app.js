@@ -78,20 +78,15 @@ function openSearchResult(item){
  if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function progress(){const t=applicable().filter(x=>!x.title?.includes('[OPTIONAL]')),n=t.filter(x=>saved.complete[x.id]).length,pct=t.length?Math.round(100*n/t.length):0;$('#progress').textContent=n+' / '+t.length+' complete';$('#progressFill').style.width=pct+'%';$('#progressTrack').setAttribute('aria-valuenow',String(pct));}
-const ORIGINAL_ITEMS=[
-'LHAT acknowledged + lab coat fitting booked',
-'EHS required online trainings completed',
-'Chemical Hygiene Plan read + all SOPs signed',
-'Physical lab walk-through',
-'Fume hood training and airflow check',
-'Emergency Response Quest',
-'Chemical Inventory Quest',
-'Waste Disposal Quest',
-'1st Experiment Risk Assessment Form',
-'Potentiostat orientation (if needed)'
+const SIGNATURE_ITEMS=[
+ {item:'LHAT acknowledged + PPE / lab coat fitting + online EHS trainings completed + Emergency Response, Chemical Inventory, and Waste Disposal Quests',signer:'Matthew Zoerb, Martha, or Sree (safety officer)'},
+ {item:'Chemical Hygiene Plan read + all relevant SOPs signed + physical lab walk-through',signer:'Wenbo Zhang'},
+ {item:'Fume hood training and airflow check',signer:''},
+ {item:'1st Experiment Risk Assessment Form',signer:''},
+ {item:'Potentiostat orientation (if needed)',signer:''}
 ];
 function signatureHtml(){
-return '<article class="signature-document"><h2>Signature Sheet</h2><p>Trainee name: ______________________ Start date: ____________ Mentor: ____________________</p><p>Complete steps in order. Each step requires initials from both trainee and trainer before the next begins. Final authorization may be signed by Shannon Boettcher or Yang Zhao before independent work begins.</p><table><thead><tr><th>#</th><th>Item</th><th>Trainer’s Signature + Initials</th><th>Date</th></tr></thead><tbody>'+ORIGINAL_ITEMS.map((x,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(x)+'</td><td>____________________________</td><td>__________</td></tr>').join('')+'</tbody></table><h3>Final Sign-Off</h3><p>I confirm that the trainee named above has completed all required onboarding steps and is authorized to begin independent laboratory work.</p><p>Trainee signature: _________________________ Date: ____________</p><p>Mentor signature: _________________________ Date: ____________</p><p>Final approval (Shannon Boettcher or Yang Zhao): _________________________ Date: ____________</p></article>'
+return '<article class="signature-document"><h2>Signature Sheet</h2><p>Trainee name: ______________________ Start date: ____________ Mentor: ____________________</p><p>Complete steps in order and obtain the indicated signatures. Final authorization may be signed by Shannon Boettcher or Yang Zhao before independent work begins.</p><table><thead><tr><th>#</th><th>Item</th><th>Trainer’s Signature + Initials</th><th>Date</th></tr></thead><tbody>'+SIGNATURE_ITEMS.map((x,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(x.item)+'</td><td>'+(x.signer?'<strong>'+esc(x.signer)+'</strong><div style="margin-top:10px">____________________________</div>':'____________________________')+'</td><td>__________</td></tr>').join('')+'</tbody></table><h3>Final Sign-Off</h3><p>I confirm that the trainee named above has completed all required onboarding steps and is authorized to begin independent laboratory work.</p><p>Trainee signature: _________________________ Date: ____________</p><p>Mentor signature: _________________________ Date: ____________</p><p>Final approval (Shannon Boettcher or Yang Zhao): _________________________ Date: ____________</p></article>'
 }
 function printSheet(){
  const w=window.open('','_blank');
