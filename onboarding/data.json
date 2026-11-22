@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13",
+  "updated": "2026-11-21",
   "sections": [
     {
       "id": "administration",
@@ -1192,8 +1192,51 @@
       "sourceTitle": "4.3 — Gas Cylinders & Dewars"
     },
     {
+      "id": "gas-cylinder-use-and-handling",
+      "title": "4.4 — Cylinder Use & Handling",
+      "lines": [
+        {
+          "html": "Before using compressed-gas cylinders or gas lines, watch the following training video series:",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://www.youtube.com/watch?v=XFstMNB0wk0\" target=\"_blank\" rel=\"noopener noreferrer\">Setting Regulator Pressure</a>",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://www.youtube.com/watch?v=M7WV1kRvPvc\" target=\"_blank\" rel=\"noopener noreferrer\">Attaching Regulator</a>",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "<a href=\"https://www.youtube.com/watch?v=B6mu6MpkjoM\" target=\"_blank\" rel=\"noopener noreferrer\">Checking the System for Leaks</a>",
+          "list": true,
+          "location": "all",
+          "roles": "all"
+        },
+        {
+          "html": "Speak with <strong>Arun</strong> if you have any questions about gas lines, regulator setup, or safe cylinder handling. Complete any required site-specific compressed-gas safety training before independently working with cylinders.",
+          "list": false,
+          "location": "all",
+          "roles": "all"
+        }
+      ],
+      "location": "all",
+      "roles": "all",
+      "condition": "gases",
+      "signoff": null,
+      "section": "equipment",
+      "name": "Cylinder use and handling",
+      "sourceTitle": "4.4 — Cylinder Use & Handling"
+    },
+    {
       "id": "bakar-nanoengineering-center-bnc",
-      "title": "4.4 — BNC Facility",
+      "title": "4.5 — BNC Facility",
       "lines": [
         {
           "html": "The Bakar NanoEngineeering Center (BNC) has shared equipment including SEM, metal deposition tools, and more. Access requires separate training and registration.",
@@ -1214,7 +1257,7 @@
       "signoff": null,
       "section": "equipment",
       "name": "Bakar NanoEngineering Center (BNC)",
-      "sourceTitle": "4.4 — BNC Facility"
+      "sourceTitle": "4.5 — BNC Facility"
     }
   ],
   "resources": [
